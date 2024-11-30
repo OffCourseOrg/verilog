@@ -1,3 +1,3 @@
 ## Tools
-    -BMC Makefile
-    -Modified NetlistSVG
+ - BMC Makefile
+ - Modified NetlistSVG
