@@ -22,4 +22,4 @@ trace: env
 
 
 
-.PHONY: all and
+.PHONY: all env clean trace
