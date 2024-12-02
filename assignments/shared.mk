@@ -1,0 +1,33 @@
+OSS-CAD-PATH=/opt/oss-cad-suite
+OSS-CAD-BIN=$(OSS-CAD-PATH)/bin
+DIR_NAME=sby_tmp
+
+SHELL:=/bin/bash
+
+SOURCE=$(wildcard *.sby)
+
+all: sby_tasks
+
+sby_tasks: $(SOURCE) env
+	$(OSS-CAD-BIN)/sby -f $< --prefix tmp
+
+cover: $(SOURCE) env
+	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
+
+prove: $(SOURCE) env
+	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
+
+env:
+	source $(OSS-CAD-PATH)/environment
+
+clean:
+	rm -rf tmp*
+
+trace: env
+	$(OSS-CAD-BIN)/gtkwave tmp_prv/engine_0/*.vcd
+
+trace-cvr: env
+	$(OSS-CAD-BIN)/gtkwave tmp_cvr/engine_0/*.vcd
+
+
+.PHONY: all env clean trace

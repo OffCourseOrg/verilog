@@ -1,1 +1,1 @@
-include ../Shared.mk
+include ../shared.mk
