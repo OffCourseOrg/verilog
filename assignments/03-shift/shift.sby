@@ -1,11 +1,11 @@
 [tasks]
-prf
+prv
 cvr
 
 [options]
 cvr: mode cover
-prf: mode prove
-depth 100
+prv: mode bmc
+depth 20
 
 [engines]
 smtbmc
@@ -14,7 +14,7 @@ smtbmc
 read -formal bmc.v
 read -formal DUT.v
 read -formal REF.v
-prep -top REF
+prep -top bmc
 
 [files]
 REF.v

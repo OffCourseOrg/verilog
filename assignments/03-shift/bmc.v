@@ -8,28 +8,29 @@
 
 module	bmc(
   input wire clk,
-  input wire	enable,
+  input wire enable,
   input wire reset,
+  input wire serial_in,
 );
 
   reg f_isReset;
   initial f_isReset <= 0;
-  wire [15:0] count_ref, count_dut;
+  wire [7:0] ref_out, dut_out;
 
-  REF #(
-    .MAX_AMOUNT(69)
-  ) REF (
+  REF REF (
     .clk(clk),
     .enable(enable),
     .reset(reset),
-    .count(count_ref)
+    .serial_in(serial_in),
+    .serial_out(ref_out)
   );
 
   DUT DUT(
     .clk(clk),
     .enable(enable),
     .reset(reset),
-    .count(count_dut)
+    .serial_in(serial_in),
+    .serial_out(dut_out)
   );
 
 `ifdef	FORMAL
@@ -40,7 +41,7 @@ module	bmc(
 
   always @(*) begin
     if(f_isReset)
-        assert(count_ref == count_dut);
+        assert(ref_out == dut_out);
   end
 `endif
 endmodule
