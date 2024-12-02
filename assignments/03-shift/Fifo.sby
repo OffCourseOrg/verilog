@@ -1,0 +1,22 @@
+[tasks]
+prf
+cvr
+
+[options]
+depth 100
+cvr : mode cover
+prf : mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal bmc.v
+read -formal DUT.v
+read -formal REF.v
+prep -top REF
+
+[files]
+REF.v
+DUT.v
+bmc.v

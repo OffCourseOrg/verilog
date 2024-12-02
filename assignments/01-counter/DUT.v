@@ -7,9 +7,9 @@
  */
 
 module DUT (
-    input clk,
+	input clk,
 	input reset,
-    input enable,
+	input enable,
 	output reg [15:0] count
 );
 
