@@ -11,10 +11,10 @@ all: sby_tasks
 sby_tasks: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< --prefix tmp
 
-cover: $(SOURCE) env
+cvr: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
 
-prove: $(SOURCE) env
+prv: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
 
 env:
@@ -30,4 +30,4 @@ trace-cvr: env
 	$(OSS-CAD-BIN)/gtkwave tmp_cvr/engine_0/*.vcd
 
 
-.PHONY: all env clean trace
+.PHONY: all env clean trace trace-cvr cvr prv
