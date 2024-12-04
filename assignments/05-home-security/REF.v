@@ -24,33 +24,36 @@ module	REF (
 
 	localparam COM_NONE = 0,
 		COM_ARM = 1,
-		COM_DIS = 2,
-		COM_MAINT = 3;
+		COM_DIS = 2;
 
-	localparam MIN_STATE= 0,
-		RESET = 0,
-		DISARMED = 1,
+	//@STATES
+	localparam _MIN_STATE=0,
+		DISARMED = 0,
 		ARM_D_0 = 1,
-		ARM_D_1 = 2,
+		ARM_D_1 =2,
 		ARM_D_2 = 3,
-		ARM_PINCHECK = 4,
-		ARMED = 6,
-		DISARM_D_0 = 7,
-		DISARM_D_1 = 8,
-		DISARM_D_2 = 9,
-		DISARM_PINCHECK = 10,
-		ALARM = 11,
-		MAINTENACE = 12,
-		MAX_STATE = 12;
+		A_CHECK = 4,
+		ARMED = 5,
+		DISARM_D_0 = 6,
+		DISARM_D_1= 7,
+		DISARM_D_2 = 8,
+		D_CHECK = 9,
+		ALARM = 10,
+		_MAX_STATE = 10;
 
 	reg [3:0] state;
 	reg [3:0] state_next;
 	reg [3:0] digits [3];
 	reg active_digit;
 
+	//Labels FSM Logic
+	wire pincode_correct = (digits[0] == D_0 && digits[1] == D_1 && digits[2] == D_2);
+	wire cmd_disarm = command == COM_DIS;
+	wire cmd_arm = command == COM_ARM;
+
 	always @(posedge clk) begin
 		if(reset) begin
-			state <= RESET;
+			state <= DISARMED;
 			armed <= 0;
 			alarm <= 0;
 		end else begin
@@ -66,9 +69,6 @@ module	REF (
 				ALARM: begin
 					alarm <= 1;
 				end
-				MAINTENACE: begin
-					alarm <= 0;
-				end
 			endcase
 
 			if(digit_enterd)
@@ -80,16 +80,6 @@ module	REF (
 		active_digit = 0;
 		state_next = state; //default
 		case(state)
-			RESET: begin
-				state_next = DISARMED;
-			end
-			ALARM: begin
-				state_next = DISARM_D_0;
-			end
-			MAINTENACE: begin
-				if(command == COM_MAINT)
-					state_next = DISARMED;
-			end
 			//Disarm flow
 			DISARM_D_0: begin
 				active_digit = 0;
@@ -104,16 +94,16 @@ module	REF (
 			DISARM_D_2: begin
 				active_digit = 2;
 				if(digit_enterd)
-					state_next = DISARM_PINCHECK;
+					state_next = D_CHECK;
 			end
-			DISARM_PINCHECK: begin
-				if(digits[0] == D_0 && digits[1] == D_1 && digits[2] == D_2)
+			D_CHECK: begin
+				if(pincode_correct)
 					state_next = DISARMED;
 				else
 					state_next = ARMED;
 			end
 			DISARMED: begin
-				if(command == COM_ARM)
+				if(cmd_arm)
 					state_next = ARM_D_0; 
 			end
 
@@ -131,24 +121,24 @@ module	REF (
 			ARM_D_2: begin
 				active_digit = 2;
 				if(digit_enterd)
-					state_next = ARM_PINCHECK;
+					state_next = A_CHECK;
 			end
-			ARM_PINCHECK: begin
-				if(digits[0] == D_0 && digits[1] == D_1 && digits[2] == D_2)
+			A_CHECK: begin
+				if(pincode_correct)
 					state_next = ARMED;
 				else
 					state_next = DISARMED;
 			end
 			ARMED: begin
-				if(command == COM_DIS)
+				if(cmd_disarm)
 					state_next = DISARM_D_0; 
 			end
-
+			ALARM: begin
+				state_next = DISARM_D_0;
+			end
 		endcase
 		// if(trigger && armed)
 		// 	state_next = ALARM;
-		// if(command == COM_MAINT)
-		// 	state_next = MAINTENACE;
 	end
 
 `ifdef FORMAL
@@ -174,7 +164,7 @@ module	REF (
 		if(f_is_reset)
 			cover(state == ARMED);
 		if(f_is_reset && f_was_armed && state == DISARMED)
-			cover($past(state) == DISARM_PINCHECK);
+			cover($past(state) == D_CHECK);
 
 		//Can arm
 		if(f_is_reset && state == ARMED) begin
