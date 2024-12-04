@@ -42,8 +42,6 @@ sh.setLevel(logging.WARN)
 sh.setFormatter(CustomFormatter())
 logger.addHandler(sh)
 
-logger.warning("test")
-
 ##YoSys args and FSM data
 yosys_target_header = "Executing FSM_INFO pass (dumping all available information on FSM cells)."
 FSM_state_reg = ""

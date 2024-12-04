@@ -1,10 +1,10 @@
 ### fsm2graph
   #### Usage
   ```sh
-  yosys -p "..." | fsm2graph REF.v #Read yosys from stdin
+  yosys -p "..." | fsm2graph.py REF.v #Read yosys from stdin
   ```
   ```sh
-  fsm2graph yosys_fsm.txt REF.v #Read yosys from file
+  fsm2graph,py yosys_fsm.txt REF.v #Read yosys from file
   ```
 
   Converts finite state machines to flowgraphs
