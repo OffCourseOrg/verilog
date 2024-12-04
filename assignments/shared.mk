@@ -19,15 +19,8 @@ prv: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
 
 fsm: env
-	$(OSS-CAD-BIN)/yosys -p 'read_verilog REF.v; proc; opt -nodffe -nosdff; fsm -nomap -norecode;'
-
-fsm_py: env
-	$(OSS-CAD-BIN)/yosys -p 'read_verilog REF.v; proc; opt -nodffe -nosdff; fsm -nomap -norecode;' | $(TOOLS-DIR)/fsm_goblin.py REF.v
+	$(OSS-CAD-BIN)/yosys -p 'read_verilog REF.v; proc; opt -nodffe -nosdff; fsm -nomap -norecode;' | $(TOOLS-DIR)/fsm2graph.py REF.v
 	xdot tmp/fsm.gv
-
-fsm_open: fsm
-	python $(TOOLS-DIR)/kiss2dot.py tmp/output.kiss2 > tmp/output.dot
-	xdot tmp/output.dot
 
 env:
 	source $(OSS-CAD-PATH)/environment
