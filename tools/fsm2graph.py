@@ -249,6 +249,7 @@ for arg in sys.argv[1::]:
 
 #Process stdin
 if(not yosys_is_read):
+    print("Reading from stdin...")
     with sys.stdin as f:
      content = f.read().splitlines()
      read_yosys(content)
