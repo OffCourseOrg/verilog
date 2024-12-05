@@ -29,15 +29,15 @@ module	REF (
 	//@STATES
 	localparam _MIN_STATE=0,
 		DISARMED = 0,
-		ARM_D_0 = 1,
-		ARM_D_1 =2,
-		ARM_D_2 = 3,
-		A_CHECK = 4,
+		ARM = 1,
+		ARM_1 =2,
+		ARM_2 = 3,
+		ARM_3 = 4,
 		ARMED = 5,
-		DISARM_D_0 = 6,
-		DISARM_D_1= 7,
-		DISARM_D_2 = 8,
-		D_CHECK = 9,
+		DISARM = 6,
+		DISARM_1= 7,
+		DISARM_2 = 8,
+		DISARM_3 = 9,
 		ALARM = 10,
 		_MAX_STATE = 10;
 
@@ -77,53 +77,55 @@ module	REF (
 	end
 
 	always @(*) begin
-		active_digit = 0;
 		state_next = state; //default
 		case(state)
 			//Disarm flow
-			DISARM_D_0: begin
-				active_digit = 0;
+			DISARM: begin
+				alarm = 0;
 				if(digit_enterd)
-					state_next = DISARM_D_1;
+					state_next = DISARM_1;
+				if(trigger && !alarm)
+					state_next = ALARM;
 			end
-			DISARM_D_1: begin
-				active_digit = 1;
+			DISARM_1: begin
 				if(digit_enterd)
-					state_next = DISARM_D_2;
+					state_next = DISARM_2;
+				if(trigger && !alarm)
+					state_next = ALARM;
 			end
-			DISARM_D_2: begin
-				active_digit = 2;
+			DISARM_2: begin
 				if(digit_enterd)
-					state_next = D_CHECK;
+					state_next = DISARM_3;
+				if(trigger && !alarm)
+					state_next = ALARM;
 			end
-			D_CHECK: begin
+			DISARM_3: begin
 				if(pincode_correct)
 					state_next = DISARMED;
 				else
 					state_next = ARMED;
+				if(trigger && !alarm)
+					state_next = ALARM;
 			end
 			DISARMED: begin
 				if(cmd_arm)
-					state_next = ARM_D_0; 
+					state_next = ARM; 
 			end
 
 			//Arming flow
-			ARM_D_0: begin
-				active_digit = 0;
+			ARM: begin
 				if(digit_enterd)
-					state_next = ARM_D_1;
+					state_next = ARM_1;
 			end
-			ARM_D_1: begin
-				active_digit = 1;
+			ARM_1: begin
 				if(digit_enterd)
-					state_next = ARM_D_2;
+					state_next = ARM_2;
 			end
-			ARM_D_2: begin
-				active_digit = 2;
+			ARM_2: begin
 				if(digit_enterd)
-					state_next = A_CHECK;
+					state_next = ARM_3;
 			end
-			A_CHECK: begin
+			ARM_3: begin
 				if(pincode_correct)
 					state_next = ARMED;
 				else
@@ -131,14 +133,16 @@ module	REF (
 			end
 			ARMED: begin
 				if(cmd_disarm)
-					state_next = DISARM_D_0; 
+					state_next = DISARM; 
+				if(trigger && !alarm)
+					state_next = ALARM;
 			end
 			ALARM: begin
-				state_next = DISARM_D_0;
+				alarm = 1;
+				if(cmd_disarm)
+					state_next = DISARM;
 			end
 		endcase
-		// if(trigger && armed)
-		// 	state_next = ALARM;
 	end
 
 `ifdef FORMAL
@@ -164,7 +168,7 @@ module	REF (
 		if(f_is_reset)
 			cover(state == ARMED);
 		if(f_is_reset && f_was_armed && state == DISARMED)
-			cover($past(state) == D_CHECK);
+			cover($past(state) == DISARM_3);
 
 		//Can arm
 		if(f_is_reset && state == ARMED) begin
@@ -185,11 +189,11 @@ module	REF (
 
 	always @(*) begin
 		case (state)
-			ARM_D_0, DISARM_D_0: 
+			ARM, DISARM: 
 				assume(digit == 4);
-			ARM_D_1, DISARM_D_1: 
+			ARM_1, DISARM_1: 
 				assume(digit == 2);
-			ARM_D_2, DISARM_D_2: 
+			ARM_2, DISARM_2: 
 				assume(digit == 0);
 		endcase
 
