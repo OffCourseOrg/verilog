@@ -3,6 +3,8 @@ OSS-CAD-PATH=/opt/oss-cad-suite
 OSS-CAD-BIN=$(OSS-CAD-PATH)/bin
 DIR_NAME=sby_tmp
 
+FSM2GRAPH=python $(TOOLS-DIR)/fsm2graph
+
 SHELL:=/bin/bash
 
 SOURCE=$(wildcard *.sby)
@@ -19,7 +21,7 @@ prv: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
 
 fsm: env
-	$(OSS-CAD-BIN)/yosys -p 'read_verilog REF.v; proc; opt -nodffe -nosdff; fsm -nomap -norecode;' | $(TOOLS-DIR)/fsm2graph.py REF.v
+	$(OSS-CAD-BIN)/yosys -p 'read_verilog REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | $(FSM2GRAPH) --log --verilog REF.v --netlist tmp/netlist.txt
 	xdot tmp/fsm.gv
 
 env:
