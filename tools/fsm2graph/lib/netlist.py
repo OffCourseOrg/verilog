@@ -9,6 +9,7 @@
 """
 
 import logging
+from cell import Cell
 
 if(len(logging.getLogger().handlers) == 0):
   logging.basicConfig(level=logging.WARN)
@@ -39,89 +40,20 @@ class Module:
       self.netname = netname
     pass
 
-
-class Cell:
-  type_lookup = {
-    "$not": "~A",
-    "$pos": "+A",
-    "$neg": "-A",
-    "$reduce_and":  "&A",
-    "$reduce_or": "|A",
-    "$reduce_xor":  "^A",
-    "$reduce_xnor": "~^A",
-    "$reduce_bool": "|A",
-    "$logic_not":  "!A",
-    "$and": "A & B", 
-    "$or": "A | B",
-    "$xor": "A  ^ B",
-    "$xnor": "A ~^ B",
-    "$shl": "A << B",
-    "$shr": "A >> B",
-    "$sshl": "A <<< B",
-    "$sshr": "A >>> B",
-    "$logic_and": "A && B",
-    "$logic_or": "A || B",
-    "$eq": "A == B",
-    "$eqx": "A === B",
-    "$nex": "A !== B",
-    "$mux": "S ? B : A",
-    "$pmux": "pmux"
-  }
-  class CellTypeError(Exception):
-    pass
-
-  class Port:
-    def __init__(self, dir, netname) -> None:
-      self.direction = dir
-      self.netname = netname
-    
-    def is_output(self):
-      return self.direction == "out"
-
-  def __init__(self, name, type, port, dir, netname) -> None:
-    if(type not in self.type_lookup):
-      raise self.CellTypeError
-    
-    self.name = name
-    self.type = type
-    self.ports: dict[str, Cell.Port] = {}
-    self.add_port(port, dir, netname)
-
-  def add_port(self, port, dir, netname):
-    self.ports[port] = self.Port(dir, netname)
-  
-  def merge(self, cell):
-    if(self.name != cell.name):
-      return
-    self.ports |= cell.ports
-
-  def is_output(self, netname):
-    for port in self.ports.values():
-      if(port.netname == netname):
-        return port.is_output()
-    return False
-
-  def resolve(self, netlist):
-    text = self.type_lookup[self.type]
-    for port_name, port in self.ports.items():
-      if(port.is_output()):
-        continue
-      if("$") not in port.netname:
-        text = text.replace(port_name, port.netname) 
-        continue
-      text = text.replace(port_name, netlist.resolve(port.netname))
-    return text
-
 class Net:
   def __init__(self, netname, cell_name) -> None:
     self.name = netname
     self.cell_name = cell_name
     self.is_internal = "$" in self.name
+    self.resolved = ""
     
   def resolve(self, netlist):
     if(not self.is_internal):
       return self.name
-    return self.get_cell(netlist).resolve(netlist)
+    if(self.resolved == ""):
+      self.resolved = self.get_cell(netlist).resolve(netlist)
+      logging.info("Resolved: %s -> %s", self.name, self.resolved)
+    return self.resolved
     
   def get_cell(self, netlist):
     return netlist.get_cell(self.cell_name)

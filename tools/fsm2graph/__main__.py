@@ -20,6 +20,8 @@ logging.basicConfig(level=logging.WARN)
 
 ##Graphiz/Render arguments
 DOT_remove_reset = True
+DOT_skip_label_loops = True
+DOT_label_line_sep = "\l  "
 netlist = None
 
 #Process Arguments
@@ -39,12 +41,14 @@ for index, arg in enumerate(sys.argv[1::]):
         with open(filepath) as f:
           content = f.read().splitlines()
         verilog = VerilogExtractor(content)
-      case("n"): #verilog
+      case("n"): #netlist
         with open(filepath) as f:
           content = f.read().splitlines()
         netlist = Netlist(content)
-      case("l"): #log
+      case("i"): #Info
         logging.getLogger().setLevel(logging.INFO)
+      case("l"): #loops
+        DOT_skip_label_loops = False
 
 #Process stdin
 if(not yosys_is_read):
@@ -90,6 +94,7 @@ for i, transistion in enumerate(fsm.transitions):
   if(DOT_remove_reset and transistion["reset"]):
     continue
 
+  
   label = "  "
   for key, value in transistion["inputs"].items():
     if(DOT_remove_reset and key == fsm.reset_input):
@@ -98,11 +103,13 @@ for i, transistion in enumerate(fsm.transitions):
       net = key if "$" not in key else netlist.resolve(key)
     else:
       net = key
-    label += f"{'' if value else '!'}{net} && "
+    label += f"{'' if value else '!'}{net} {DOT_label_line_sep}&& "
   label = label[:-3]
   for key, value in transistion["outputs"].items():
     label += ""
 
+  if(DOT_skip_label_loops and transistion["state"] == transistion["state_next"]):
+    label=""
   dot.edge(f"{transistion['state']}", f"{transistion['state_next']}", label=label)
 
 dot.save()

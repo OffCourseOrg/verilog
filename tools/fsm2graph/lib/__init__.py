@@ -11,3 +11,4 @@
 from .fsm import FSMInfoParser
 from .verilog import VerilogExtractor
 from .netlist import Netlist
+from .cell import Cell
