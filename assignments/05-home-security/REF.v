@@ -20,7 +20,7 @@ module	REF (
 	);
 	localparam D_0 = 4'd4,
 		D_1 = 4'd2,
-		D_2 = 4'd0;
+		D_2 = 4'd1;
 
 	localparam COM_NONE = 0,
 		COM_ARM = 1,
@@ -32,24 +32,22 @@ module	REF (
 		ARM = 1,
 		ARM_1 =2,
 		ARM_2 = 3,
-		ARM_3 = 4,
-		ARMED = 5,
-		DISARM = 6,
-		DISARM_1= 7,
-		DISARM_2 = 8,
-		DISARM_3 = 9,
-		ALARM = 10,
-		_MAX_STATE = 10;
+		ARMED = 4,
+		DISARM = 5,
+		DISARM_1= 6,
+		DISARM_2 = 7,
+		ALARM = 8,
+		ARM_1_BAD =9,
+		ARM_2_BAD = 10,
+		DISARM_1_BAD = 11,
+		DISARM_2_BAD  = 12,
+		_MAX_STATE = 12;
 
 	reg [3:0] state;
 	reg [3:0] state_next;
-	reg [3:0] digits [3];
 	reg active_digit;
 
 	//Labels FSM Logic
-	wire pincode_correct = (digits[0] == D_0 && digits[1] == D_1 && digits[2] == D_2);
-	wire cmd_disarm = command == COM_DIS;
-	wire cmd_arm = command == COM_ARM;
 
 	always @(posedge clk) begin
 		if(reset) begin
@@ -70,9 +68,6 @@ module	REF (
 					alarm <= 1;
 				end
 			endcase
-
-			if(digit_enterd)
-				digits[active_digit] <= digit;
 		end
 	end
 
@@ -81,65 +76,65 @@ module	REF (
 		case(state)
 			//Disarm flow
 			DISARM: begin
-				alarm = 0;
 				if(digit_enterd)
-					state_next = DISARM_1;
+					state_next = digit == D_0 ? DISARM_1 : DISARM_1_BAD;
 				if(trigger && !alarm)
 					state_next = ALARM;
 			end
 			DISARM_1: begin
 				if(digit_enterd)
-					state_next = DISARM_2;
+					state_next = digit == D_1 ? DISARM_2 : DISARM_2_BAD;
 				if(trigger && !alarm)
 					state_next = ALARM;
 			end
 			DISARM_2: begin
 				if(digit_enterd)
-					state_next = DISARM_3;
+					state_next = digit == D_2 ? ARMED : DISARMED;
 				if(trigger && !alarm)
 					state_next = ALARM;
 			end
-			DISARM_3: begin
-				if(pincode_correct)
-					state_next = DISARMED;
-				else
+			DISARM_1_BAD: begin
+				if(digit_enterd)
+					state_next = DISARM_2_BAD;
+			end
+			DISARM_2_BAD: begin
+				if(digit_enterd)
 					state_next = ARMED;
-				if(trigger && !alarm)
-					state_next = ALARM;
 			end
 			DISARMED: begin
-				if(cmd_arm)
+				if(command == COM_ARM)
 					state_next = ARM; 
 			end
 
 			//Arming flow
 			ARM: begin
 				if(digit_enterd)
-					state_next = ARM_1;
+					state_next = digit == D_0 ? ARM_1 : ARM_1_BAD;
 			end
 			ARM_1: begin
 				if(digit_enterd)
-					state_next = ARM_2;
+					state_next = digit == D_1 ? ARM_2 : ARM_2_BAD;
 			end
 			ARM_2: begin
 				if(digit_enterd)
-					state_next = ARM_3;
+					state_next = digit == D_2 ? DISARMED : ARMED;
 			end
-			ARM_3: begin
-				if(pincode_correct)
-					state_next = ARMED;
-				else
+			ARM_1_BAD: begin
+				if(digit_enterd)
+					state_next = ARM_2_BAD;
+			end
+			ARM_2_BAD: begin
+				if(digit_enterd)
 					state_next = DISARMED;
 			end
 			ARMED: begin
-				if(cmd_disarm)
+				if(command == COM_DIS)
 					state_next = DISARM; 
 				if(trigger && !alarm)
 					state_next = ALARM;
 			end
 			ALARM: begin
-				alarm = 1;
-				if(cmd_disarm)
+				if(command == COM_DIS)
 					state_next = DISARM;
 			end
 		endcase
