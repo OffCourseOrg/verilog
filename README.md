@@ -1,6 +1,10 @@
+## Setup
+  Run `make install`
+
 ## Toolchain
  - Make
  - [OSS-CAD](https://github.com/YosysHQ/oss-cad-suite-build?tab=readme-ov-file#installation)
+ - [Netlistsvg-offcourse](https://github.com/OffCourseOrg/netlistsvg-offcourse)
 
 ## Evaluation
 
