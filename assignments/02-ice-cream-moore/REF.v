@@ -62,14 +62,14 @@ module REF (
     endcase
   end
 
-  // always @(*) begin
-  //   if (state == TWO_COINS_ONE_BALL)
-  //     ice_cream_balls = 1;
-  //   else if (state == THREE_COINS_TWO_BALLS)
-  //     ice_cream_balls = 2;
-  //   else
-  //     ice_cream_balls = 0;
-  // end
+  always @(*) begin
+    if (state == TWO_COINS_ONE_BALL)
+      ice_cream_balls = 1;
+    else if (state == THREE_COINS_TWO_BALLS)
+      ice_cream_balls = 2;
+    else
+      ice_cream_balls = 0;
+  end
 
 `ifdef FORMAL
   reg f_isReset = 0;
