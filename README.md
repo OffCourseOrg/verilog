@@ -1,5 +1,9 @@
 ## Setup
-  Run `make install`
+  ```sh
+  sudo apt install npm
+  sudo npm install --global yarn
+  make install
+  ```
 
 ## Toolchain
  - Make
