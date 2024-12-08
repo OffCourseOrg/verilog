@@ -1,4 +1,9 @@
 ### fsm2graph
+  #### Requirements:
+  - Python 3.10+
+  ```sh
+  pip install graphviz
+  ```
   #### Usage
   ```sh
   yosys -p "..." | fsm2graph.py REF.v #Read yosys from stdin

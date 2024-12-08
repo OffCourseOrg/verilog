@@ -62,7 +62,7 @@ try:
         fsm.states[i]["name"] = key
 except:
   for i, state in enumerate(fsm.states):
-     fsm.states[i]["name"] = f"s{state["verilog_id"]}"
+     fsm.states[i]["name"] = f"s{state['verilog_id']}"
   logging.warning("No state params available")
 
 ##Ensure Datastate
@@ -81,9 +81,9 @@ for i, state in enumerate(fsm.states):
    shape = "circle"
    if(i == 0):
       dot.node("_reset", "", style="invis")
-      dot.edge("_reset", f"{state["fsm_id"]}", label="  reset", arrowhead="diamond")
+      dot.edge("_reset", f"{state['fsm_id']}", label="  reset", arrowhead="diamond")
       shape = "doublecircle"
-   dot.node(f"{state["fsm_id"]}", state["name"], shape=shape)
+   dot.node(f"{state['fsm_id']}", state["name"], shape=shape)
 
 #add edges/transitions
 for i, transistion in enumerate(fsm.transitions):
@@ -98,11 +98,11 @@ for i, transistion in enumerate(fsm.transitions):
       net = key if "$" not in key else netlist.resolve(key)
     else:
       net = key
-    label += f"{"" if value else "!"}{net} && "
+    label += f"{'' if value else '!'}{net} && "
   label = label[:-3]
   for key, value in transistion["outputs"].items():
     label += ""
 
-  dot.edge(f"{transistion["state"]}", f"{transistion["state_next"]}", label=label)
+  dot.edge(f"{transistion['state']}", f"{transistion['state_next']}", label=label)
 
 dot.save()
