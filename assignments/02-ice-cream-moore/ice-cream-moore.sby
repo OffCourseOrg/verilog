@@ -1,7 +1,11 @@
+[tasks]
+prv
+cvr
+
 [options]
-mode bmc
-depth 100
-vcd on
+cvr: mode cover
+prv: mode bmc
+depth 75
 
 [engines]
 smtbmc
@@ -10,7 +14,7 @@ smtbmc
 read -formal bmc.v
 read -formal DUT.v
 read -formal REF.v
-prep -top REF
+prep -top bmc
 
 [files]
 REF.v

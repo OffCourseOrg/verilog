@@ -11,7 +11,7 @@ module DUT (
 	input reset,
   input insert,
   input wire [1:0] coins,
-  output reg coffee,
+  output reg [1:0] ice_cream_balls,
   output reg [2:0] state
 );
 
@@ -19,70 +19,59 @@ module DUT (
   localparam COIN0 = 2'b00,
              COIN1 = 2'b01,
              COIN2 = 2'b10;
-  
+  //@STATES
+  localparam ZERO_COINS_NO_ICE_CREAM = 0,
+             ONE_COIN_NO_ICE_CREAM = 1,
+             TWO_COINS_ONE_BALL = 2,
+             THREE_COINS_TWO_BALLS = 3;
+             
+  reg [2:0] state;
   reg insert_prev;
   reg [2:0] state_next;
 
+
   always @(posedge clk) begin
-    if(reset) begin
-      insert_prev <= 0;
-      coffee <= 0;
-      state <= 0;
-    end
-    else if (insert && !insert_prev) begin
-      insert_prev <= insert;
-      state <= state_next;
-      
-      case (state_next)
-        3: coffee <= 1;
-        4: coffee <= 1;
-        default: coffee <= 0;
-      endcase
-    end
-    else begin
-      insert_prev <= insert;
+    if (reset) begin
+      state <= ZERO_COINS_NO_ICE_CREAM;
+    end else begin
       state <= state_next;
     end
   end
 
   always @(*) begin
-    case(state)
-      1: begin
+    state_next = 0;
+    case (state)
+      ZERO_COINS_NO_ICE_CREAM: begin
         case (coins)
-          COIN1: state_next = 2;
-          COIN2: state_next = 3;
+          COIN1: state_next = ONE_COIN_NO_ICE_CREAM;
+          COIN2: state_next = TWO_COINS_ONE_BALL;
           default: state_next = state;
-        endcase
-    end
-    2: begin
-        case (coins)
-          COIN1: state_next = 3;
-          COIN2: state_next = 4;
-          default: state_next = state;
-        endcase
-    end
-    3: begin
-        case (coins)
-          COIN1: state_next = 1;
-          COIN2: state_next = 2;
-          default: state_next = 0;
-        endcase
-    end
-    4: begin
-        case (coins)
-          COIN1: state_next = 2;
-          COIN2: state_next = 3;
-          default: state_next = 1;
-        endcase
-    end
-    default: begin
-        case (coins)
-          COIN1: state_next = 1;
-          COIN2: state_next = 2;
-          default: state_next = 0;
         endcase
       end
+      ONE_COIN_NO_ICE_CREAM: begin
+        case (coins)
+          COIN1: state_next = TWO_COINS_ONE_BALL;
+          COIN2: state_next = THREE_COINS_TWO_BALLS;
+          default: state_next = state;
+        endcase
+      end
+      TWO_COINS_ONE_BALL: begin
+        case (coins)
+          COIN1: state_next = THREE_COINS_TWO_BALLS;
+          default: state_next = ZERO_COINS_NO_ICE_CREAM;
+        endcase
+      end
+      THREE_COINS_TWO_BALLS: state_next = ZERO_COINS_NO_ICE_CREAM;
     endcase
+  end
+
+  always @(*) begin
+    if (state == TWO_COINS_ONE_BALL)
+      ice_cream_balls = 1;
+    else if (state == THREE_COINS_TWO_BALLS)
+      ice_cream_balls = 2;
+    else
+      ice_cream_balls = 0;
   end
 
 endmodule

@@ -12,37 +12,37 @@ module	bmc(
   input wire [1:0] coins,
 );
 
-  reg f_isReset;
-  initial f_isReset <= 0;
-
-  reg coffee_ref, coffee_dut;
+  wire [1:0] ice_cream_balls_ref;
+  wire [1:0] ice_cream_balls_dut;
     
-  reg [2:0] state_ref; 
-  reg [2:0] state_dut;
+  wire [2:0] state_ref; 
+  wire [2:0] state_dut;
 
 
   REF REF (
     .clk(clk),
     .reset(reset),
     .coins(coins),
-    .coffee(coffee_ref),
-    .state(state_ref),
+    .ice_cream_balls(ice_cream_balls_ref),
+    .state_ref(state_ref),
   );
 
   DUT DUT(
     .clk(clk),
     .reset(reset),
     .coins(coins),
-    .coffee(coffee_dut),
+    .ice_cream_balls(ice_cream_balls_dut),
     .state(state_dut),
   );
 
 `ifdef	FORMAL
+  reg f_isReset;
+  initial f_isReset <= 0;
   always @(posedge clk) begin
     if(reset)
       f_isReset <= 1;
     if(f_isReset) begin
-      assert(coffee_ref == coffee_dut);
+      assert(ice_cream_balls_dut == ice_cream_balls_ref);
       assert(state_ref == state_dut);
     end
   end

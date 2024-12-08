@@ -13,7 +13,7 @@ module REF (
   input wire [1:0] coins,
   output reg [1:0] ice_cream_balls,
 `ifndef GEN_FSM
-  output state_ref,
+  output wire [2:0] state_ref,
 `endif
 );
 
