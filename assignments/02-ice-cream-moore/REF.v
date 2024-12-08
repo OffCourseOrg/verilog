@@ -11,7 +11,7 @@ module REF (
 	input reset,
   input insert,
   input wire [1:0] coins,
-  output reg [1:0]ice_cream_balls,
+  output reg [1:0] ice_cream_balls,
 );
 
 
@@ -37,6 +37,7 @@ module REF (
   end
 
   always @(*) begin
+    state_next = 0;
     case (state)
       ZERO_COINS_NO_ICE_CREAM: begin
         case (coins)
