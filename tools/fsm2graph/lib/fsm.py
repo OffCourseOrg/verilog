@@ -120,12 +120,11 @@ class FSMInfoParser:
               continue
             transition["inputs"][self.inputs[i]] = int(chr)
           
-          for i, chr in enumerate(line[i_outputs:line.find(" ", i_outputs)][::-1]):
-            if(chr == "-"):
-              continue
+          for i, chr in enumerate(line[i_outputs::]):
             transition["outputs"][self.outputs[i]] = int(chr)
           
-          transition["reset"] = transition["inputs"]["reset"] == 1
+          if("reset" in transition["inputs"]):
+            transition["reset"] = transition["inputs"]["reset"] == 1
 
           self.transitions.append(transition)
           continue
