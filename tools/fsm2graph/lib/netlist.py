@@ -9,7 +9,7 @@
 """
 
 import logging
-from cell import Cell
+from .cell import Cell, cell_factory
 
 if(len(logging.getLogger().handlers) == 0):
   logging.basicConfig(level=logging.WARN)
@@ -19,7 +19,6 @@ class Module:
     self.name = name
     self.io = {}
     self.cells: dict[str, Cell]  = {}
-    pass
 
   def add_io(self, name, direction, netname):
     self.io[name] = self.IO(name, direction, netname)
@@ -38,7 +37,6 @@ class Module:
       self.name = name
       self.direction = "output" if direction == "po" else "input"
       self.netname = netname
-    pass
 
 class Net:
   def __init__(self, netname, cell_name) -> None:
@@ -88,7 +86,7 @@ class Netlist:
 
       #Cells
       try:
-        cell = Cell(cell_name, type, port, direction, netname)
+        cell = cell_factory(cell_name, type, port, direction, netname)
         module.add_cell(cell)
 
         #Nets come from somewhere:
