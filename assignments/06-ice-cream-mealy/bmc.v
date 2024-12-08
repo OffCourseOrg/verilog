@@ -1,6 +1,6 @@
 /*
  *  OffCourse::Verilog
- *		- ice-cream-moore bmc
+ *		- ice-cream-mealy bmc
  *
  *  Written by: Aleksandrs
  *  License: MIT
