@@ -15,6 +15,9 @@ module	REF (
 		input [3:0] digit,
 		input digit_enterd,
 
+	`ifndef GEN_FM
+		output state_ref,
+	`endif GEN_FM
 		output reg armed,
 		output reg alarm
 	);
@@ -37,15 +40,20 @@ module	REF (
 		DISARM_1= 6,
 		DISARM_2 = 7,
 		ALARM = 8,
-		ARM_1_BAD =9,
-		ARM_2_BAD = 10,
-		DISARM_1_BAD = 11,
-		DISARM_2_BAD  = 12,
-		_MAX_STATE = 12;
+		ALARMING = 9,
+		ARM_1_BAD =10,
+		ARM_2_BAD = 11,
+		DISARM_1_BAD = 12,
+		DISARM_2_BAD  = 13,
+		_MAX_STATE = 13;
 
 	reg [3:0] state;
 	reg [3:0] state_next;
 	reg active_digit;
+
+`ifndef GEN_FM
+	assign state_ref = state;
+`endif GEN_FM
 
 	//Labels FSM Logic
 
@@ -66,6 +74,10 @@ module	REF (
 				end
 				ALARM: begin
 					alarm <= 1;
+				end
+				default: begin
+					armed <= armed;
+					alarm <= alarm;
 				end
 			endcase
 		end
@@ -134,6 +146,9 @@ module	REF (
 					state_next = ALARM;
 			end
 			ALARM: begin
+				state_next = ALARMING;
+			end
+			ALARMING: begin
 				if(command == COM_DIS)
 					state_next = DISARM;
 			end
