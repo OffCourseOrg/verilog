@@ -12,6 +12,9 @@ module REF (
   input insert,
   input wire [1:0] coins,
   output reg [1:0] ice_cream_balls,
+`ifndef GEN_FSM
+  output state_ref,
+`endif
 );
 
 
@@ -27,6 +30,9 @@ module REF (
   reg [2:0] state;
   reg insert_prev;
   reg [2:0] state_next;
+`ifndef GEN_FSM
+  assign state_ref = state;
+`endif
 
   always @(posedge clk) begin
     if (reset) begin
