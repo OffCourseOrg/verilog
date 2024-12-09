@@ -30,6 +30,11 @@ fsm_int: env
 	$(OSS-CAD-BIN)/yosys -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | tee tmp/yosys.txt | $(FSM2GRAPH) --info --netlist tmp/netlist.txt
 	xdot tmp/fsm.gv
 
+load_for_tools:
+	rm $(TOOLS-DIR)/tmp/*
+	cp tmp/* $(TOOLS-DIR)/tmp/
+	cp REF.v $(TOOLS-DIR)/tmp/REF.v
+
 diagram: env
 	$(OSS-CAD-BIN)/yosys -p "prep -top REF; write_json tmp/netlist.json" REF.v
 	yarn netlistsvg-offcourse $(CURRENT_DIR)/tmp/netlist.json -o $(CURRENT_DIR)/tmp/diagram.svg

@@ -15,9 +15,9 @@ module	REF (
 		input [3:0] digit,
 		input digit_enterd,
 
-	`ifndef GEN_FM
+	`ifndef GEN_FSM
 		output state_ref,
-	`endif GEN_FM
+	`endif
 		output reg armed,
 		output reg alarm
 	);
@@ -51,9 +51,9 @@ module	REF (
 	reg [3:0] state_next;
 	reg active_digit;
 
-`ifndef GEN_FM
-	assign state_ref = state;
-`endif GEN_FM
+	`ifndef GEN_FSM
+		assign state_ref = state;
+	`endif
 
 	//Labels FSM Logic
 
@@ -74,10 +74,6 @@ module	REF (
 				end
 				ALARM: begin
 					alarm <= 1;
-				end
-				default: begin
-					armed <= armed;
-					alarm <= alarm;
 				end
 			endcase
 		end

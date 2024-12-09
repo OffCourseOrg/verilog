@@ -12,6 +12,23 @@ import logging
 
 class FSMInfoParser:
   fsm_info_header = "Executing FSM_INFO pass (dumping all available information on FSM cells)."
+
+  class state:
+    def __init__(self, verilog_id, fsm_id, is_reset=False, name=""):
+      self.name = name
+      self.verilog_id = verilog_id
+      self.fsm_id = fsm_id
+      self.is_reset = is_reset
+      self.base_transition = []
+      self.transitions: dict[str, list] = {}
+
+    def add_transition(self, state_next, outputs=[]):
+      if(outputs == []):
+         return
+      if(self.base_transition == []):
+         self.base_transition = outputs
+      self.transitions[state_next] = outputs
+
   def __init__(self, lines):
     self.state_reg = ""
     self.inputs = []
@@ -84,12 +101,11 @@ class FSMInfoParser:
         if(line != ""):
           id_binary_str = line[line.find("'")+1::].replace("<RESET STATE>", "").strip()
           verilog_id = int(id_binary_str, 2)
-          self.states.append({
-            "name": "empty",
-            "verilog_id": verilog_id,
-            "fsm_id": len(self.states),
-            "reset": "<RESET STATE>" in line
-          })
+          self.states.append(FSMInfoParser.state(
+             verilog_id=verilog_id,
+             fsm_id=len(self.states),
+             is_reset=("<RESET STATE>" in line)
+          ))
           continue
 
         in_block = False
@@ -120,7 +136,7 @@ class FSMInfoParser:
               continue
             transition["inputs"][self.inputs[i]] = int(chr)
           
-          for i, chr in enumerate(line[i_outputs::]):
+          for i, chr in enumerate(line[i_outputs::][::-1]):
             transition["outputs"][self.outputs[i]] = int(chr)
           
           if("reset" in transition["inputs"]):
@@ -131,6 +147,15 @@ class FSMInfoParser:
         in_block = False
         parsed["transitions"] = True
 
+  def get_state_index(self, fsm_id):
+    for i, state in enumerate(self.states):
+      if(state.fsm_id == fsm_id):
+         return i
+  
+  def get_state(self, fsm_id):
+    for state in self.states:
+      if(state.fsm_id == fsm_id):
+         return state
 
   #is this a yosys header -> starts with digits
   # Optional check if header text matches compare_header
