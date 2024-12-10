@@ -75,10 +75,10 @@ module REF (
             state_next <= ZERO_COINS_NO_ICE_CREAM;
             ice_cream_balls <= 2;
           end
-            default: begin
-              state_next <= ZERO_COINS_NO_ICE_CREAM;
-              ice_cream_balls <= 1;
-            end
+          default: begin
+            state_next <= ZERO_COINS_NO_ICE_CREAM;
+            ice_cream_balls <= 1;
+          end
         endcase
       end
     endcase

@@ -10,7 +10,7 @@
 
 import logging
 
-from .utils import is_value
+from .utils import format_netlist_str, is_binary_str, is_value
 from .cell import Cell, cell_factory
 
 if(len(logging.getLogger().handlers) == 0):
@@ -120,6 +120,10 @@ class Netlist:
       
       if(cell_name in skipped_cells):
         continue
+
+      ##Binary value formatting
+      if(is_binary_str(netname)):
+        netname = format_netlist_str(netname)
 
       #Cells
       cell = cell_factory(cell_name, type, port, direction, netname)

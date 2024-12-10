@@ -34,11 +34,20 @@ def get_value(data: str | int):
     return int(data[2::])
   raise Exception("Data neither Int nor BinaryString -> %s", data)
 
+def format_netlist_str(data: str | int):
+  if(isinstance(data, int)):
+    return str(data)
+  if(is_binary_str(data) and "'b" not in data):
+    return data.replace("'", "'b")
+  return data
+
+##Reversed bits so bits[0] is LSB
 def get_binary_bits(data: str):
-  return data[2::]
+  data = data.replace("'b", "'")
+  return data[2::][::-1]
 
 def get_subsection_binary(data: str, section_length: int, index: int):
-  bits = data[2::]
+  bits = get_binary_bits(data)
   if(len(bits) % section_length != 0):
     raise Exception("Binary section_length not equally dividing bits")
   return f"{section_length}'{bits[index*section_length:section_length*(index+1)]}"

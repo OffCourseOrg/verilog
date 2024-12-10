@@ -245,7 +245,7 @@ class PMUX(Cell):
       if(not is_value(self.ports["B"].netname)):
         raise NotImplementedError("$pmux with non-static 'B' -> %s", self.ports["B"])
       for i, execute_net in enumerate(execute_nets):
-        if(args[execute_net] == 1):
+        if(args[execute_net] == 1 if execute_net in args else get_value(execute_net) == 1):
           subsection_length = len(get_binary_bits(self.ports["B"].netname)) // len(execute_nets)
           return get_subsection_binary(self.ports['B'].netname, subsection_length, i)
     return self.ports['A'].netname

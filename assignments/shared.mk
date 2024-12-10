@@ -32,8 +32,8 @@ fsm_int: env
 
 load_for_tools:
 	rm $(TOOLS-DIR)/tmp/*
-	cp tmp/* $(TOOLS-DIR)/tmp/
 	cp REF.v $(TOOLS-DIR)/tmp/REF.v
+	cp tmp/*.txt $(TOOLS-DIR)/tmp/
 
 diagram: env sby_tasks
 	$(OSS-CAD-BIN)/yosys -p "prep -top REF; write_json tmp/netlist.json" REF.v
