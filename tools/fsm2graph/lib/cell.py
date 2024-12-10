@@ -153,8 +153,6 @@ class SSHR(Cell):
 class EQ(Cell):
   type = "$eq"
   resolve_format = "A == B"
-  def execute(self, netlist, args={}, start_net=""):
-    return 0
 
 class NE(Cell):
   type = "$ne"
