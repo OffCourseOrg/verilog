@@ -22,7 +22,7 @@ cvr: $(SOURCE) env
 prv: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
 
-fsm: env
+fsm: env sby_tasks
 	$(OSS-CAD-BIN)/yosys -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | tee tmp/yosys.txt | $(FSM2GRAPH) --info --verilog REF.v --netlist tmp/netlist.txt
 	xdot tmp/fsm.gv
 
@@ -35,7 +35,7 @@ load_for_tools:
 	cp tmp/* $(TOOLS-DIR)/tmp/
 	cp REF.v $(TOOLS-DIR)/tmp/REF.v
 
-diagram: env
+diagram: env sby_tasks
 	$(OSS-CAD-BIN)/yosys -p "prep -top REF; write_json tmp/netlist.json" REF.v
 	yarn netlistsvg-offcourse $(CURRENT_DIR)/tmp/netlist.json -o $(CURRENT_DIR)/tmp/diagram.svg
 	xdg-open tmp/diagram.svg
