@@ -10,15 +10,16 @@
 
 from enum import Enum
 import logging
+from typing import List
 
-from .utils import is_value
+from .utils import format_netlist_str, is_binary_str, is_value
 
 class Transition:
-  def __init__(self, state_fsm_id, next_fsm_id, inputs={}, outputs={}, reset=False):
+  def __init__(self, state_fsm_id, next_fsm_id, reset=False):
     self.state_fsm_id: str = state_fsm_id
     self.next_fsm_id: str = next_fsm_id
-    self.inputs: dict[str, int] = inputs
-    self.outputs: dict[str, int] = outputs
+    self.inputs: dict[str, int] = {}
+    self.outputs: dict[str, int] = {}
     self.reset: bool = reset
     self.executed_outputs = []
 
@@ -43,17 +44,15 @@ class State:
     self.verilog_id = verilog_id
     self.fsm_id = fsm_id
     self.is_reset = is_reset
-    self.transitions: dict[str, Transition] = {}
-    self.executed_outputs = []
+    self.transitions: List[Transition] = []
 
   def add_transition(self, transition: Transition):
-     self.transitions[transition.next_fsm_id] = transition
+     self.transitions.append(transition)
   
   def get_executed_outputs(self):
-    if(self.executed_outputs != []):
-      return self.executed_outputs
-    for transition in self.transitions.values():
-      return transition.executed_outputs
+    if(self.transitions == []):
+      return {}
+    return self.transitions[0].executed_outputs
 
 class FSMInfoParser:
   fsm_info_header = "Executing FSM_INFO pass (dumping all available information on FSM cells)."
@@ -195,7 +194,9 @@ class FSMInfoParser:
   def execute_outputs(self, netlist):
     #Compile outputs into states
     for state in self.states.values():
-      for key, transition in state.transitions.items():
+      transitions = state.transitions
+      state.transitions = []
+      for i, transition in enumerate(transitions):
         #Ignore Reset Transition
         if(transition.reset):
           continue
@@ -210,8 +211,11 @@ class FSMInfoParser:
             result = netlist.execute(result, execute_args, start_net=output_net)
           if(output_net == result):
             continue
+          ###Binary Value formatting
+          result = format_netlist_str(result)
+            
           transition.executed_outputs.append(f"{output_net} = {result}")
-        self.get_state(state.fsm_id).add_transition(transition) 
+        state.add_transition(transition)
 
   #### MOORE vs MEALY ######
   #### MUST BE RUN AFTER OUTPUTS ARE EXECUTED
@@ -226,7 +230,7 @@ class FSMInfoParser:
       if(len(state.transitions) < 2):
         continue
       base_outputs = []
-      for i, transition in enumerate(state.transitions.values()):
+      for i, transition in enumerate(state.transitions):
         if(i == 0):
           base_outputs = transition.executed_outputs
           continue

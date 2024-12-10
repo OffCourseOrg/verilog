@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.WARN)
 ##Graphiz/Render arguments
 DOT_remove_reset = True
 DOT_skip_label_loops = True
-DOT_label_line_sep = "\l  "
+DOT_edge_label_spacing = "  "
 netlist: Netlist = None
 fsm: FSMInfoParser = None
 
@@ -102,7 +102,7 @@ for i, state in enumerate(fsm.states.values()):
 
 #add edges/transitions
 for state in fsm.states.values():
-  for transition in state.transitions.values():
+  for transition in state.transitions:
     if(DOT_remove_reset and transition.reset):
       continue
     
@@ -117,14 +117,14 @@ for state in fsm.states.values():
       else:
         net = key
       if(label != ""):
-        label += " && "
+        label += f"{DOT_edge_label_spacing}&& "
       else:
-        label = " "
+        label = DOT_edge_label_spacing
       label += f"{'' if value else '!'}{net}\l"
 
     if(fsm.is_mealy()):
       for output in transition.executed_outputs:
-        label += f"  {output}\l"
+        label += f"{DOT_edge_label_spacing}[{output}]\l"
 
     if(DOT_skip_label_loops and transition.state_fsm_id == transition.next_fsm_id):
       label=""
