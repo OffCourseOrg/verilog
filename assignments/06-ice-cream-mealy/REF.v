@@ -72,7 +72,6 @@ module REF (
       TWO_COINS_ONE_BALL: begin
         case(coins)
           COIN1: begin
-            state_next <= ZERO_COINS_NO_ICE_CREAM;
             ice_cream_balls <= 2;
           end
             default: begin
