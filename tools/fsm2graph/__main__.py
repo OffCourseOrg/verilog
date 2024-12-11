@@ -79,7 +79,7 @@ fsm.get_fsm_type()
 dot = graphviz.Digraph(filename="fsm.gv",
                        directory="tmp/",
                        engine="neato",
-                       node_attr={"style": "filled", "margin": "0.02", "fillcolor": "darkolivegreen3"}
+                       node_attr={"style": "filled", "margin": "0.05", "fillcolor": "darkolivegreen3"}
                        )
 
 #add states

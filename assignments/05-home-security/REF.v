@@ -16,7 +16,7 @@ module	REF (
 		input digit_enterd,
 
 	`ifndef GEN_FSM
-		output state_ref,
+		output [3:0]state_ref,
 	`endif
 		output reg armed,
 		output reg alarm
@@ -31,21 +31,24 @@ module	REF (
 
 	//@STATES
 	localparam _MIN_STATE=0,
-		DISARMED = 0,
-		ARM = 1,
-		ARM_1 =2,
-		ARM_2 = 3,
+		DISARM = 0,
+		ARM0 = 1,
+		ARM1 =2,
+		ARM2 = 3,
 		ARMED = 4,
-		DISARM = 5,
-		DISARM_1= 6,
-		DISARM_2 = 7,
+		DISARM0 = 5,
+		DISARM1= 6,
+		DISARM2 = 7,
 		ALARM = 8,
 		ALARMING = 9,
-		ARM_1_BAD =10,
-		ARM_2_BAD = 11,
-		DISARM_1_BAD = 12,
-		DISARM_2_BAD  = 13,
-		_MAX_STATE = 13;
+		ARM1B =10,
+		ARM2B = 11,
+		DISARM1B = 12,
+		DISARM2B  = 13,
+		ARM = 14,
+		DISARMED = 15,
+		_MAX_STATE = 15;
+
 
 	reg [3:0] state;
 	reg [3:0] state_next;
@@ -59,16 +62,16 @@ module	REF (
 
 	always @(posedge clk) begin
 		if(reset) begin
-			state <= DISARMED;
+			state <= DISARM;
 			armed <= 0;
 			alarm <= 0;
 		end else begin
 			state <= state_next;
 			case (state)
-				ARMED: begin
+				ARM: begin
 					armed <= 1;
 				end
-				DISARMED: begin
+				DISARM: begin
 					armed <= 0;
 					alarm <= 0;
 				end
@@ -83,62 +86,62 @@ module	REF (
 		state_next = state; //default
 		case(state)
 			//Disarm flow
-			DISARM: begin
+			DISARM0: begin
 				if(digit_enterd)
-					state_next = digit == D_0 ? DISARM_1 : DISARM_1_BAD;
-				if(trigger && !alarm)
-					state_next = ALARM;
+					state_next = digit == D_0 ? DISARM1 : DISARM1B;
 			end
-			DISARM_1: begin
+			DISARM1: begin
 				if(digit_enterd)
-					state_next = digit == D_1 ? DISARM_2 : DISARM_2_BAD;
-				if(trigger && !alarm)
-					state_next = ALARM;
+					state_next = digit == D_1 ? DISARM2 : DISARM2B;
 			end
-			DISARM_2: begin
+			DISARM2: begin
 				if(digit_enterd)
-					state_next = digit == D_2 ? ARMED : DISARMED;
-				if(trigger && !alarm)
-					state_next = ALARM;
+					state_next = digit == D_2 ? DISARM : ARMED;
 			end
-			DISARM_1_BAD: begin
+			DISARM1B: begin
 				if(digit_enterd)
-					state_next = DISARM_2_BAD;
+					state_next = DISARM2B;
 			end
-			DISARM_2_BAD: begin
+			DISARM2B: begin
 				if(digit_enterd)
 					state_next = ARMED;
 			end
+			DISARM: begin
+				state_next = DISARMED;
+			end
 			DISARMED: begin
 				if(command == COM_ARM)
-					state_next = ARM; 
+					state_next = ARM0; 
 			end
 
 			//Arming flow
-			ARM: begin
+			ARM0: begin
 				if(digit_enterd)
-					state_next = digit == D_0 ? ARM_1 : ARM_1_BAD;
+					state_next = digit == D_0 ? ARM1 : ARM1B;
 			end
-			ARM_1: begin
+			ARM1: begin
 				if(digit_enterd)
-					state_next = digit == D_1 ? ARM_2 : ARM_2_BAD;
+					state_next = digit == D_1 ? ARM2 : ARM2B;
 			end
-			ARM_2: begin
+			ARM2: begin
 				if(digit_enterd)
-					state_next = digit == D_2 ? DISARMED : ARMED;
+					state_next = digit == D_2 ? ARM : DISARMED;
 			end
-			ARM_1_BAD: begin
+			ARM1B: begin
 				if(digit_enterd)
-					state_next = ARM_2_BAD;
+					state_next = ARM2B;
 			end
-			ARM_2_BAD: begin
+			ARM2B: begin
 				if(digit_enterd)
 					state_next = DISARMED;
 			end
+			ARM: begin
+				state_next = ARMED;
+			end
 			ARMED: begin
 				if(command == COM_DIS)
-					state_next = DISARM; 
-				if(trigger && !alarm)
+					state_next = DISARM0; 
+				if(trigger)
 					state_next = ALARM;
 			end
 			ALARM: begin
@@ -146,7 +149,7 @@ module	REF (
 			end
 			ALARMING: begin
 				if(command == COM_DIS)
-					state_next = DISARM;
+					state_next = DISARM0;
 			end
 		endcase
 	end
@@ -162,47 +165,42 @@ module	REF (
 
 	always @(posedge clk) begin
 		//track if rest into valid state
-		if(reset)
+		if(reset) begin
 			f_is_reset <= 1;
+			f_was_armed <= 0;
+		end
 
 		if(f_is_reset) begin
-			assert(state <= MAX_STATE);
-			assert(state >= MIN_STATE);
+			assert(state <= _MAX_STATE);
+			assert(state >= _MIN_STATE);
 		end
 
-		//Completed FSM
-		if(f_is_reset)
-			cover(state == ARMED);
-		if(f_is_reset && f_was_armed && state == DISARMED)
-			cover($past(state) == DISARM_3);
+		if(!reset) begin
+			//Completed FSM
+			if(f_is_reset && f_was_armed && state == DISARMED) begin
+				cover($past(state) == DISARM);
+				assert($past(state) == DISARMED || $past(state) == DISARM || $past(state) == ARM2 || $past(state) == ARM2B);
+			end
 
-		//Can arm
-		if(f_is_reset && state == ARMED) begin
-			f_was_armed <= 1;
-			assert(armed == 1);
+			//Can arm
+			if(f_is_reset && state == ARMED) begin
+				f_was_armed = 1;
+				assert(armed);
+			end
+
+			//Can disarm
+			if(f_is_reset && state == DISARMED) begin
+				assert(!armed && !alarm);
+			end
+
+			//Alarm ouput
+			if(f_is_reset && trigger && state == ARMED) begin
+				assert(state_next == ALARM);
+			end
 		end
-		//Can disarm
-		if(f_is_reset && state == DISARMED)
-			assert(armed == 0);
-		//Can maintenace
-		if(f_is_reset && !$past(reset) && $past(command) == COM_MAINT)
-			assert(state == MAINTENACE && alarm == 0);
-
-		//Alarm ouput
-		if(f_is_reset && trigger)
-			assert(alarm == armed);
 	end
 
 	always @(*) begin
-		case (state)
-			ARM, DISARM: 
-				assume(digit == 4);
-			ARM_1, DISARM_1: 
-				assume(digit == 2);
-			ARM_2, DISARM_2: 
-				assume(digit == 0);
-		endcase
-
 		if(f_is_reset) begin
 			
 		end

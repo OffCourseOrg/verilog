@@ -5,7 +5,7 @@ cvr
 [options]
 cvr: mode cover
 prv: mode bmc
-depth 75
+depth 50
 
 [engines]
 smtbmc

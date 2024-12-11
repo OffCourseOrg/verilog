@@ -160,7 +160,7 @@ class FSMInfoParser:
           i_arrow = line.find(">")
           transition = Transition(
             state_fsm_id=int(line[line.find(":")+1:i_inputs-2].strip()),
-            next_fsm_id=int(line[i_arrow+1:i_outputs-2].strip())
+            next_fsm_id=int(line[i_arrow+1:i_outputs-3].strip())
           )
           for i, chr in enumerate(line[i_inputs:line.find(" ", i_inputs)][::-1]):
             if(chr == "-"):
