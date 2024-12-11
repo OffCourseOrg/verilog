@@ -195,6 +195,7 @@ module	REF (
 
 			//Alarm ouput
 			if(f_is_reset && trigger && state == ARMED) begin
+				cover(state_next == ALARM);
 				assert(state_next == ALARM);
 			end
 		end
