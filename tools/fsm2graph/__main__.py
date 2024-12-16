@@ -14,7 +14,7 @@ import logging
 import graphviz
 import sys
 
-from lib import FSMInfoParser, VerilogExtractor, Netlist, is_value, get_value
+from lib import FSMInfoParser, VerilogExtractor, Netlist
 
 logging.basicConfig(level=logging.WARN)
 
@@ -96,7 +96,7 @@ for i, state in enumerate(fsm.states.values()):
     name += "\n"
     for output in state.get_executed_outputs():
       name += f"{output}\n"
-    name = name.replace("=", "<=")
+    #name = name.replace("=", "<=")
 
   dot.node(f"{state.fsm_id}", name, shape=shape)
 
@@ -109,8 +109,6 @@ for state in fsm.states.values():
     label = ""
     for key, value in transition.inputs.items():
       if(DOT_remove_reset and key == fsm.reset_input):
-        continue
-      if(value < 0):
         continue
       if(netlist != None):
         net = key if "$" not in key else netlist.resolve(key)

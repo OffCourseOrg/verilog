@@ -23,6 +23,7 @@ prv: $(SOURCE) env
 	$(OSS-CAD-BIN)/sby -f $< $@ --prefix tmp
 
 fsm: env sby_tasks
+	rm tmp/fsm.gv
 	$(OSS-CAD-BIN)/yosys -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | tee tmp/yosys.txt | $(FSM2GRAPH) --info --verilog REF.v --netlist tmp/netlist.txt
 	xdot tmp/fsm.gv
 

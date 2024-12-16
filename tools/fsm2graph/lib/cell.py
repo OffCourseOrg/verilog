@@ -7,7 +7,7 @@
 """
 import logging
 
-from .utils import get_binary_bits, get_subsection_binary, is_value, get_value
+from .bits import Bits
 
 class Cell:
   resolve_format = ""
@@ -34,7 +34,7 @@ class Cell:
 
   def add_port(self, port, dir, netname) -> Port:
     #Direct net
-    if("{" not in netname):
+    if(isinstance(netname, Bits) or "{" not in netname):
      self.ports[port] = self.Port(dir, netname)
      return self.ports[port]
     #Combined net
@@ -64,19 +64,22 @@ class Cell:
     for port_name, port in self.ports.items():
       if(port.is_output()):
         continue
-      if("$") not in port.netname:
+      if(not isinstance(port.netname, Bits) and "$" not in port.netname):
         text = text.replace(port_name, port.netname) 
         continue
-      text = text.replace(port_name, netlist.resolve(port.netname))
+      text = text.replace(port_name, f"{netlist.resolve(port.netname)}")
     return text
       
   #Execute cell to obtain output mapping 
   def execute(self, netlist, args={}, start_net="") -> str:
-    return self.resolve(netlist)
+    raise NotImplementedError("Execute method on class => '{}'".format(type(self)))
   
 class Not(Cell):
   type = "$not"
   resolve_format = "~A"
+  def execute(self, netlist, args={}, start_net=""):
+    value = ~netlist.execute(self.ports["A"].netname, args, start_net)
+    return value
   
 class Pos(Cell):
   type = "$pos"
@@ -89,18 +92,50 @@ class Neg(Cell):
 class ReduceAND(Cell):
   type = "$reduce_and"
   resolve_format = "&A"
+  def execute(self, netlist, args={}, start_net=""):
+    value = None
+    for i, netname in enumerate(self.ports["A"].netnames):
+      if(i == 0):
+        value = netlist.execute(netname, args, start_net)
+        continue
+      value = value & netlist.execute(netname, args, start_net)
+    return value
 
 class ReduceOR(Cell):
   type = "$reduce_or"
   resolve_format = "|A"
+  def execute(self, netlist, args={}, start_net=""):
+    value = None
+    for i, netname in enumerate(self.ports["A"].netnames):
+      if(i == 0):
+        value = netlist.execute(netname, args, start_net)
+        continue
+      value = value | netlist.execute(netname, args, start_net)
+    return value
 
 class ReduceXOR(Cell):
   type = "$reduce_xor"
   resolve_format = "^A"
+  def execute(self, netlist, args={}, start_net=""):
+    value = None
+    for i, netname in enumerate(self.ports["A"].netnames):
+      if(i == 0):
+        value = netlist.execute(netname, args, start_net)
+        continue
+      value = value ^ netlist.execute(netname, args, start_net)
+    return value
 
 class ReduceXNOR(Cell):
   type = "$reduce_xnor"
   resolve_format = "~^A"
+  def execute(self, netlist, args={}, start_net=""):
+    value = None
+    for i, netname in enumerate(self.ports["A"].netnames):
+      if(i == 0):
+        value = netlist.execute(netname, args, start_net)
+        continue
+      value = ~(value ^ netlist.execute(netname, args, start_net))
+    return value
 
 class ReduceBOOL(Cell):
   type = "$reduce_bool"
@@ -121,26 +156,44 @@ class LogicOR(Cell):
 class AND(Cell):
   type = "$and"
   resolve_format = "A & B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) & netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class OR(Cell):
   type = "$or"
   resolve_format = "A | B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) | netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class XOR(Cell):
   type = "$xor"
   resolve_format = "A ^ B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) ^ netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class XNOR(Cell):
   type = "$xnor"
   resolve_format = "A ~^ B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = ~(netlist.execute(self.ports["A"].netname, args, start_net) ^ netlist.execute(self.ports["B"].netname, args, start_net))
+    return value
 
 class SHL(Cell):
   type = "$shl"
   resolve_format = "A << B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) << netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class SHR(Cell):
   type = "$shr"
   resolve_format = "A >> B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) >> netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class SSHL(Cell):
   type = "$sshl"
@@ -153,10 +206,22 @@ class SSHR(Cell):
 class EQ(Cell):
   type = "$eq"
   resolve_format = "A == B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) == netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 class NE(Cell):
   type = "$ne"
   resolve_format = "A != B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) != netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 class EQX(Cell):
   type = "$eqx"
@@ -169,38 +234,80 @@ class NEX(Cell):
 class LT(Cell):
   type = "$lt"
   resolve_format = "A < B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) < netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class LE(Cell):
   type = "$neq"
   resolve_format = "A <= B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) <= netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class GE(Cell):
   type = "$ge"
   resolve_format = "A >= B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) >= netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class GT(Cell):
   type = "$gt"
   resolve_format = "A > B"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["A"].netname, args, start_net) > netlist.execute(self.ports["B"].netname, args, start_net)
+    return value
 
 class ADD(Cell):
   type = "$add"
   resolve_format = "A + B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) + netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 class SUB(Cell):
   type = "$sub"
   resolve_format = "A - B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) - netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 class MUL(Cell):
   type = "$mul"
   resolve_format = "A * B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) * netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 class DIV(Cell):
   type = "$neq"
   resolve_format = "A / B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) / netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 class POW(Cell):
   type = "$pow"
   resolve_format = "A ** B"
+  def execute(self, netlist, args={}, start_net=""):
+    try:
+      value = netlist.execute(self.ports["A"].netname, args, start_net) ** netlist.execute(self.ports["B"].netname, args, start_net)
+      return value
+    except TypeError:
+      return self.resolve(netlist)
 
 ##Execute Enabled
 #Multiplexer
@@ -210,11 +317,7 @@ class MUX(Cell):
   resolve_format = "S ? B : A"
 
   def execute(self, netlist, args={}, start_net=""):
-    execute_net = self.ports["S"].netname
-    if(execute_net not in args):
-      execute_net = netlist.execute(self.ports["S"].netname, args, start_net)
-    value = args[execute_net] if execute_net in args else get_value(execute_net)
-    if(value == 1):
+    if(netlist.execute(self.ports["S"].netname, args, start_net)):
       return self.ports['B'].netname
     return self.ports['A'].netname
   
@@ -238,16 +341,15 @@ class PMUX(Cell):
     #Combined B net
     if(len(self.ports["B"].netnames)):
       for i, execute_net in enumerate(execute_nets):
-        if(args[execute_net] == 1):
+        if(args[execute_net]):
           return netlist.execute(self.ports["B"].netnames[i], args, start_net)
     else:
       #Static B net
-      if(not is_value(self.ports["B"].netname)):
+      if(not isinstance(self.ports["B"].netname, Bits)):
         raise NotImplementedError("$pmux with non-static 'B' -> %s", self.ports["B"])
       for i, execute_net in enumerate(execute_nets):
-        if(args[execute_net] == 1 if execute_net in args else get_value(execute_net) == 1):
-          subsection_length = len(get_binary_bits(self.ports["B"].netname)) // len(execute_nets)
-          return get_subsection_binary(self.ports['B'].netname, subsection_length, i)
+        if(args[execute_net] if execute_net in args else execute_net):
+          return self.ports['B'].netname.sub_bits(len(execute_nets), i)
     return self.ports['A'].netname
 
 #dff latch
@@ -258,6 +360,29 @@ class DFF(Cell):
   def execute(self, netlist, args={}, start_net=""):
     return self.ports['D'].netname
   
+#d-latch 
+class DLATCH(Cell):
+  # Q = Q
+  # if(EN == 1)
+  #   Q = D
+  type = "$dlatch"
+  resolve_format = "$dlatch"
+  def execute(self, netlist, args={}, start_net=""):
+    value = netlist.execute(self.ports["EN"].netname, args, start_net)
+    if(not value): #WHY???? WHY IS THIS LOGIC INVERTED
+      return self.ports["D"].netname
+    return self.ports["Q"].netname
+
+class ADFF(Cell):
+  type = "$adff"
+  resolve_format = "$adff"
+  def execute(self, netlist, args={}, start_net=""):
+    if(netlist.execute(self.ports["ARST"].netname, args, start_net) == 1):
+      return 0
+    if(netlist.execute(self.ports["CLK"].netname, args, start_net) == 1):
+      return self.ports["D"].netname
+    return self.ports["Q"].netname
+
 ###UNIQUE
 class FSM(Cell):
   type = "$fsm"
@@ -337,5 +462,9 @@ def cell_factory(cell_name, type, port, direction, netname):
       return POW(cell_name, port, direction, netname)
     case(FSM.type):
       return FSM(cell_name, port, direction, netname)
+    case(DLATCH.type):
+      return DLATCH(cell_name, port, direction, netname)
+    case(ADFF.type):
+      return ADFF(cell_name, port, direction, netname)
     case _:
         raise Cell.CellTypeError("Unknown type -> %s", type)

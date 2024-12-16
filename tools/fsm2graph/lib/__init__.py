@@ -12,4 +12,4 @@ from .fsm import FSMInfoParser
 from .verilog import VerilogExtractor
 from .netlist import Netlist
 from .cell import Cell
-from .utils import is_value, get_value
+from .bits import Bits

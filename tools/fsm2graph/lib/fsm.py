@@ -12,7 +12,8 @@ from enum import Enum
 import logging
 from typing import List
 
-from .utils import format_netlist_str, is_binary_str, is_value
+from .bits import Bits
+
 
 class Transition:
   def __init__(self, state_fsm_id, next_fsm_id, reset=False):
@@ -24,7 +25,7 @@ class Transition:
     self.executed_outputs = []
 
   def add_input(self, netname, value):
-    self.inputs[netname] = int(value)
+    self.inputs[netname] = value
 
   def has_input(self, netname):
     return netname in self.inputs
@@ -33,7 +34,7 @@ class Transition:
     return self.inputs[netname]
 
   def add_output(self, netname, value):
-    self.outputs[netname] = int(value)
+    self.outputs[netname] = value
   
   def has_output(self, netname):
     return netname in self.outputs
@@ -165,10 +166,10 @@ class FSMInfoParser:
           for i, chr in enumerate(line[i_inputs:line.find(" ", i_inputs)][::-1]):
             if(chr == "-"):
               continue
-            transition.add_input(self.inputs[i], int(chr))
+            transition.add_input(self.inputs[i], Bits.from_str(chr))
           
           for i, chr in enumerate(line[i_outputs::][::-1]):
-            transition.add_output(self.outputs[i], int(chr))
+            transition.add_output(self.outputs[i], Bits.from_str(chr))
           
           ##Transition is reset
           if(transition.has_input("reset")):
@@ -203,16 +204,19 @@ class FSMInfoParser:
         execute_args = transition.inputs | transition.outputs | {"reset": 0}
         for input in self.inputs:
           if(input not in execute_args):
-            execute_args[input] = 0
+            execute_args[input] = Bits(0,1)
 
         for output_net in netlist.output_netnames:
           result = netlist.execute(output_net, execute_args)
-          while(output_net != result and not is_value(result)):
+          prv_result = ""
+          while(not isinstance(result, Bits) and output_net != result):
             result = netlist.execute(result, execute_args, start_net=output_net)
-          if(output_net == result):
+            if(result == prv_result):
+              break
+            prv_result = result
+          if(not isinstance(result, Bits) and output_net == result):
             continue
           ###Binary Value formatting
-          result = format_netlist_str(result)
             
           transition.executed_outputs.append(f"{output_net} = {result}")
         state.add_transition(transition)

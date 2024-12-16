@@ -67,7 +67,7 @@ module	REF (
 			alarm <= 0;
 		end else begin
 			state <= state_next;
-			case (state)
+			case (state_next)
 				ARM: begin
 					armed <= 1;
 				end
@@ -105,9 +105,6 @@ module	REF (
 			DISARM2B: begin
 				if(digit_enterd)
 					state_next = ARMED;
-			end
-			DISARM: begin
-				state_next = DISARMED;
 			end
 			DISARMED: begin
 				if(command == COM_ARM)

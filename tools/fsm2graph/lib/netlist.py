@@ -10,8 +10,8 @@
 
 import logging
 
-from .utils import format_netlist_str, is_binary_str, is_value
 from .cell import Cell, cell_factory
+from .bits import Bits
 
 if(len(logging.getLogger().handlers) == 0):
   logging.basicConfig(level=logging.WARN)
@@ -102,6 +102,8 @@ class Netlist:
       line = line.replace("\\", "")
       module_name, cell_name, type, port, direction, netname = line.split("\t")
 
+      ##Filter [x:x] from netname
+      netname = netname.split(" ")[0]
 
       if(module_name not in self.modules.keys()):
         self.modules[module_name] = Module(module_name)
@@ -122,8 +124,8 @@ class Netlist:
         continue
 
       ##Binary value formatting
-      if(is_binary_str(netname)):
-        netname = format_netlist_str(netname)
+      if(Bits.is_yosys_bits(netname)):
+        netname = Bits.from_yosys_bits(netname)
 
       #Cells
       cell = cell_factory(cell_name, type, port, direction, netname)
@@ -148,6 +150,8 @@ class Netlist:
     return None
   
   def resolve(self, netname):
+    if(isinstance(netname, Bits)):
+      return netname
     if(netname not in self.nets):
       logging.warning("Net not in netlist -> %s", netname)
       return netname
@@ -155,7 +159,7 @@ class Netlist:
     return net.resolve(self)
   
   def execute(self, netname, args={}, start_net=""):
-    if(is_value(netname)):
+    if(isinstance(netname, Bits)):
       return netname
     if(netname in args):
       return args[netname]
@@ -167,10 +171,8 @@ class Netlist:
       return netname
     cell = self.get_cell_by_output(netname)
     if(cell == None):
-      if(netname in self.output_netnames):
-        logging.warning("Output is not driven by module =/=> %s",netname)
-        return netname
-      raise Cell.CellExecuteError("No cell drives net => %s", netname)
+      logging.warning("No Cell drives net => %s",netname)
+      return netname
     return cell.execute(self, args, start_net)
   
   def get_cell_by_output(self, netname) -> Cell:

@@ -31,7 +31,7 @@ module	REF (
 
 	//@STATES
 	localparam _MIN_STATE=0,
-		DISARM = 0,
+		DISARMED = 0,
 		ARM0 = 1,
 		ARM1 =2,
 		ARM2 = 3,
@@ -40,14 +40,11 @@ module	REF (
 		DISARM1= 6,
 		DISARM2 = 7,
 		ALARM = 8,
-		ALARMING = 9,
-		ARM1B =10,
-		ARM2B = 11,
-		DISARM1B = 12,
-		DISARM2B  = 13,
-		ARM = 14,
-		DISARMED = 15,
-		_MAX_STATE = 15;
+		ARM1B =9,
+		ARM2B = 10,
+		DISARM1B = 11,
+		DISARM2B  = 12,
+		_MAX_STATE = 12;
 
 
 	reg [3:0] state;
@@ -62,28 +59,16 @@ module	REF (
 
 	always @(posedge clk) begin
 		if(reset) begin
-			state <= DISARM;
-			armed <= 0;
-			alarm <= 0;
+			state <= DISARMED;
 		end else begin
 			state <= state_next;
-			case (state)
-				ARM: begin
-					armed <= 1;
-				end
-				DISARM: begin
-					armed <= 0;
-					alarm <= 0;
-				end
-				ALARM: begin
-					alarm <= 1;
-				end
-			endcase
 		end
 	end
 
 	always @(*) begin
 		state_next = state; //default
+		alarm = alarm;
+		armed = armed;
 		case(state)
 			//Disarm flow
 			DISARM0: begin
@@ -96,7 +81,7 @@ module	REF (
 			end
 			DISARM2: begin
 				if(digit_enterd)
-					state_next = digit == D_2 ? DISARM : ARMED;
+					state_next = digit == D_2 ? DISARMED : ARMED;
 			end
 			DISARM1B: begin
 				if(digit_enterd)
@@ -106,10 +91,9 @@ module	REF (
 				if(digit_enterd)
 					state_next = ARMED;
 			end
-			DISARM: begin
-				state_next = DISARMED;
-			end
 			DISARMED: begin
+				alarm = 0;
+				armed = 0;
 				if(command == COM_ARM)
 					state_next = ARM0; 
 			end
@@ -125,7 +109,7 @@ module	REF (
 			end
 			ARM2: begin
 				if(digit_enterd)
-					state_next = digit == D_2 ? ARM : DISARMED;
+					state_next = digit == D_2 ? ARMED : DISARMED;
 			end
 			ARM1B: begin
 				if(digit_enterd)
@@ -135,19 +119,15 @@ module	REF (
 				if(digit_enterd)
 					state_next = DISARMED;
 			end
-			ARM: begin
-				state_next = ARMED;
-			end
 			ARMED: begin
+				armed = 1;
 				if(command == COM_DIS)
 					state_next = DISARM0; 
 				if(trigger)
 					state_next = ALARM;
 			end
 			ALARM: begin
-				state_next = ALARMING;
-			end
-			ALARMING: begin
+				alarm = 1;
 				if(command == COM_DIS)
 					state_next = DISARM0;
 			end
@@ -168,6 +148,7 @@ module	REF (
 		if(reset) begin
 			f_is_reset <= 1;
 			f_was_armed <= 0;
+
 		end
 
 		if(f_is_reset) begin
@@ -177,9 +158,9 @@ module	REF (
 
 		if(!reset) begin
 			//Completed FSM
-			if(f_is_reset && f_was_armed && state == DISARMED) begin
-				cover($past(state) == DISARM);
-				assert($past(state) == DISARMED || $past(state) == DISARM || $past(state) == ARM2 || $past(state) == ARM2B);
+			if(f_is_reset && f_was_armed && state == DISARMED && $past(state) != DISARMED && !$past(reset)) begin
+				cover($past(state) == DISARM2);
+				assert($past(state) == ARM2 || $past(state) == ARM2B || $past(state) == DISARM2);
 			end
 
 			//Can arm
