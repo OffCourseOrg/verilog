@@ -1,9 +1,9 @@
 /*
  *  OffCourse::Verilog
- *		- Home Security UUT
+ *		- Home Cracking UUT
  *
- *  Written by: Sybe
- *  License: MIT
+ *  Copyright: Sybe
+ *  License: GPLv3 or later
  */
 
 module UUT (

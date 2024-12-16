@@ -2,8 +2,8 @@
  *  OffCourse::Verilog
  *		- Shift Register UUT
  *
- *  Written by: Sybe
- *  License: MIT
+ *  Copyright: Sybe
+ *  License: GPLv3 or later
  */
 
 module UUT (

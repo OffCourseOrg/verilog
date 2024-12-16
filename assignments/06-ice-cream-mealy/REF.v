@@ -2,8 +2,8 @@
  *  OffCourse::Verilog
  *		- ice-cream-mealy REF
  *
- *  Written by: Aleksandrs
- *  License: MIT
+ *  Copyright: Aleksandrs
+ *  License: GPLv3 or later
  */
 
 module REF (

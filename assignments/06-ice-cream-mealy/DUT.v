@@ -2,8 +2,8 @@
  *  OffCourse::Verilog
  *		- ice-cream-mealy UUT
  *
- *  Written by: Aleksandrs
- *  License: MIT
+ *  Copyright: Aleksandrs
+ *  License: GPLv3 or later
  */
  module UUT (
   input clk,
