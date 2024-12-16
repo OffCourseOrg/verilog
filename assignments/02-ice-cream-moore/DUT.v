@@ -1,12 +1,12 @@
 /*
  *  OffCourse::Verilog
- *		- ice-cream-moore DUT
+ *		- ice-cream-moore UUT
  *
  *  Written by: Aleksandrs
  *  License: MIT
  */
 
-module DUT (
+module UUT (
   input clk,
 	input reset,
   input insert,

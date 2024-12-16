@@ -14,7 +14,7 @@ module	bmc(
 
     reg f_isReset;
     initial f_isReset <= 0;
-    wire [15:0] count_ref, count_dut;
+    wire [15:0] count_ref, count_uut;
 
     REF #(
         .MAX_AMOUNT(69)
@@ -25,11 +25,11 @@ module	bmc(
         .count(count_ref)
     );
 
-    DUT DUT(
+    UUT UUT(
         .clk(clk),
         .enable(enable),
         .reset(reset),
-        .count(count_dut)
+        .count(count_uut)
     );
 
 `ifdef	FORMAL
@@ -40,7 +40,7 @@ module	bmc(
 
     always @(*) begin
         if(f_isReset)
-            assert(count_ref == count_dut);
+            assert(count_ref == count_uut);
     end
 `endif
 endmodule

@@ -15,7 +15,7 @@ module	bmc(
 
   reg f_isReset;
   initial f_isReset <= 0;
-  wire [7:0] ref_out, dut_out;
+  wire [7:0] ref_out, uut_out;
 
   REF REF (
     .clk(clk),
@@ -25,12 +25,12 @@ module	bmc(
     .serial_out(ref_out)
   );
 
-  DUT DUT(
+  UUT UUT(
     .clk(clk),
     .enable(enable),
     .reset(reset),
     .serial_in(serial_in),
-    .serial_out(dut_out)
+    .serial_out(uut_out)
   );
 
 `ifdef	FORMAL
@@ -41,7 +41,7 @@ module	bmc(
 
   always @(*) begin
     if(f_isReset)
-        assert(ref_out == dut_out);
+        assert(ref_out == uut_out);
   end
 `endif
 endmodule

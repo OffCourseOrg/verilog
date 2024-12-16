@@ -1,12 +1,12 @@
 /*
  *  OffCourse::Verilog
- *		- Home Security DUT
+ *		- Home Security UUT
  *
  *  Written by: Sybe
  *  License: MIT
  */
 
-module DUT (
+module UUT (
     input clk,
 		input reset,
 		input enable,

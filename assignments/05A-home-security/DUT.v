@@ -1,29 +1,24 @@
 /*
  *  OffCourse::Verilog
- *		- Home Security DUT
+ *		- Home Security UUT
  *
  *  Written by: Sybe
  *  License: MIT
  */
 
-module DUT (
-    input clk,
+module UUT (
+		input clk,
 		input reset,
-		input enable,
-		input serial_in,
-		output serial_out
+
+		input trigger,
+		input [1:0] command,
+		input [3:0] digit,
+		input digit_enterd,
+
+		output [3:0] state,
+		output reg armed,
+		output reg alarm
 	);
-	reg [7:0] register;
 
-  always @(posedge clk) begin
-    if(reset) begin
-      register <= 8'b0;
-    end else if(enable) begin
-      register <= register << 1;
-      register[0] <= serial_in;
-    end
-  end
-
-  assign serial_out = register[7];
 
 endmodule
