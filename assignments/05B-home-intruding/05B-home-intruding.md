@@ -11,7 +11,7 @@
 
   If you are comfortable with verilog, try this assignment without looking at the solution diagram. On an exam the diagram will always be provided.
   
-#### Your UUT will be checked against the `05A "Home Security"` FSM the TARGET
+#### Your UUT will be run against the `05A "Home Security"` FSM as the "TARGET"
 
 
   - The TARGET will start in its `ARMED` state.
@@ -23,7 +23,7 @@
 
   *This task does not use a golden reference. Therefore the trace in GTKwave will not end at a divergence/error point. It instead ends ater XXX clockcycles*
 
-[Solution Diagram is hiding here!](https://github.com/OffCourseOrg/verilog/tree/master/assignments/05B-home-cracking/diagram.svg)
+[Solution Diagram is hiding here!](https://raw.githubusercontent.com/OffCourseOrg/verilog/refs/heads/master/assignments/05B-home-cracking/diagram.svg)
 
 ```
  *  This work is licensed under CC BY-NC-SA 4.0 

@@ -1,6 +1,6 @@
 /*
  *  OffCourse::Verilog
- *		- Home Cracking UUT
+ *		- Home Intruding UUT
  *
  *  Copyright: Sybe
  *  License: GPLv3 or later

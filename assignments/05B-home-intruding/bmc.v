@@ -1,6 +1,6 @@
 /*
  *  OffCourse::Verilog
- *		- Home Cracking BMC
+ *		- Home Intruding BMC
  *
  *  Copyright: Sybe
  *  License: GPLv3 or later
