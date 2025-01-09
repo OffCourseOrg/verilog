@@ -16,14 +16,14 @@ module	REF (
 		input digit_enterd,
 
 	`ifndef GEN_FSM
-		output [3:0]state_ref,
+		output [3:0] state_ref,
 	`endif
 		output reg armed,
 		output reg alarm
 	);
-	localparam D_0 = 4'd4,
+	localparam D_2 = 4'd4,
 		D_1 = 4'd2,
-		D_2 = 4'd1;
+		D_0 = 4'd1;
 
 	localparam COM_NONE = 0,
 		COM_ARM = 1,

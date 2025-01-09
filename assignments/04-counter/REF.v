@@ -7,7 +7,7 @@
  */
 
 module	REF #(
-		parameter [15:0] MAX_AMOUNT = 22,
+		parameter [15:0] MAX_AMOUNT = 42,
 	) (
 		input clk,
 		input reset,
@@ -23,7 +23,7 @@ module	REF #(
 			count <= 0;
 		end
 		else if(enable)
-			if(count != MAX_AMOUNT)
+			if(count < MAX_AMOUNT)
 				count <= count + 1;
 			else begin
 				count <= count;

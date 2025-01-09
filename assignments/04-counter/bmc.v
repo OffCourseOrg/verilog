@@ -16,9 +16,7 @@ module	bmc(
     initial f_isReset <= 0;
     wire [15:0] count_ref, count_uut;
 
-    REF #(
-        .MAX_AMOUNT(69)
-    ) REF (
+    REF REF (
         .clk(clk),
         .enable(enable),
         .reset(reset),

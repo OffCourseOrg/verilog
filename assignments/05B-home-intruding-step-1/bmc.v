@@ -1,6 +1,6 @@
 /*
  *  OffCourse::Verilog
- *		- Home Intruding BMC
+ *		- Home Intruding Step 1 BMC
  *
  *  Copyright: Sybe
  *  License: GPLv3 or later
@@ -9,28 +9,30 @@
 module	bmc(
   input wire clk,
   input wire enable,
-  input wire reset,
-  input wire serial_in,
+  input wire reset
 );
 
   reg f_isReset;
-  initial f_isReset <= 0;
-  wire [7:0] ref_out, uut_out;
+  initial f_isReset = 0;
+  wire [3:0] ref_count, uut_count;
+  wire ref_rollover, uut_rollover;
 
   REF REF (
     .clk(clk),
     .enable(enable),
     .reset(reset),
-    .serial_in(serial_in),
-    .serial_out(ref_out)
+
+    .count(ref_count),
+    .rollover(ref_rollover)
   );
 
   UUT UUT(
     .clk(clk),
     .enable(enable),
     .reset(reset),
-    .serial_in(serial_in),
-    .serial_out(uut_out)
+
+    .count(uut_count),
+    .rollover(uut_rollover)
   );
 
 `ifdef	FORMAL
@@ -40,8 +42,10 @@ module	bmc(
   end
 
   always @(*) begin
-    if(f_isReset)
-        assert(ref_out == uut_out);
+    if(f_isReset) begin
+        assert(ref_count == uut_count);
+        assert(ref_rollover == uut_rollover);
+    end
   end
 `endif
 endmodule

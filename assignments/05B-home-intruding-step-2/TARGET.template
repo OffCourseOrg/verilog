@@ -1,12 +1,12 @@
 /*
  *  OffCourse::Verilog
- *		- Home Security REF
+ *		- Home Security step 2 target
  *
  *  Copyright: Sybe
  *  License: GPLv3 or later
  */
 
-module	REF (
+module TARGET (
 		input clk,
 		input reset,
 
@@ -16,14 +16,14 @@ module	REF (
 		input digit_enterd,
 
 	`ifndef GEN_FSM
-		output [3:0]state_ref,
+		output [3:0] state_target,
 	`endif
 		output reg armed,
 		output reg alarm
 	);
-	localparam D_0 = 4'd4,
-		D_1 = 4'd2,
-		D_2 = 4'd1;
+	localparam D_2 = _RANDOM_DIGIT_,
+		D_1 = _RANDOM_DIGIT_,
+		D_0 = _RANDOM_DIGIT_;
 
 	localparam COM_NONE = 0,
 		COM_ARM = 1,
@@ -52,14 +52,14 @@ module	REF (
 	reg active_digit;
 
 	`ifndef GEN_FSM
-		assign state_ref = state;
+		assign state_target = state;
 	`endif
 
 	//Labels FSM Logic
 
 	always @(posedge clk) begin
 		if(reset) begin
-			state <= DISARMED;
+			state <= ARMED;
 		end else begin
 			state <= state_next;
 		end

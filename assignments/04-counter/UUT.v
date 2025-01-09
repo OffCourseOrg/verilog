@@ -16,7 +16,7 @@ module UUT (
 	always @(posedge clk) begin
 		if(reset) begin
 			count <= 0;
-		end else if(enable && count < 69) begin
+		end else if(enable && count < 42) begin
 			count <= count + 1;
 		end else begin
 			count <= count;

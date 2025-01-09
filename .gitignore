@@ -2,5 +2,6 @@
 **/.vscode
 **/_**/
 **/node_modules
+**/obj_dir
 package.json
 yarn.lock

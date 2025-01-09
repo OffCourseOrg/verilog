@@ -13,20 +13,29 @@ module	REF (
 		input serial_in,
 		output serial_out
 	);
-	reg [7:0] register;
+	localparam SHIFT_SIZE = 8;
+
+	reg [SHIFT_SIZE-1:0] register;
+
+	generate
+	genvar i;
 
 	always @(posedge clk) begin
-		register <= register;
-
 		if (reset) begin
-			register <= 8'b0;
+				for (i = SHIFT_SIZE-1; i >= 0; i = i -1) begin
+					register[i] <= 1'b0;
+				end
 		end else if (enable) begin
-			register <= register << 1;
+				for (i = SHIFT_SIZE-1; i > 0; i = i -1) begin
+					register[i] <= register[i-1]; 
+				end
+
 			register[0] <= serial_in;
 		end
 	end
+	endgenerate
 
-	assign serial_out = register[7];
+	assign serial_out = register[SHIFT_SIZE-1];
 
 `ifdef FORMAL
 	reg f_is_reset;

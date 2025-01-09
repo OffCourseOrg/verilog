@@ -1,26 +1,41 @@
 ```
  *  Copyright: Sybe Feitsma
- *  This work is licensed under CC BY-NC-SA 4.0 
+ *  This work is licensed under CC BY-SA 4.0 
 ```
-### Assignment 05A "Home Security"
+#### Part of Series:
+  | 05-Home |
+  ---------------------
+  | => **05A-Home-Security** |
+  | 05B-Home-Intruding-step-1 |
+  | 05B-Home-Intruding-step-2 |
+
+
+## Assignment 05A "Home Security"
 
   05A requires you to construct a simple home security system with a 3 digit pincode. implemented as a moore FSM.
   
-#### Your UUT will be checked against a golden reference. 
+#### Your UUT will be checked against a Golden reference. 
   Every clockcyle:
 
-  - UUT State must match REF state
+  - UUT State must match REF state  
   - UUT Outputs must match REF Outputs
   - If your UUT and the REF diverge the simulation will halt immediatly
 
-  The skeleton UUT (Unit Under Test) file has been filled in with the relevant input and outputs.
-  use GTKWave (The software hiding behind the Debug/Spider button) to debug any issues.
-
+  use GTKWave (The software hiding behind the Debug/Spider button) to debug any issues.\
   *This task uses a golden reference. Therefore the trace in GTKwave will always end at the divergence/error point*
 
+# Task
+  Use the provided state graph to implement the home-security Moore FSM
+  | |
+  |-|
+  |  **Outputs keep their value unless changed by a state.** |
+  The skeleton UUT (Unit Under Test) file is given with relevant input and outputs. |
 
-<img src="fsm.svg">
+  Good luck!
+
+
+<img src="fsm.svg" style="background-color:white;padding:20px;">
 
 ```
- *  This work is licensed under CC BY-NC-SA 4.0 
+ *  This work is licensed under CC BY-SA 4.0 
 ```
