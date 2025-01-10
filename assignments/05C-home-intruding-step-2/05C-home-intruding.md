@@ -8,12 +8,12 @@
   ---------------------
   | 05A-Home-Security |
   | 05B-Home-Intruding-step-1 |
-  | => **05B-Home-Intruding-step-2** |
+  | => **05C-Home-Intruding-step-2** |
 
  
-### Assignment 05B "Home Intruding" Step 2
+### Assignment 05C "Home Intruding" Step 2
 
-  **05B** requires you to construct a tool to crack the security system of **05A**. As you might have noticed, the home security fsm you implemented previously contains a critical security flaw. It does not raise the alarm when incorrect pincodes are repeatedly entered. Exposing the security system to a *bruteforce* attack.
+  **05C** requires you to construct a tool to crack the security system of **05A**. As you might have noticed, the home security fsm you implemented previously contains a critical security flaw. It does not raise the alarm when incorrect pincodes are repeatedly entered. Exposing the security system to a *bruteforce* attack.
 
   
 #### Your UUT will be checked against a Golden reference. 

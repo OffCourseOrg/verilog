@@ -21,9 +21,9 @@ module TARGET (
 		output reg armed,
 		output reg alarm
 	);
-	localparam D_2 = 4,
-		D_1 = 4,
-		D_0 = 5;
+	localparam D_2 = 3,
+		D_1 = 5,
+		D_0 = 0;
 
 	localparam COM_NONE = 0,
 		COM_ARM = 1,
