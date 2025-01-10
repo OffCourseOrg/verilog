@@ -63,8 +63,8 @@ module	REF (
 	end
 
 	assign active_digit_is_2 = active_digit == 2;
-	assign active_digit_is_3 = active_digit == 3;
-	assign active_digit_overflow = active_digit == 3;
+	assign active_digit_is_3 = 3 == active_digit;
+	assign active_digit_overflow = 3 == active_digit;
 
 	assign command = 2'b10; //DISARM command
 	assign digit_entered = 1; //Just needs to be set

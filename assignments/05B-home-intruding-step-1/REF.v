@@ -29,7 +29,7 @@ module	REF (
 	end
 
 	assign count_finish = count == 9;
-	assign rollover = enable && count_finish;
+	assign rollover = count_finish && enable;
 
 `ifdef FORMAL
 	reg f_is_reset;

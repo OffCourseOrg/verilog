@@ -11,8 +11,8 @@ module counter (
 		input reset,
 		input enable,
 
-		output reg [3:0] count,
-		output rollover
+		output rollover,
+		output reg [3:0] count
 	);
 
 	wire count_finish;

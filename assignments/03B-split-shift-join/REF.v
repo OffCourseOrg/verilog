@@ -9,33 +9,23 @@
 module	REF (
 		input clk,
 		input reset,
-		input enable,
 		input serial_in,
 		output serial_out
 	);
-	localparam SHIFT_SIZE = 8;
 
-	reg [SHIFT_SIZE-1:0] register;
+	reg [7:0] register;
 
-	generate
 	genvar i;
-
 	always @(posedge clk) begin
+	register <= register;
 		if (reset) begin
-				for (i = SHIFT_SIZE-1; i >= 0; i = i -1) begin
-					register[i] <= 1'b0;
-				end
-		end else if (enable) begin
-				for (i = SHIFT_SIZE-1; i > 0; i = i -1) begin
-					register[i] <= register[i-1]; 
-				end
-
-			register[0] <= serial_in;
+			register <= 8'b00000000;
+		end else begin
+			register = {register[6:0], serial_in};
 		end
 	end
-	endgenerate
 
-	assign serial_out = register[SHIFT_SIZE-1];
+	assign serial_out = register[7];
 
 `ifdef FORMAL
 	reg f_is_reset;
@@ -50,7 +40,7 @@ module	REF (
 			f_is_reset <= 1;
 
 		//Data shifted
-		if(f_is_reset && $past(enable) && !$past(reset)) begin
+		if(f_is_reset && !$past(reset)) begin
 			assert(register[0] == $past(serial_in));
 		end
 	end

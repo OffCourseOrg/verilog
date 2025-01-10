@@ -3,9 +3,15 @@
  *  This work is licensed under CC BY-SA 4.0 
 ```
 
-## Assignment 03 "Shift"
+#### Part of Series:
+  | 03-split-join |
+  ---------------------
+  | 03A-split-join |
+  | => **03B-split-shift-join** |
 
-  04 requires you to create a counter that counts from 0 to 16. Using the prodivded module diagram.
+## Assignment 03B "Split Shift Join"
+
+  03B utilises the value splitting and joining techniques of 03A to implement a shift register. In these series assignments it will be expected that you have completed the previous assignments in the series. 
   
 #### Your UUT will be checked against a Golden reference. 
   Every clockcyle:
@@ -17,11 +23,9 @@
   *This task uses a golden reference. Therefore the trace in GTKwave will always end at the divergence/error point*
 
 # Task
-  Use the provided module diagram to implement a 16bit counter. The counter runs till 16 and rolls-over to 0.
+  Use the provided module diagram to implement an 8bit shift register with reset.
   | |
   |-|
-  | **0x2a** and **0x0** are hexadecimal values. Either convert them to decimal or use the hexadecimal notation in verilog.|
-  | Hex in verilog:  **width**`'h`**value** => `16'h2a`|
   | The skeleton UUT (Unit Under Test) file is given with relevant input and outputs. |
 
   #### Good luck!

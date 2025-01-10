@@ -8,7 +8,6 @@
 
 module	bmc(
   input wire clk,
-  input wire enable,
   input wire reset,
   input wire serial_in,
 );
@@ -19,7 +18,6 @@ module	bmc(
 
   REF REF (
     .clk(clk),
-    .enable(enable),
     .reset(reset),
     .serial_in(serial_in),
     .serial_out(ref_out)
@@ -27,7 +25,6 @@ module	bmc(
 
   UUT UUT(
     .clk(clk),
-    .enable(enable),
     .reset(reset),
     .serial_in(serial_in),
     .serial_out(uut_out)
