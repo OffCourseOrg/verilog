@@ -47,7 +47,7 @@ load_for_tools:
 
 diagram: $(VERILOG_SOURCES)
 	$(YOSYS) -p "prep -top REF; write_json tmp/netlist.json" $^
-	yarn netlistsvg-offcourse $(CURRENT_DIR)/tmp/netlist.json -o $(CURRENT_DIR)/diagram.svg
+	yarn netlistsvg-offcourse $(CURRENT_DIR)/tmp/netlist.json -o $(CURRENT_DIR)/diagram.svg --skin $(CURRENT_DIR)/default.svg
 	xdg-open diagram.svg
 
 env:
