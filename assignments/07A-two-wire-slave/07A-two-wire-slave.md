@@ -3,14 +3,11 @@
  *  This work is licensed under CC BY-SA 4.0 
 ```
 #### Part of Series:
-  | 05-Home |
+  | 07-two-wire |
   ---------------------
-  | => **05A-Home-Security** |
-  | 05B-Home-Intruding-step-1 |
-  | 05B-Home-Intruding-step-2 |
+  | => **07A-two-wire-slave** |
 
-
-## Assignment 05A "Home Security"
+## Assignment 07A "Two Wire Slave"
 
   05A requires you to construct a simple home security system with a 3 digit pincode. implemented as a moore FSM.
   
