@@ -1,0 +1,22 @@
+[tasks]
+prv
+cvr
+
+[options]
+cvr: mode cover
+prv: mode bmc
+depth 40
+
+[engines]
+smtbmc
+
+[script]
+read -formal bmc.v
+read -formal UUT.v
+read -formal REF.v
+prep -top REF
+
+[files]
+REF.v
+UUT.v
+bmc.v
