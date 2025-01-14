@@ -74,7 +74,11 @@ class Net:
     if(not self.is_internal):
       return self.name
     if(self.resolved == ""):
-      self.resolved = self.get_cell(netlist).resolve(netlist)
+      result = self.get_cell(netlist).resolve(netlist)
+      if(not isinstance(result, str)):
+        logging.info("Unresolvable encountered: %s -> %s", self.name, self.resolved)
+        return -1
+      self.resolved = result
       logging.info("Resolved: %s -> %s", self.name, self.resolved)
     return self.resolved
     
@@ -103,7 +107,7 @@ class Netlist:
       module_name, cell_name, type, port, direction, netname = line.split("\t")
 
       ##Filter [x:x] from netname
-      netname = netname.split(" ")[0]
+      #netname = netname.split(" ")[0]
 
       if(module_name not in self.modules.keys()):
         self.modules[module_name] = Module(module_name)
@@ -171,8 +175,22 @@ class Netlist:
       return netname
     cell = self.get_cell_by_output(netname)
     if(cell == None):
-      logging.warning("No Cell drives net => %s",netname)
-      return netname
+      #Try select wise outputs
+      cells = []
+      for i in range(32):
+        cell = self.get_cell_by_output(f'{netname} [{i}]')
+        if(cell == None):
+          break
+        cells.append(cell)
+
+      if(cells == []):
+        logging.warning("No Cell drives net => %s",netname)
+        return netname
+
+      result = []
+      for c in cells:
+        result.append(c.execute(self, args, start_net))
+      return result
     return cell.execute(self, args, start_net)
   
   def get_cell_by_output(self, netname) -> Cell:

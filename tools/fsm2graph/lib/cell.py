@@ -64,6 +64,8 @@ class Cell:
     for port_name, port in self.ports.items():
       if(port.is_output()):
         continue
+      if(port.netname == ""):
+        return -1
       if(not isinstance(port.netname, Bits) and "$" not in port.netname):
         text = text.replace(port_name, port.netname) 
         continue
@@ -333,16 +335,25 @@ class PMUX(Cell):
     if(len(self.ports['S'].netnames) == 0):
       raise NotImplementedError("$pmux with non-combined S port")
     
-    execute_nets = self.ports["S"].netnames
+    execute_nets = self.ports["S"].netnames.copy()
     for index, netname in enumerate(self.ports["S"].netnames):
+      if(isinstance(netname, Bits)):
+        continue
       if(netname not in args):
         execute_nets[index] = netlist.execute(netname, args, start_net)
     
     #Combined B net
     if(len(self.ports["B"].netnames)):
       for i, execute_net in enumerate(execute_nets):
-        if(args[execute_net]):
-          return netlist.execute(self.ports["B"].netnames[i], args, start_net)
+        if(isinstance(execute_net, Bits) and not execute_net):
+          continue
+        if(isinstance(execute_net, str) and not args[execute_net]):
+          continue
+        if(len(execute_nets) > len(self.ports["B"].netnames)):
+          #Select
+          if(i > 0):
+            return netlist.execute(f'{self.ports["B"].netnames[1]} [{i-1}]', args, start_net)
+        return netlist.execute(self.ports["B"].netnames[i], args, start_net)
     else:
       #Static B net
       if(not isinstance(self.ports["B"].netname, Bits)):

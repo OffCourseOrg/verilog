@@ -12,6 +12,7 @@ from enum import Enum
 import logging
 from typing import List
 
+import re 
 from .bits import Bits
 
 
@@ -195,6 +196,8 @@ class FSMInfoParser:
   def execute_outputs(self, netlist):
     #Compile outputs into states
     for state in self.states.values():
+      global ACTIVE_STATE
+      ACTIVE_STATE = state
       transitions = state.transitions
       state.transitions = []
       for i, transition in enumerate(transitions):
@@ -207,18 +210,54 @@ class FSMInfoParser:
             execute_args[input] = Bits(0,1)
 
         for output_net in netlist.output_netnames:
+          NORMAL_STATE = True
           result = netlist.execute(output_net, execute_args)
           prv_result = ""
-          while(not isinstance(result, Bits) and output_net != result):
-            result = netlist.execute(result, execute_args, start_net=output_net)
-            if(result == prv_result):
-              break
-            prv_result = result
-          if(not isinstance(result, Bits) and output_net == result):
-            continue
-          ###Binary Value formatting
-            
-          transition.executed_outputs.append(f"{output_net} = {result}")
+          if(type(result) is list):
+              keep_running = True
+              while(keep_running):
+                keep_running = False
+                for index, subnet in enumerate(result):
+                  if(isinstance(subnet, Bits)):
+                    continue
+                  result[index] = netlist.execute(subnet, execute_args, start_net=output_net)
+                  keep_running = prv_result != result
+                  prv_result = result
+              #Check if result => output net or bits are changed
+              NORMAL_STATE = False
+              for i, subnet in enumerate(result):
+                if(not isinstance(subnet, str)):
+                  continue
+                match = re.search("(?!\[)\d+?(?=\])", subnet)
+                if(match == None):
+                  transition.executed_outputs.append(f"{output_net}[{i}] = {subnet}")
+                else:
+                  selected = int(match.group())
+                  if(selected != i):
+                    transition.executed_outputs.append(f"{output_net}[{i}] = {output_net}[{selected}]")
+
+          if(NORMAL_STATE):
+            while(not isinstance(result, Bits) and output_net != result):
+              result = netlist.execute(result, execute_args, start_net=output_net)
+              if(result == prv_result):
+                break
+              if(type(result) is list):
+                keep_running = True
+                while(keep_running):
+                  keep_running = False
+                  for index, subnet in enumerate(result):
+                    if(isinstance(subnet, Bits)):
+                      continue
+                    result[index] = netlist.execute(subnet, execute_args, start_net=output_net)
+                    keep_running = prv_result != result
+                    prv_result = result
+                result = Bits.concat(result)
+              prv_result = result
+            if(not isinstance(result, Bits) and output_net == result):
+              continue
+            ###Binary Value formatting
+              
+            transition.executed_outputs.append(f"{output_net} = {result}")
         state.add_transition(transition)
 
   #### MOORE vs MEALY ######

@@ -13,6 +13,7 @@
 import logging
 import graphviz
 import sys
+import re
 
 from lib import FSMInfoParser, VerilogExtractor, Netlist
 
@@ -79,7 +80,7 @@ fsm.get_fsm_type()
 dot = graphviz.Digraph(filename="fsm.gv",
                        directory="tmp/",
                        engine="neato",
-                       node_attr={"style": "filled", "margin": "0.05", "fillcolor": "darkolivegreen3"}
+                       node_attr={"style": "filled", "width": "2", "margin": "0.05", "fillcolor": "darkolivegreen3"}
                        )
 
 #add states
@@ -114,6 +115,8 @@ for state in fsm.states.values():
         net = key if "$" not in key else netlist.resolve(key)
       else:
         net = key
+      if(net == -1):
+        continue
       if(label != ""):
         label += f"{DOT_edge_label_spacing}&& "
       else:
@@ -126,7 +129,10 @@ for state in fsm.states.values():
 
     if(DOT_skip_label_loops and transition.state_fsm_id == transition.next_fsm_id):
       label=""
-    dot.edge(f"{transition.state_fsm_id}", f"{transition.next_fsm_id}", label=label)
 
+    label = re.sub("(?<=[\x21-\x7E]) &&", f"@{DOT_edge_label_spacing}&& ", label)
+    label = label.replace("@", "\l")
+    label = label.lower()
+    dot.edge(f"{transition.state_fsm_id}", f"{transition.next_fsm_id}", label=label)
 
 dot.save()

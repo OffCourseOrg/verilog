@@ -46,7 +46,7 @@ load_for_tools:
 	cp tmp/*.txt $(TOOLS-DIR)/tmp/
 
 diagram: $(VERILOG_SOURCES)
-	$(YOSYS) -p "prep -top REF; write_json tmp/netlist.json" $^
+	$(YOSYS) -p "hierarchy -check -top $(TOP_MODULE); proc; future; opt_clean; check; opt -noff -keepdc; wreduce -keepdc; opt_clean; memory_collect; opt -noff -keepdc -fast; stat; check; write_json tmp/netlist.json" $^
 	yarn netlistsvg-offcourse $(CURRENT_DIR)/tmp/netlist.json -o $(CURRENT_DIR)/diagram.svg --skin $(CURRENT_DIR)/default.svg
 	xdg-open diagram.svg
 

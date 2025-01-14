@@ -11,6 +11,11 @@ class Bits:
   class BitsFormatException(Exception):
     pass
   
+  class Selector():
+     def __init__(self, end, start):
+        self.end = end
+        self.start = start
+
   def __init__(self, value: int, size: int):
     self._data = value
     self._size = size
@@ -100,6 +105,25 @@ class Bits:
 
   def __str__(self):
     return f"{self._size}'{'%0*d' % (self._size, int(bin(self._data)[2:]))}"
+
+
+  #Verilog Selector
+  #selector => [end, start]
+  def select(self, sel: Selector):
+    return self.from_str(bin(self._data)[-sel.end + 2:-sel.start + 1])
+
+  @classmethod
+  #Concat a list of bits -> [0] = MSB
+  def concat(cls, bits: list):
+    bits.reverse()
+    result = 0
+    size = 0
+    for i, bit in enumerate(bits):
+       if(not isinstance(bit, Bits)):
+          raise TypeError("Unsupported type in Bits concat => {}".format(type(bit)))
+       result += bit._data << i
+       size += bit._size
+    return Bits(result, size)
 
   #Make bits instance from xxx string
   @classmethod

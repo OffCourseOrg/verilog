@@ -1,6 +1,6 @@
 /*
  *  OffCourse::Verilog
- *		- Two Wires REF
+ *		- IIC PLACEHOLDER REF
  *
  *  Copyright: Sybe
  *  License: GPLv3 or later
@@ -10,6 +10,11 @@ module	REF (
 		input clk,
 		input reset,
 
+		input SCL,
+		input SDA_in,
+		output reg write_SDA,
+		output reg SDA_out,
+
 	`ifndef GEN_FSM
 		output [3:0] state_ref,
 	`endif
@@ -17,6 +22,16 @@ module	REF (
 
 	//@STATES
 	localparam _MIN_STATE=0,
+		IDLE = 0,
+		START = 1,
+		ADDR1 = 2,
+		ADDR2 = 3,
+		ADDR3 = 4,
+		ADDR4 = 5,
+		ADDR5 = 6,
+		ADDR6 = 7,
+		ADDR7 = 8,
+		ACK = 9,
 		_MAX_STATE = 0;
 
 

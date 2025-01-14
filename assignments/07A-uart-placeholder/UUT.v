@@ -1,6 +1,6 @@
 /*
  *  OffCourse::Verilog
- *		- Two Wires UUT
+ *		- IIC PLACEHOLDER UUT
  *
  *  Copyright: Sybe
  *  License: GPLv3 or later

@@ -1,0 +1,28 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Tue Jan 14 00:56:48 2025
+[*]
+[dumpfile] "/home/walthzer/offcourse/github/verilog/assignments/08A-iic-controller/trace.vcd"
+[dumpfile_mtime] "Tue Jan 14 00:54:55 2025"
+[dumpfile_size] 11558
+[savefile] "/home/walthzer/offcourse/github/verilog/assignments/08A-iic-controller/working.gtkw"
+[timestart] 0
+[size] 1228 1425
+[pos] -1 -1
+*-16.410690 26500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] bench.
+[sst_width] 297
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 446
+@28
+bench.decoder.clk
+bench.decoder.SCL
+bench.decoder.SDA
+@820
+bench.debug[152:0]
+@24
+bench.REF.state_ref[7:0]
+bench.REF.state_next[7:0]
+[pattern_trace] 1
+[pattern_trace] 0

@@ -3,13 +3,12 @@
  *  This work is licensed under CC BY-SA 4.0 
 ```
 #### Part of Series:
-  | 07-two-wire |
+  | 07-uart |
   ---------------------
-  | => **07A-two-wire-slave** |
+  | => **07A-uart-placeholder** |
 
-## Assignment 07A "Two Wire Slave"
-
-  05A requires you to construct a simple home security system with a 3 digit pincode. implemented as a moore FSM.
+## Assignment 07A "UART PLACEHOLDER"
+  
   
 #### Your UUT will be checked against a Golden reference. 
   Every clockcyle:
@@ -22,11 +21,11 @@
   *This task uses a golden reference. Therefore the trace in GTKwave will always end at the divergence/error point*
 
 # Task
-  Use the provided state graph to implement the home-security Moore FSM
+  Use the provided state graph to implement a basic Two Wire slave.
+
   | |
   |-|
-  |  **Outputs keep their value unless changed by a state.** |
-  The skeleton UUT (Unit Under Test) file is given with relevant input and outputs. |
+  | The skeleton UUT (Unit Under Test) file is given with relevant input and outputs. |
 
   Good luck!
 
