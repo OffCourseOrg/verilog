@@ -1,0 +1,520 @@
+\documentclass[12pt, a4paper, oneside]{memoir}
+\chapterstyle{lyhne}
+
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm,nomarginpar]{geometry}
+
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage{colortbl}
+\usepackage[english]{babel}
+\usepackage[english]{isodate}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{wrapfig}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\makepagestyle{fancy}
+\usepackage{minted}
+\tcbuselibrary{minted}
+\usepackage{tikz}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{multirow}
+\usepackage{graphfig}
+\usepackage{graphicx}
+\usepackage{circuitikz}
+\usepackage{tikz-timing}
+\usetikztiminglibrary{either}
+\usepackage{svg}
+\usepackage{bookmark}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{titling}
+
+
+\setlength{\marginparwidth}{2cm}
+\usepackage[colorinlistoftodos,prependcaption]{todonotes}
+\captionsetup{belowskip=0pt}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\newcommand{\attention}[1]{\begin{center}\colorbox{attention}{\textbf{#1}}\end{center}}
+\renewcommand{\lnot}{\textasciitilde{}}
+
+\author{OffCourse Verilog Staff}
+\title{\textbf{Digital Circuits and Verilog}}
+
+
+\pretitle{%
+  \begin{center}
+  \LARGE
+  \includegraphics[width=2cm]{offcourse_logo}\\[\bigskipamount]
+}
+\posttitle{\end{center}}
+
+\begin{document}
+\setlength{\beforechapskip}{-20pt}
+\fancypagestyle{plain}{%
+  \fancyhead[L]{OffCourse}
+  \fancyhead[C]{\textbf{Digital Circuits and Verilog}}
+  \fancyhead[R]{CC BY-SA 4.0}
+}
+
+\fancyhead[L]{OffCourse}
+\fancyhead[C]{\textbf{Digital Circuits and Verilog}}
+\fancyhead[R]{CC BY-SA 4.0}
+
+\definecolor{attention}{cmyk}{0,0,0.4,0}
+\definecolor{logicblue}{cmyk}{0.27,0.01,0,0.06}
+\definecolor{gtkgreen}{rgb}{32,32,112}
+\colorlet{tbDGrn}{white!40!green}
+\colorlet{tbBlu}{white!60!blue}
+\colorlet{tbRed}{white!55!red}
+
+\maketitle
+\thispagestyle{empty}
+
+\chapter*{Introduction}
+\section*{Preface}
+This document aims to introduce you to Verilog as well as digital logic.
+This document has been carefully compiled in our free time to provide you a supplement to official TU/e resources.
+\\\\
+While this document does explain Verilog, it will take a few pages to get to it.
+This is for the simple reason that digital circuits deserve to be understood independent of what tool you use to work with them.
+Digital circuits and digital computers have existed since long before the creators of verilog were even born.
+Thus instead of tying your understanding of digital circuits directly to Verilog, there will be a degree of seperation.
+\\\\
+Do let us know about your experience with this document, both positive and negative feedback is appreciated.
+
+\chapter*{Preliminaries}
+To keep this document focused and not reinvent the wheel too much, not every concept will be fully explained.
+Here we will indicates what you are expected to understand.
+These are fairly basic concepts and we are confident you already know them or will quickly be able to understand them elsewhere.
+
+\section{Binary}
+\begin{table}[h]
+  \caption{Counting in Decimal and Binary}
+  \centering
+  \begin{tabularx}{0.48\textwidth}{Xrr}
+    Value & Decimal & \hspace{0.05\textwidth} Binary \\
+    \midrule
+    zero & 0 & 0 \\
+    one & 1 & 1 \\
+    two & 2 & 10 \\
+    three & 3 & 11 \\
+    four & 4 & 100 \\
+    five & 5 & 101 \\
+    six & 6 & 110 \\
+    seven & 7 & 111 \\
+    eight & 8 & 1000 \\
+    nine & 9 & 1001 \\
+    ten & 10 & 1010 \\
+    \bottomrule
+  \end{tabularx}
+  \hspace{0.02\textwidth}
+  \begin{tabularx}{0.48\textwidth}{Xrr}
+    Value & Decimal & \hspace{0.05\textwidth} Binary \\
+    \midrule
+    eleven & 11 & 1011 \\
+    twelve & 12 & 1100 \\
+    thirteen & 13 & 1101 \\
+    fourteen & 14 & 1110 \\
+    fifteen & 15 & 1111 \\
+    sixteen & 16 & 10000 \\
+    seventeen & 17 & 10001 \\
+    eighteen & 18 & 10010 \\
+    nineteen & 19 & 10011 \\
+    twenty & 20 & 10100 \\
+    twenty-one & 21 & 10101 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+\noindent
+You should be familair with the concept of different numeration systems, especially binary.
+Where decimal is a base-10 system with 10 symbols and a shift of a number results in a multiplication or division by 10.
+Binary is a base-2 system with 2 symbols where a shift results in a multiplication or division by 2.
+
+\begin{table}[h]
+  \caption{Shifting of Numbers}
+  \centering
+  \begin{tabular}{lcr}
+  $\leftarrow$ left-shift & value & right-shift $\rightarrow$ \\
+  \midrule
+  60 & 6 & 0.6 \\
+  100 & 10 & 1 \\
+  \midrule
+  times 10 & & divide 10 \\
+  \bottomrule
+  \end{tabular}
+  \hspace{0.02\textwidth}
+  \begin{tabular}{lcr}
+    $\leftarrow$ left-shift & value & right-shift $\rightarrow$ \\
+    \midrule
+    1100 (12) & 110 (6) & 11 (3)\\
+    10100 (20) & 1010 (10) & 101 (5) \\
+    \midrule
+    times 2 & & divide 2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\attention{The 0 and 1 in binary are called bits, from Bi(nary Digi)ts}
+\noindent
+If you have never seen binary before and are currently very confused. 
+There are some excellent videos online from the usual suspects like \textit{3Blue1Brown} and \textit{Khan Academy}
+\\
+\textbf{We will ignore 1's and 2's compliment, this document only applies basic binary.}
+
+\chapter{Digital Circuits: The Basics}
+
+\section{From Analogue to Digital}
+\subsection*{Analogue}
+The universe itself is analogue, everything is \textbf{continous}. The better your tools for observing the universe, the more information you can get from it.
+A tape measure will tell you your bathroom is 3.14 meters by 2.71 meters, measure the same room with a laser and now its 3.14159 meters by 2.71828 meters.
+Measure again and the least-significant digits might jump around a little. This creates uncertainty.
+
+\subsubsection*{Analogue Circuits}
+Analogue ciruits are the circuits you are familiar with. Circuits built from both passive and active components: resistors, capacitors, operational amplifiers, etc.
+As analogue circuits are part of the continous universe, they can have many different voltage and current values. 9V, -12V, 6.94V are all valid voltages in an analogue circuit.
+
+\subsubsection*{Problems}
+When building analogue circuits or cutting a pizza into slices you can run into some problems. Getting an exact voltage level from a voltage source and ensuring your pizza slices are all equally large is difficult.
+The uncertain nature of the analogue universe is problematic when you need to be exact.
+
+\subsection*{Digital}
+Digital systems set themselves apart from analogue systems by replacing continuity with \textbf{discrete} values.
+This is exactly what you are doing when you measure your room.
+You turn the continous nature of your room into a discrete measurment that depends on the instrument you used to measure.
+
+\subsubsection*{Digital Circuits}
+Digital circuits operate with \textit{two} discrete values, based on the bits in binary, \textbf{0} and \textbf{1}.
+These two discrete values are obtained from the analogue universe, by approximating voltages into \textbf{logic levels}. 
+As an example, the \textit{PYNQ Board} uses 3.3V as its logic level. This means it approximates voltages around 3.3V into a \textbf{1} and voltages around 0V into a \textbf{0}.
+Any other voltage is not considered valid. For the \textit{PYNQ} this means it could either be a 0 or a 1. Another popular logic level is 5V but many more exist.
+
+\begin{center}
+  \begin{tabular}{cccc}
+    \textbf{0} & False & off & \textit{0V--0.8V} \\
+    \midrule
+    \textbf{1} & True & on & \textit{2V--3.3V} \\
+  \end{tabular}
+\end{center}
+\attention{Digital circuits are discrete, either 0 or 1}
+
+\chapter*{Digital Circuits: The Basics}
+\section{The Building Blocks}
+In analogue circuits you have many different components that all have \textit{continous} effects on the values in the circuit.
+Digital circuits have their own components that instead have \textit{discrete} effects on the values in the circuit.
+
+\subsection{Logic Gates}
+\begin{table}[h]
+  \caption{Basic Logic Gates}
+  \label{table:basiclogicgates}
+  \centering
+  \begin{tabularx}{\textwidth}{YYYY}
+    NOT & OR & AND & XOR \\
+    \lnot{}a $\rightarrow$ c & a | b $\rightarrow$ c & a \& b $\rightarrow$ c & a \textasciicircum{} b $\rightarrow$ c \\
+    \midrule
+    $\begin{array}{c|c} 0 & 1 \\ 1 & 0 \\\end{array}$ &
+    $\begin{array}{cc|c} 0 & 0 & 0 \\ 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 1 \\ \end{array}$ &
+    $\begin{array}{cc|c} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \\ 1 & 1 & 1 \\ \end{array}$ &
+    $\begin{array}{cc|c} 0 & 0 & 0 \\ 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \\ \end{array}$ \\
+    \midrule
+    \includesvg{svgs/not}  & \includesvg{svgs/or}  & \includesvg{svgs/and}  & \includesvg{svgs/xor}  \\
+    \midrule
+    Inverts bit & Any bit & All bits & Exclusively one bit \\
+  \end{tabularx}
+\end{table}
+\noindent
+The basic building blocks, the \textbf{logic gates}, are shown in table~\ref{table:basiclogicgates}. Per logic gate the relationship of inputs to output is represented as a \textbf{truth table}.
+These four logic gates are the basis from which all other digital circuit components are constructed.
+
+
+\begin{table}[h]
+  \caption{Inverted Logic Gates}
+  \centering
+  \begin{tabularx}{\textwidth}{YYYY}
+    OR (inverted a) & NOR & NAND & XNOR \\
+    (\lnot{}a) | b $\rightarrow$ y & \textasciitilde{}(a | b) $\rightarrow$ y & \textasciitilde{}(a \& b) $\rightarrow$ y & \textasciitilde{}(a \textasciicircum{} b) $\rightarrow$ y \\
+    \midrule
+    $\begin{array}{cc|c} 0 & 0 & 1 \\ 0 & 1 & 1 \\ 1 & 0 & 0 \\ 1 & 1 & 1 \\ \end{array}$ &
+    $\begin{array}{cc|c} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \\ 1 & 1 & 0 \\ \end{array}$ &
+    $\begin{array}{cc|c} 0 & 0 & 1 \\ 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \\ \end{array}$ &
+    $\begin{array}{cc|c} 0 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 0 \\ 1 & 1 & 1 \\ \end{array}$ \\
+    \midrule
+    \includesvg[width=90pt]{svgs/or_inverted_a}  & \includesvg[width=90pt]{svgs/nor}  & \includesvg[width=90pt]{svgs/nand}  & \includesvg[width=90pt]{svgs/xnor}  \\
+    \midrule
+    Everything but just a & No bits & Everything but all bits & All or no bits \\
+  \end{tabularx}
+\end{table}
+\noindent
+Combining basic gates with inverters already defines new gates. Both the outputs and inputs of logic gates can be draw with an implied \textsc{not} gate.
+
+\chapter*{Digital Circuits: The Basics}
+\section{Combinational Logic}
+The next step after individual logic gates is combining them into circuits. These will be \textbf{combinational} logic circuits, \textit{combining a set of inputs into a set of outputs}.
+Comparable to a mathematical functions where every set of inputs maps to a set of outputs.
+\attention{Combinational logic maps a set of inputs to a set of outputs}
+\begin{figure}[ht]
+  \centering
+  \begin{tabularx}{0.95\linewidth}{@{}c Y @{}}
+    \raisebox{-0.16\linewidth}{\includesvg[width=0.4\linewidth, inkscapelatex=false]{svgs/4x_bcd}}
+  &   
+    \begin{tabular}{cc|cccc}
+      \toprule
+      b1 & b0 & zero & one & two & three \\
+      \midrule
+      0 &   0 &    1 &   0 &   0 &    0  \\
+      0 &   1 &    0 &   1 &   0 &    0  \\ 
+      1 &   0 &    0 &   0 &   1 &    0  \\ 
+      1 &   1 &    0 &   0 &   0 &    1  \\ 
+      \bottomrule
+    \end{tabular}
+    \noindent
+  \end{tabularx}
+  \noindent
+  \caption{Two bit binary to decimal circuit}
+\label{fig:2bBDC}
+\end{figure}
+
+Figure~\ref{fig:2bBDC} shows a simple combinational circuit, which turns a two bit binary number into the equivalent decimal number.
+The relation between the inputs and the outputs of the circuit are expressed with a \textbf{truth table}.
+
+\subsubsection{Constructing Truth Tables}
+Constructing a truth table is as simple as trying every possible combination of inputs and observing the related outputs.
+On the next page, in figure~\ref{fig:bdctableproof}, a visualisation of this process is provided.
+
+\subsubsection{Describing combinational circuits}
+Another method of expressing a combinational circuit, besides circuit diagrams and truth tables, is by describing the outputs as the results of logical operations between the inputs.
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lclcl @{\vspace{5pt}}}
+    zero &=& b1 \textsc{nor} b0 &=& \textbf{\lnot{}(b1 | b0)} \\
+    one &=& \textsc{not} b1 \textsc{and} b0&=& \textbf{(\lnot{}b1) \& b0} \\
+    two &=& b1 \textsc{and} \textsc{not} b0&=& \textbf{b1 \& (\lnot{}b0)}\\
+    three &=& b1 \textsc{and} b0&=&\textbf{b1 \& b0} \\
+  \end{tabular}
+\end{table}
+
+\chapter*{Digital Circuits: The Basics}
+\begin{figure}[H]
+  \centering
+  \caption{Step-by-step truth table}
+  \label{fig:bdctableproof}
+  \begin{tabularx}{0.9\linewidth}{@{}c Y @{\vspace{10pt}}}
+    \raisebox{-0.14\linewidth}{\includesvg[width=0.35\linewidth, inkscapelatex=false]{svgs/4x_bcd_active_0}}
+  &   
+    \begin{tabular}{cc|cccc}
+      \toprule
+      b1 & b0 & zero & one & two & three \\
+      \midrule
+      \rowcolor{attention} 0 &   0 &    1 &   0 &   0 &    0  \\
+      \bottomrule
+    \end{tabular} \\
+    \raisebox{-0.14\linewidth}{\includesvg[width=0.35\linewidth, inkscapelatex=false]{svgs/4x_bcd_active_1}}
+  &   
+    \begin{tabular}{cc|cccc}
+      \toprule
+      b1 & b0 & zero & one & two & three \\
+      \midrule
+      0 &   0 &    1 &   0 &   0 &    0  \\
+      \rowcolor{attention} 0 &   1 &    0 &   1 &   0 &    0  \\
+      \bottomrule
+    \end{tabular} \\
+    \raisebox{-0.14\linewidth}{\includesvg[width=0.35\linewidth, inkscapelatex=false]{svgs/4x_bcd_active_2}}
+  &   
+    \begin{tabular}{cc|cccc}
+      \toprule
+      b1 & b0 & zero & one & two & three \\
+      \midrule
+      0 &   0 &    1 &   0 &   0 &    0  \\
+      0 &   1 &    0 &   1 &   0 &    0  \\
+      \rowcolor{attention} 1 &   0 &    1 &   0 &   1 &    0  \\
+      \bottomrule
+    \end{tabular} \\
+    \raisebox{-0.14\linewidth}{\includesvg[width=0.35\linewidth, inkscapelatex=false]{svgs/4x_bcd_active_3}}
+  &   
+    \begin{tabular}{cc|cccc}
+      \toprule
+      b1 & b0 & zero & one & two & three \\
+      \midrule
+      0 &   0 &    1 &   0 &   0 &    0  \\
+      0 &   1 &    0 &   1 &   0 &    0  \\
+      1 &   0 &    1 &   0 &   1 &    0  \\
+      \rowcolor{attention} 1 &   1 &    0 &   0 &   0 &    1  \\
+      \bottomrule
+    \end{tabular} \\
+  \end{tabularx}
+\end{figure}
+
+\chapter*{Digital Circuits: The Basics}
+\section{Wires}
+Building these combinational circuits requires inter-connecting logic gates. These simple connections are refered to as \textbf{wires}.
+Wires carry a single bit from the output of a \textit{single source}, refered to as the \textbf{driver}, to the inputs on one or multiple destinations.
+\begin{table}[H]
+  \centering
+  \caption{Wiring rules for combinational circuits}
+  \label{rulescombcircuits} 
+  \begin{tabular}{c>{\hspace{20pt}}c}
+    \toprule
+    Multiple drivers: Illegal & Feedback: Illegal \\
+    \midrule
+    \includesvg[width=0.3\linewidth, inkscapelatex=false]{svgs/dual_driver} & \raisebox{10pt}{\includesvg[width=0.25\linewidth, inkscapelatex=false]{svgs/feedback_circuit}} \\
+    \midrule
+  \end{tabular}
+\end{table}
+
+\subsection{Multiple drivers}
+Multiple drivers are illegal in digital circuits. Remember that the bits 0 and 1, represent \textit{different voltage levels}.
+This means that if two drivers where to be connected to the same wires and both tried to drive the wire to different bits, the wire would become a \textit{short} between two voltages.
+How these voltages interact is an analogue question and thus illegal in the digital world.
+\attention{Multiple drivers are illegal, to prevent unforeseen consequences.}
+
+\subsection{Feedback}
+\begin{figure}[ht]
+  \centering
+  \begin{tabular}{c>{\hspace{10pt}}c>{\hspace{10pt}}c}
+    \includesvg[width=0.25\linewidth, inkscapelatex=false]{svgs/feedback_circuit_active_no.svg} & \includesvg[width=0.25\linewidth, inkscapelatex=false]{svgs/feedback_circuit_active_a.svg} & \includesvg[width=0.25\linewidth, inkscapelatex=false]{svgs/feedback_circuit_active_y.svg} \\
+  \end{tabular}
+  \caption{Memory Effect of feedback}
+  \label{fig:feedbackor} 
+\end{figure}
+\noindent
+Figure~\ref{fig:feedbackor} shows the results of feedback in a circuit.
+After momentarily driving a \textbf{1} into $a$ the \textsc{or} gate \textit{latches} the \textbf{1} into its output.
+This circuit has \textbf{memory} and unlike combinational logic doesn't have a static relation between inputs and outputs.
+Thus in order to preserve the combinational nature of combinational logic, memory and as a result feedback is illegal.
+\attention{To prevent memory, feedback is illegal in combinational logic.}
+
+
+\chapter*{Digital Circuits: The Basics}
+\section{Sequential Logic}
+Combinational circuits are restricted to a static mapping of inputs to outputs, prohibiting the use of feedback. 
+However, as figure~\ref{fig:feedbackor} shows, feedback allows the creation of \textbf{memory}.
+Thus a new kind of circuit will be defined that does allow the use of feedback and by extension memory, the \textbf{sequential circuit}.
+\attention{Sequential circuits are combinational circuits with memory.}
+The term sequential circuit is based on the fact that \textit{the sequence of both past and present inputs define the outputs} of these circuits.
+
+\subsection{SR Latch}
+\begin{figure}[ht]
+  \centering
+  \raisebox{-25pt}{\includesvg[width=150pt, inkscapelatex=false]{svgs/sr_latch}}
+  \hspace{15pt}
+  \raisebox{ -5pt}{\includesvg[width=60pt, inkscapelatex=false]{svgs/sr_latch_symbol}}
+  \hspace{10pt}
+  \raisebox{20pt}{
+    \begin{tabular}{cc|cc|l}
+      \toprule
+      S & R & $Q$ & $\overline{Q}$ & Action\\
+      \midrule
+      0 & 0 & $Q$ & $\overline{Q}$ & No change \\
+      1 & 0 & 1 & 0 & Set \\
+      0 & 1 & 0 & 1 & Reset \\
+      1 & 1 & $X$   & $X$ & Invalid  \\
+    \end{tabular}
+  }
+  \caption{SR latch circuit and symbol}
+  \label{fig:srlatch}
+\end{figure}
+\noindent
+Figure~\ref{fig:srlatch} shows a sequential circuit, the S(et) R(eset) latch. With the set input the value of the latch is set to a \textbf{1} and the reset input resets the latch to a \textbf{0}. 
+The outputs of the latch are Q and the inverse of Q, denoted as $\overline{Q}$. Q is considered the primary output.
+When both S and R are \textbf{0}, the SR latch keeps its previous Q value.
+
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=150pt, inkscapelatex=false]{svgs/sr_latch_active_q}
+  \hspace{20pt}
+  \includesvg[width=150pt, inkscapelatex=false]{svgs/sr_latch_inactive_q}
+  \caption{Initial conditions of a SR latch}
+  \label{fig:initialsrlatch}
+\end{figure}
+\noindent
+The value a SR latch contains, upon powering on, is indeterminate. It could start with Q set to \textbf{0} or \textbf{1}, randomly.
+The value is based on analogue interactions that occur right after powering on the circuit.
+Thus before the SR latch can be used, it must always be \textbf{reset} to ensure the starting state is a known state.
+\attention{Sequential circuits require a reset at startup to ensure a known state}
+
+\chapter*{Digital Circuits: The Basics}
+\subsection{State graphs}
+\begin{figure}[ht]
+  \centering
+  \caption{Comparing a stategraph to a truth table.}
+  \label{fig:wavevstruth}
+  
+  \hspace{20pt}
+  \raisebox{52.75pt}{
+    \begin{tabular}{cc|cc|l}
+      \toprule
+      S & R & $Q$ & $\overline{Q}$ & Action\\
+      \midrule
+      0 & 0 & $Q$ & $\overline{Q}$ & No change \\
+      1 & 0 & 1 & 0 & Set \\
+      0 & 1 & 0 & 1 & Reset \\
+      1 & 1 & $X$   & $X$ & Invalid  \\
+    \end{tabular}
+  }
+\end{figure}
+
+
+% \begin{tikztimingtable}[%
+%   timing/slope=0,
+%   timing/.style={x=3ex,y=2ex},
+%   x=5ex,
+%   timing/rowdist=4ex,
+%   timing/E/background/.style={fill=gray}
+% ]
+%   $S$ & LL LL HLL \\
+%   $R$ & LL HL LLL \\
+%   $Q$ & XX LL HHH \\
+%   $\overline{Q}$ & XX HH LLL \\
+%   \extracode
+%   \tablerules
+%   \tablegrid[black!25]
+% \end{tikztimingtable}
+
+\noindent
+For combinational circuits a truth table was used to express the relation between inputs and outputs.\ With sequential circuits being dependent on both past and present inputs this becomes problematic as \textit{a truth table does not show the history of the circuit}.
+Instead of truth tables, sequential circuits are expressed in time-dependent graphs that contains all inputs, outputs and values of the memory in a circuit. Such a graph is called a \textbf{waveform}.
+\attention{Waveforms describe a circuit over time.}
+Figure~\ref{fig:wavevstruth} shows how a waveform can display indeterminate states upon startup aswell as inputs, outputs and the values of memory.
+
+\subsubsection{Constructing Waveforms}
+Unlike the truth tables 
+
+
+\chapter{Verilog: Single Module} 
+\section{Comparing C to Verilog}
+\subsection*{C}
+Programming, as you will have done it up until now, in languages such as C has been fairly straight forward.
+You write lines of code that the computer then executes in the order you have written. 
+Besides some processing to turn the human text into machine readable instructions the structure of the program you write is maintained.
+The order of execution for variables, if-statements, function calls, etc is the same to you as it is to the computer.
+\attention{C code becomes instructions the computer can execute.}
+
+\subsection*{Verilog}
+Verilog is not a programming language. It will resemble the C code you are familiar with, it will even have some of the same elements. If-statements and switch-statements will show up just like they do in C.
+\textit{Verilog is however \textbf{not} a programming language}
+It is not used to create instructions for a computer to execute.
+Verilog instead exists to describe the design of digital circuits.
+Making verilog a \textbf{HDL} \textit{hardware description language}.
+\attention{Verilog describes digital circuits, not programs for a computer}
+
+First off explain the structure of verilog v C.
+aka the top module is the main function and submodules are subfunctions.
+BUT EVERYTHING IS MADE INTO A CIRCUIT SO SUBMODULES ARE RECREATED, NOT RECALLED.
+
+THERE IS NO PROGRAM FLOW IN VERILOG, FOR THERE IS NO PROGRAM.
+
+Second off do the three levels of verilog abstraction.
+
+Gate level Modeling -> this is the shit one
+Data flow Modeling -> this is the fast one
+Behavrial Modeling -> this is the C-like one, this is the real stuff
+DO the same thing that guy in the video did with the MUX.
+
+Everything till now has been combinational logic. Intro sequential logic and explain how its different.
+Touch on blocking and non-blocking assignment.
+
+Do testbenches at the VERY FUCKING END. Because they kinda ruin the point about verilog.
+\end{document}

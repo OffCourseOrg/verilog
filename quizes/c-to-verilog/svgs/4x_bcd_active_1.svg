@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="216"
+   height="199"
+   version="1.1"
+   id="svg54"
+   sodipodi:docname="4x_bcd_active_1.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:s="https://github.com/nturley/netlistsvg">
+  <defs
+     id="defs54">
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop2" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="radialGradient2"
+       cx="111.83333"
+       cy="76.041412"
+       fx="111.83333"
+       fy="76.041412"
+       r="12.333328"
+       gradientTransform="matrix(1,0,0,0.04054056,0,72.958651)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview54"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="6.1708543"
+     inkscape:cx="90.506107"
+     inkscape:cy="78.190146"
+     inkscape:window-width="1238"
+     inkscape:window-height="1481"
+     inkscape:window-x="0"
+     inkscape:window-y="21"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <style
+     id="style1">  svg {
+    stroke:#000;
+    fill:none;
+  }
+  text {
+    fill:#000;
+    fill-opacity:1.0;
+    stroke:none;
+    font-size:10px;
+    font-weight: bold;
+    font-family: &quot;Courier New&quot;, monospace;
+  }
+  line {
+      stroke-linecap: round;
+  }
+  .nodelabel {
+    text-anchor: middle;
+  }
+  .inputPortLabel {
+    text-anchor: end;
+  }
+  .splitjoinBody {
+    fill:#000;
+  }
+  .invert {
+    fill:#ff9999;
+    fill-opacity:1.0;
+  }
+  .combinational {
+    fill:#afecef;
+    fill-opacity:1.0;
+  }
+  .state {
+    fill:#def1b2;
+    fill-opacity:1.0;
+  }
+  .hierarchical {
+    fill:#ffd8b2;
+    fill-opacity:1.0;
+  }
+  .io {
+    fill:#fcffb2;
+    fill-opacity:1.0;
+  }</style>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="background">
+    <line
+       x1="60.27681"
+       x2="131.27681"
+       y1="61"
+       y2="61"
+       class="net_3 width_1"
+       style="stroke-width:1;stroke:#00be00;stroke-opacity:1;fill:#00be00;fill-opacity:1"
+       id="line24" />
+    <line
+       x1="62.098217"
+       x2="74.860207"
+       y1="24.5"
+       y2="24.5"
+       class="net_3 width_1"
+       style="stroke-width:1.09382;stroke:#00be00;stroke-opacity:1;fill:#00be00;fill-opacity:1"
+       id="line29" />
+    <line
+       x1="62"
+       x2="74.666664"
+       y1="156.30457"
+       y2="156.30457"
+       class="net_3 width_1"
+       style="stroke-width:1;stroke:#00be00;stroke-opacity:1;fill:#000000;fill-opacity:1"
+       id="line35" />
+    <line
+       x1="52.055531"
+       x2="75.017487"
+       y1="39.5"
+       y2="39.5"
+       class="net_2 width_1"
+       style="stroke-width:1.05407;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       id="line42" />
+    <line
+       x1="52"
+       x2="74.666664"
+       y1="171.30457"
+       y2="171.30457"
+       class="net_2 width_1"
+       style="stroke-width:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       id="line48" />
+    <line
+       x1="102.66666666666666"
+       x2="124"
+       y1="32"
+       y2="32"
+       class="net_7 width_1"
+       style="stroke-width:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       id="line54" />
+    <line
+       x1="102.8867"
+       x2="175.42738"
+       y1="163.80457"
+       y2="163.80457"
+       class="net_4 width_1"
+       style="stroke-width:1;stroke-dasharray:none"
+       id="line51" />
+    <line
+       x1="42.081165"
+       x2="124.60683"
+       y1="111"
+       y2="111"
+       class="net_2 width_1"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-opacity:1;stroke-dasharray:none"
+       id="line37" />
+    <line
+       x1="100"
+       x2="123.66666"
+       y1="76.041412"
+       y2="76.041412"
+       class="net_8 width_1"
+       style="stroke-width:1;fill:url(#radialGradient2);stroke:#00be00;stroke-opacity:1"
+       id="line36" />
+    <line
+       x1="100"
+       x2="123.66666"
+       y1="125.98412"
+       y2="125.98412"
+       class="net_9 width_1"
+       style="stroke-width:1;stroke:#000000;stroke-opacity:1"
+       id="line49" />
+    <line
+       x1="153.66667"
+       x2="174"
+       y1="68.541412"
+       y2="68.541412"
+       class="net_5 width_1"
+       style="stroke-width:1;stroke:#00be00;stroke-opacity:1;fill:#000000;fill-opacity:1"
+       id="line52" />
+    <line
+       x1="42"
+       x2="62"
+       y1="24.446381"
+       y2="24.446381"
+       class="net_3 width_1"
+       style="stroke-width:1;stroke:#00be00;stroke-opacity:1;fill:#00be00;fill-opacity:1"
+       id="line30" />
+  </g>
+  <g
+     s:type="and"
+     class="combinational"
+     transform="translate(123.66667,56.041416)"
+     s:width="30"
+     s:height="25"
+     id="cell_$and$REF.v:19$4">
+    <s:alias
+       val="$and" />
+    <s:alias
+       val="$logic_and" />
+    <s:alias
+       val="$_AND_" />
+    <s:alias
+       val="$reduce_and" />
+    <path
+       d="M 0,0 V 25 H 15 A 15,12.5 0 0 0 15,0 Z"
+       class="cell_$and$REF.v:19$4"
+       id="path1" />
+    <g
+       s:x="0"
+       s:y="5"
+       s:pid="A"
+       id="g1" />
+    <g
+       s:x="0"
+       s:y="20"
+       s:pid="B"
+       id="g2" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g3" />
+  </g>
+  <g
+     s:type="and"
+     class="combinational"
+     transform="translate(123.66667,105.98412)"
+     s:width="30"
+     s:height="25"
+     id="cell_$and$REF.v:20$6">
+    <s:alias
+       val="$and" />
+    <s:alias
+       val="$logic_and" />
+    <s:alias
+       val="$_AND_" />
+    <s:alias
+       val="$reduce_and" />
+    <path
+       d="M 0,0 V 25 H 15 A 15,12.5 0 0 0 15,0 Z"
+       class="cell_$and$REF.v:20$6"
+       id="path3" />
+    <g
+       s:x="0"
+       s:y="5"
+       s:pid="A"
+       id="g4" />
+    <g
+       s:x="0"
+       s:y="20"
+       s:pid="B"
+       id="g5" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g6" />
+  </g>
+  <g
+     s:type="and"
+     class="combinational"
+     transform="translate(72.666667,150.92426)"
+     s:width="30"
+     s:height="25"
+     id="cell_$and$REF.v:21$7">
+    <s:alias
+       val="$and" />
+    <s:alias
+       val="$logic_and" />
+    <s:alias
+       val="$_AND_" />
+    <s:alias
+       val="$reduce_and" />
+    <path
+       d="M 0,0 V 25 H 15 A 15,12.5 0 0 0 15,0 Z"
+       class="cell_$and$REF.v:21$7"
+       id="path6" />
+    <g
+       s:x="0"
+       s:y="5"
+       s:pid="A"
+       id="g7" />
+    <g
+       s:x="0"
+       s:y="20"
+       s:pid="B"
+       id="g8" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g9" />
+  </g>
+  <g
+     s:type="not"
+     class="combinational"
+     transform="translate(124,22.056189)"
+     s:width="30"
+     s:height="20"
+     id="cell_$not$REF.v:18$2">
+    <s:alias
+       val="$_NOT_" />
+    <s:alias
+       val="$not" />
+    <s:alias
+       val="$logic_not" />
+    <circle
+       cx="-17.595499"
+       cy="10"
+       r="3"
+       class="invert"
+       id="circle9" />
+    <g
+       s:x="-1"
+       s:y="10"
+       s:pid="A"
+       id="g10" />
+    <g
+       s:x="27"
+       s:y="10"
+       s:pid="Y"
+       id="g11" />
+  </g>
+  <g
+     s:type="not"
+     class="combinational"
+     transform="translate(73,66.041416)"
+     s:width="30"
+     s:height="20"
+     id="cell_$not$REF.v:19$3">
+    <s:alias
+       val="$_NOT_" />
+    <s:alias
+       val="$not" />
+    <s:alias
+       val="$logic_not" />
+    <path
+       d="M 0,0 V 20 L 20,10 Z"
+       class="cell_$not$REF.v:19$3"
+       id="path11" />
+    <circle
+       cx="24"
+       cy="10"
+       r="3"
+       class="invert"
+       id="circle11" />
+    <g
+       s:x="-1"
+       s:y="10"
+       s:pid="A"
+       id="g12" />
+    <g
+       s:x="27"
+       s:y="10"
+       s:pid="Y"
+       id="g13" />
+  </g>
+  <g
+     s:type="not"
+     class="combinational"
+     transform="translate(73,115.98412)"
+     s:width="30"
+     s:height="20"
+     id="cell_$not$REF.v:20$5">
+    <s:alias
+       val="$_NOT_" />
+    <s:alias
+       val="$not" />
+    <s:alias
+       val="$logic_not" />
+    <path
+       d="M 0,0 V 20 L 20,10 Z"
+       class="cell_$not$REF.v:20$5"
+       id="path13" />
+    <circle
+       cx="24"
+       cy="10"
+       r="3"
+       class="invert"
+       id="circle13" />
+    <g
+       s:x="-1"
+       s:y="10"
+       s:pid="A"
+       id="g14" />
+    <g
+       s:x="27"
+       s:y="10"
+       s:pid="Y"
+       id="g15" />
+  </g>
+  <g
+     s:type="or"
+     class="combinational"
+     transform="translate(72.666667,19.556189)"
+     s:width="30"
+     s:height="25"
+     id="cell_$or$REF.v:18$1">
+    <s:alias
+       val="$or" />
+    <s:alias
+       val="$logic_or" />
+    <s:alias
+       val="$_OR_" />
+    <s:alias
+       val="$reduce_or" />
+    <s:alias
+       val="$reduce_bool" />
+    <path
+       d="M 0,0 A 30,25 0 0 1 0,25 30,25 0 0 0 30,12.5 30,25 0 0 0 0,0"
+       class="cell_$or$REF.v:18$1"
+       id="path15" />
+    <g
+       s:x="2"
+       s:y="5"
+       s:pid="A"
+       id="g16" />
+    <g
+       s:x="2"
+       s:y="20"
+       s:pid="B"
+       id="g17" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g18" />
+  </g>
+  <g
+     s:type="inputExt"
+     class="io"
+     transform="translate(12,101)"
+     s:width="30"
+     s:height="20"
+     id="cell_b1">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_b1"
+       s:attribute="ref"
+       id="text18">b1</text>
+    <s:alias
+       val="$_inputExt_" />
+    <path
+       d="M0,0 L0,20 L15,20 L30,10 L15,0 Z"
+       class="cell_b1"
+       id="path18" />
+    <g
+       s:x="30"
+       s:y="10"
+       s:pid="Y"
+       id="g19" />
+  </g>
+  <g
+     s:type="inputExt"
+     class="io"
+     transform="translate(12,14.44638)"
+     s:width="30"
+     s:height="20"
+     id="cell_b0">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_b0"
+       s:attribute="ref"
+       id="text19">b0</text>
+    <s:alias
+       val="$_inputExt_" />
+    <path
+       d="M 0,0 V 20 H 15 L 30,10 15,0 Z"
+       class="cell_b0"
+       id="path19" />
+    <g
+       s:x="30"
+       s:y="10"
+       s:pid="Y"
+       id="g20" />
+  </g>
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(174,153.80456)"
+     s:width="30"
+     s:height="20"
+     id="cell_zero">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_zero"
+       s:attribute="ref"
+       id="text20">three</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M 30,0 V 20 H 15 L 0,10 15,0 Z"
+       class="cell_zero"
+       id="path20" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g21" />
+  </g>
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(174,58.541416)"
+     s:width="30"
+     s:height="20"
+     id="cell_one">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_one"
+       s:attribute="ref"
+       id="text21">one</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M 30,0 V 20 H 15 L 0,10 15,0 Z"
+       class="cell_one"
+       id="path21" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g22" />
+  </g>
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(174,108.48412)"
+     s:width="30"
+     s:height="20"
+     id="cell_two">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_two"
+       s:attribute="ref"
+       id="text22">two</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M 30,0 V 20 H 15 L 0,10 15,0 Z"
+       class="cell_two"
+       id="path22" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g23" />
+  </g>
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(124,22)"
+     s:width="30"
+     s:height="20"
+     id="cell_three">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_three"
+       s:attribute="ref"
+       id="text23">zero</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M30,0 L30,20 L15,20 L0,10 L15,0 Z"
+       class="cell_three"
+       id="path23" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g24" />
+  </g>
+  <line
+     x1="62"
+     x2="62"
+     y1="61"
+     y2="24.5"
+     class="net_3 width_1"
+     style="stroke-width:1;stroke:#00be00;stroke-opacity:1;fill:#00be00;fill-opacity:1"
+     id="line28" />
+  <line
+     x1="62"
+     x2="62"
+     y1="61"
+     y2="132"
+     class="net_3 width_1"
+     style="stroke-width: 1"
+     id="line31" />
+  <line
+     x1="62.015625"
+     x2="72.32814"
+     y1="125.98412"
+     y2="125.98412"
+     class="net_3 width_1"
+     style="stroke-width:1.01551;stroke:#00be00;stroke-opacity:1;fill:#00be00;fill-opacity:1"
+     id="line32" />
+  <line
+     x1="62"
+     x2="62"
+     y1="60.949131"
+     y2="156.16499"
+     class="net_3 width_1"
+     style="stroke-width:1;stroke-dasharray:none;stroke:#00be00;stroke-opacity:1;fill:#00be00;fill-opacity:1"
+     id="line34" />
+  <line
+     x1="52"
+     x2="52"
+     y1="111"
+     y2="39.5"
+     class="net_2 width_1"
+     style="stroke-width:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="line41" />
+  <line
+     x1="52.019096"
+     x2="72.78302"
+     y1="76.041412"
+     y2="76.041412"
+     class="net_2 width_1"
+     style="stroke-width:1.01892;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="line45" />
+  <line
+     x1="52"
+     x2="52"
+     y1="110.92639"
+     y2="171.4742"
+     class="net_2 width_1"
+     style="stroke-width:1;stroke-dasharray:none;fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+     id="line47" />
+  <line
+     x1="153.66667"
+     x2="174"
+     y1="118.48412"
+     y2="118.48412"
+     class="net_6 width_1"
+     style="stroke-width:1"
+     id="line53" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="FOREGROUND">
+    <circle
+       cx="62"
+       cy="61"
+       r="2"
+       style="fill:#00be00;stroke:#00be00;stroke-opacity:1;fill-opacity:1"
+       class="net_3 width_1"
+       id="circle28" />
+    <circle
+       cx="62"
+       cy="24.376221"
+       r="2"
+       style="fill:#00be00;stroke:#00be00;stroke-opacity:1;fill-opacity:1"
+       class="net_3 width_1"
+       id="circle28-1" />
+    <circle
+       cx="62"
+       cy="125.98412"
+       r="2"
+       style="fill:#00be00;stroke:#00be00;stroke-opacity:1;fill-opacity:1"
+       class="net_3 width_1"
+       id="circle31" />
+    <circle
+       cx="52"
+       cy="111"
+       r="2"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       class="net_2 width_1"
+       id="circle41" />
+    <circle
+       cx="52"
+       cy="76.041412"
+       r="2"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+       class="net_2 width_1"
+       id="circle44" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="hidden"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:10px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;paint-order:stroke fill markers"
+       x="137.73112"
+       y="95.365639"
+       id="text34"><tspan
+         sodipodi:role="line"
+         id="tspan34"
+         x="137.73112"
+         y="95.365639">wires</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       d="M 89.772831,97.499505 H 166.92215"
+       id="path36" />
+    <circle
+       style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:0.522172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path35-2-6"
+       cx="-112.80957"
+       cy="-76.145493"
+       r="1.6677125"
+       transform="scale(-1)" />
+    <circle
+       style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:0.522172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path35-2-6-3"
+       cx="-62.055855"
+       cy="-89.798744"
+       r="1.6677125"
+       transform="scale(-1)" />
+    <path
+       style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 61.848642,89.818856 28.392961,7.67334"
+       id="path37-1-2"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 75.370065,111.1484 90.110135,97.47137"
+       id="path37-1-2-5"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <circle
+       style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:0.522172;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path35-2-6-3-1"
+       cx="-75.415565"
+       cy="-110.97399"
+       r="1.6677125"
+       transform="scale(-1)" />
+    <path
+       style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 128.05719,97.455196 112.63193,76.072113"
+       id="path37-1-2-5-7"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>

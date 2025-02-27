@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="226"
+   height="177.5"
+   version="1.1"
+   id="svg29"
+   sodipodi:docname="sr_latch_inactive_q.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:s="https://github.com/nturley/netlistsvg">
+  <defs
+     id="defs29" />
+  <sodipodi:namedview
+     id="namedview29"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="8.6314719"
+     inkscape:cx="87.180959"
+     inkscape:cy="75.016174"
+     inkscape:window-width="2254"
+     inkscape:window-height="1481"
+     inkscape:window-x="0"
+     inkscape:window-y="21"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg29" />
+  <style
+     id="style1">  svg {
+    stroke:#000;
+    fill:none;
+  }
+  text {
+    fill:#000;
+    fill-opacity:1.0;
+    stroke:none;
+    font-size:10px;
+    font-weight: bold;
+    font-family: &quot;Courier New&quot;, monospace;
+  }
+  line {
+      stroke-linecap: round;
+  }
+  .nodelabel {
+    text-anchor: middle;
+  }
+  .inputPortLabel {
+    text-anchor: end;
+  }
+  .splitjoinBody {
+    fill:#000;
+  }
+  .invert {
+    fill:#ff9999;
+    fill-opacity:1.0;
+  }
+  .combinational {
+    fill:#afecef;
+    fill-opacity:1.0;
+  }
+  .state {
+    fill:#def1b2;
+    fill-opacity:1.0;
+  }
+  .hierarchical {
+    fill:#ffd8b2;
+    fill-opacity:1.0;
+  }
+  .io {
+    fill:#fcffb2;
+    fill-opacity:1.0;
+  }</style>
+  <circle
+     cx="127.91807"
+     cy="93.200516"
+     r="2"
+     style="fill:#00bf00;stroke:#00bf00;stroke-opacity:1;fill-opacity:1"
+     class="net_4 width_1"
+     id="circle27-1" />
+  <line
+     x1="105.34954"
+     x2="169.31143"
+     y1="93.200516"
+     y2="93.200516"
+     class="net_4 width_1"
+     style="stroke-width:0.999999;stroke-linecap:round;stroke:#00bf00;stroke-opacity:1;fill:#00bf00;fill-opacity:1"
+     id="line29-8" />
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(142.54083,83.200513)"
+     s:width="30"
+     s:height="20"
+     id="cell_Q-7"
+     style="fill:#fcffb2;fill-opacity:1">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_Q"
+       s:attribute="ref"
+       id="text12-9"
+       style="font-weight:bold;font-size:10px;font-family:'Courier New', monospace;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none">Q</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M 30,0 V 20 H 15 L 0,10 15,0 Z"
+       class="cell_Q"
+       id="path12-2" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g13-0" />
+  </g>
+  <line
+     x1="53"
+     x2="75"
+     y1="28.914248"
+     y2="28.914248"
+     class="net_2 width_1"
+     style="stroke-width:1"
+     id="line20" />
+  <line
+     x1="59.515766"
+     x2="75.144791"
+     y1="43.979801"
+     y2="43.979801"
+     class="net_2 width_1"
+     style="stroke-width:1;stroke-linecap:round;stroke:#00bf00;stroke-opacity:1;fill:#00bf00;fill-opacity:1"
+     id="line20-3" />
+  <line
+     x1="59.549515"
+     x2="127.91167"
+     y1="56.451088"
+     y2="76.742058"
+     class="net_2 width_1"
+     style="stroke-width:1;stroke-linecap:round;stroke:#00bf00;stroke-opacity:1;fill:#00bf00;fill-opacity:1"
+     id="line20-3-2" />
+  <line
+     x1="59.561611"
+     x2="127.57725"
+     y1="74.163162"
+     y2="52.100368"
+     class="net_2 width_1"
+     style="stroke-width:0.999993;stroke-linecap:round;stroke:#000000;stroke-opacity:1"
+     id="line20-3-2-8" />
+  <line
+     x1="59.538887"
+     x2="59.538887"
+     y1="44.029823"
+     y2="56.462204"
+     class="net_2 width_1"
+     style="stroke-width:0.999998;stroke-linecap:round;stroke:#00bf00;stroke-opacity:1;fill:#00bf00;fill-opacity:1"
+     id="line20-3-5" />
+  <line
+     x1="127.53808"
+     x2="127.53808"
+     y1="36.81353"
+     y2="52.001865"
+     class="net_2 width_1"
+     style="stroke-width:0.999998;stroke-linecap:round;stroke:#000000;stroke-opacity:1"
+     id="line20-3-5-97" />
+  <line
+     x1="127.9474"
+     x2="127.9474"
+     y1="76.715981"
+     y2="93.10862"
+     class="net_2 width_1"
+     style="stroke-width:1;stroke-linecap:round;stroke:#00bf00;stroke-opacity:1;fill:#00bf00;fill-opacity:1"
+     id="line20-3-5-97-3" />
+  <line
+     x1="59.538887"
+     x2="59.538887"
+     y1="74.141533"
+     y2="86.573914"
+     class="net_2 width_1"
+     style="stroke-width:0.999998;stroke-linecap:round;stroke:#000000;stroke-opacity:1"
+     id="line20-3-5-9" />
+  <line
+     x1="53.016239"
+     x2="75.016235"
+     y1="99.679886"
+     y2="99.679886"
+     class="net_3 width_1"
+     style="stroke-width:1"
+     id="line25" />
+  <line
+     x1="59.61829"
+     x2="75.149895"
+     y1="86.596642"
+     y2="86.596642"
+     class="net_3 width_1"
+     style="stroke-width:0.999997;stroke-linecap:round;stroke:#000000;stroke-opacity:1"
+     id="line25-7" />
+  <circle
+     cx="127.56146"
+     cy="36.365459"
+     r="2"
+     style="fill:#000000;stroke:#000000;stroke-opacity:1"
+     class="net_4 width_1"
+     id="circle27" />
+  <line
+     x1="105.34954"
+     x2="169.31143"
+     y1="36.365459"
+     y2="36.365459"
+     class="net_4 width_1"
+     style="stroke-width:0.999999;stroke:#000000;stroke-opacity:1"
+     id="line29" />
+  <g
+     s:type="or"
+     class="combinational"
+     transform="translate(73,23.914248)"
+     s:width="30"
+     s:height="25"
+     id="cell_$or$REF.v:16$1">
+    <s:alias
+       val="$or" />
+    <s:alias
+       val="$logic_or" />
+    <s:alias
+       val="$_OR_" />
+    <s:alias
+       val="$reduce_or" />
+    <s:alias
+       val="$reduce_bool" />
+    <path
+       d="M 0,0 A 30,25 0 0 1 0,25 30,25 0 0 0 30,12.5 30,25 0 0 0 0,0"
+       class="cell_$or$REF.v:16$1"
+       id="path4" />
+    <g
+       s:x="2"
+       s:y="5"
+       s:pid="A"
+       id="g5" />
+    <g
+       s:x="2"
+       s:y="20"
+       s:pid="B"
+       id="g6" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g7" />
+    <circle
+       cx="33.585289"
+       cy="12.644558"
+       r="3"
+       class="invert"
+       id="circle1-6"
+       style="fill:#ff9999;fill-opacity:1" />
+  </g>
+  <g
+     s:type="or"
+     class="combinational"
+     transform="translate(72.686891,80.729665)"
+     s:width="30"
+     s:height="25"
+     id="cell_$or$REF.v:16$1-9"
+     style="fill:#afecef;fill-opacity:1">
+    <s:alias
+       val="$or" />
+    <s:alias
+       val="$logic_or" />
+    <s:alias
+       val="$_OR_" />
+    <s:alias
+       val="$reduce_or" />
+    <s:alias
+       val="$reduce_bool" />
+    <path
+       d="M 0,0 A 30,25 0 0 1 0,25 30,25 0 0 0 30,12.5 30,25 0 0 0 0,0"
+       class="cell_$or$REF.v:16$1"
+       id="path4-1" />
+    <g
+       s:x="2"
+       s:y="5"
+       s:pid="A"
+       id="g5-2" />
+    <g
+       s:x="2"
+       s:y="20"
+       s:pid="B"
+       id="g6-7" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g7-0" />
+    <circle
+       cx="33.585289"
+       cy="12.644558"
+       r="3"
+       class="invert"
+       id="circle1-6-9"
+       style="fill:#ff9999;fill-opacity:1" />
+  </g>
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(142.54083,26.365461)"
+     s:width="30"
+     s:height="20"
+     id="cell_Q">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_Q"
+       s:attribute="ref"
+       id="text12">Q</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M 30,0 V 20 H 15 L 0,10 15,0 Z"
+       class="cell_Q"
+       id="path12" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g13" />
+  </g>
+  <g
+     s:type="inputExt"
+     class="io"
+     transform="translate(23,18.914248)"
+     s:width="30"
+     s:height="20"
+     id="cell_S">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_S"
+       s:attribute="ref"
+       id="text10">S</text>
+    <s:alias
+       val="$_inputExt_" />
+    <path
+       d="M 0,0 V 20 H 15 L 30,10 15,0 Z"
+       class="cell_S"
+       id="path10" />
+    <g
+       s:x="30"
+       s:y="10"
+       s:pid="Y"
+       id="g11" />
+  </g>
+  <g
+     s:type="inputExt"
+     class="io"
+     transform="translate(23.016238,89.679896)"
+     s:width="30"
+     s:height="20"
+     id="cell_R">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_R"
+       s:attribute="ref"
+       id="text11">R</text>
+    <s:alias
+       val="$_inputExt_" />
+    <path
+       d="M 0,0 V 20 H 15 L 30,10 15,0 Z"
+       class="cell_R"
+       id="path11" />
+    <g
+       s:x="30"
+       s:y="10"
+       s:pid="Y"
+       id="g12" />
+  </g>
+  <line
+     x1="155.04903"
+     x2="160.19528"
+     y1="72.294495"
+     y2="72.294495"
+     class="net_3 width_1"
+     style="stroke-width:0.999999;stroke-linecap:round"
+     id="line25-2" />
+</svg>

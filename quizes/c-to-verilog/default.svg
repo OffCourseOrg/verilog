@@ -5,8 +5,8 @@
   <s:properties>
     <s:layoutEngine
       org.eclipse.elk.layered.spacing.nodeNodeBetweenLayers="40"
-      org.eclipse.elk.spacing.nodeNode= "25"
-      org.eclipse.elk.layered.layering.strategy= "NETWORK_SIMPLEX"
+      org.eclipse.elk.spacing.nodeNode= "30"
+      org.eclipse.elk.layered.layering.strategy= "LONGEST_PATH"
     />
   </s:properties>
   

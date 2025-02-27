@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="265"
+   height="125"
+   version="1.1"
+   id="svg34"
+   sodipodi:docname="xor-diagram.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:s="https://github.com/nturley/netlistsvg">
+  <defs
+     id="defs34" />
+  <sodipodi:namedview
+     id="namedview34"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="6.2090338"
+     inkscape:cx="125.3013"
+     inkscape:cy="93.090168"
+     inkscape:window-width="2254"
+     inkscape:window-height="1481"
+     inkscape:window-x="0"
+     inkscape:window-y="21"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg34" />
+  <style
+     id="style1">  svg {
+    stroke:#000;
+    fill:none;
+  }
+  text {
+    fill:#000;
+    fill-opacity:1.0;
+    stroke:none;
+    font-size:10px;
+    font-weight: bold;
+    font-family: &quot;Courier New&quot;, monospace;
+  }
+  line {
+      stroke-linecap: round;
+  }
+  .nodelabel {
+    text-anchor: middle;
+  }
+  .inputPortLabel {
+    text-anchor: end;
+  }
+  .splitjoinBody {
+    fill:#000;
+  }
+  .invert {
+    fill:#ff9999;
+    fill-opacity:1.0;
+  }
+  .combinational {
+    fill:#afecef;
+    fill-opacity:1.0;
+  }
+  .state {
+    fill:#def1b2;
+    fill-opacity:1.0;
+  }
+  .hierarchical {
+    fill:#ffd8b2;
+    fill-opacity:1.0;
+  }
+  .io {
+    fill:#fcffb2;
+    fill-opacity:1.0;
+  }</style>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="BACKGROUND">
+    <line
+       x1="100"
+       x2="123"
+       y1="53.029297"
+       y2="53.029297"
+       class="net_5 width_1"
+       style="stroke-width:1;fill:none;fill-opacity:1;stroke:#00d700;stroke-opacity:1"
+       id="line22" />
+    <line
+       x1="100"
+       x2="123"
+       y1="92.115547"
+       y2="92.115547"
+       class="net_7 width_1"
+       style="stroke-width:1;stroke:#00d700;stroke-opacity:1"
+       id="line29" />
+    <line
+       x1="152.99733"
+       x2="162.94408"
+       y1="45.529297"
+       y2="45.529297"
+       class="net_6 width_1"
+       style="stroke-width:0.997333;stroke:#0005ff;stroke-opacity:1"
+       id="line30" />
+    <line
+       x1="163"
+       x2="163"
+       y1="45.615025"
+       y2="69.567253"
+       class="net_6 width_1"
+       style="stroke-width:0.893536;stroke:#0005ff;stroke-opacity:1"
+       id="line31" />
+    <line
+       x1="163.06386"
+       x2="175.00255"
+       y1="69.615547"
+       y2="69.615547"
+       class="net_6 width_1"
+       style="stroke-width:0.997443;stroke:#0005ff;stroke-opacity:1"
+       id="line32" />
+    <line
+       x1="153"
+       x2="175"
+       y1="84.615547"
+       y2="84.615547"
+       class="net_8 width_1"
+       style="stroke-width:1;stroke:#0005ff;stroke-opacity:1"
+       id="line33" />
+    <line
+       x1="203"
+       x2="223"
+       y1="77.115547"
+       y2="77.115547"
+       class="net_4 width_1"
+       style="stroke-width:1;stroke:#ec0000;stroke-opacity:1"
+       id="line34" />
+  </g>
+  <rect
+     style="fill:#ff6e00;fill-opacity:0.34980941;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     id="rect37"
+     width="43.955627"
+     height="95.112175"
+     x="4.0505185"
+     y="10.801383" />
+  <rect
+     style="fill:#ff6e00;fill-opacity:0.349809;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     id="rect37-8"
+     width="43.955627"
+     height="95.112175"
+     x="217.49922"
+     y="11.009012" />
+  <g
+     s:type="and"
+     class="combinational"
+     transform="translate(123,33.029295)"
+     s:width="30"
+     s:height="25"
+     id="cell_$and$REF.v:18$1">
+    <s:alias
+       val="$and" />
+    <s:alias
+       val="$logic_and" />
+    <s:alias
+       val="$_AND_" />
+    <s:alias
+       val="$reduce_and" />
+    <path
+       d="M 0,0 V 25 H 15 A 15,12.5 0 0 0 15,0 Z"
+       class="cell_$and$REF.v:18$1"
+       id="path1" />
+    <g
+       s:x="0"
+       s:y="5"
+       s:pid="A"
+       id="g1" />
+    <g
+       s:x="0"
+       s:y="20"
+       s:pid="B"
+       id="g2" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g3" />
+  </g>
+  <g
+     s:type="not"
+     class="combinational"
+     transform="translate(73,82.115543)"
+     s:width="30"
+     s:height="20"
+     id="cell_$not$REF.v:0$4">
+    <s:alias
+       val="$_NOT_" />
+    <s:alias
+       val="$not" />
+    <s:alias
+       val="$logic_not" />
+    <path
+       d="M 0,0 V 20 L 20,10 Z"
+       class="cell_$not$REF.v:0$4"
+       id="path6" />
+    <circle
+       cx="24"
+       cy="10"
+       r="3"
+       class="invert"
+       id="circle6" />
+    <g
+       s:x="-1"
+       s:y="10"
+       s:pid="A"
+       id="g7" />
+    <g
+       s:x="27"
+       s:y="10"
+       s:pid="Y"
+       id="g8" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:5.33333px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     x="75.627464"
+     y="94.08326"
+     id="text37-2-9"><tspan
+       sodipodi:role="line"
+       id="tspan37-93-4"
+       x="75.627464"
+       y="94.08326"
+       style="font-size:5.33333px;fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1">not</tspan></text>
+  <g
+     s:type="not"
+     class="combinational"
+     transform="translate(73,43.029295)"
+     s:width="30"
+     s:height="20"
+     id="cell_$not$REF.v:0$5">
+    <s:alias
+       val="$_NOT_" />
+    <s:alias
+       val="$not" />
+    <s:alias
+       val="$logic_not" />
+    <path
+       d="M 0,0 V 20 L 20,10 Z"
+       class="cell_$not$REF.v:0$5"
+       id="path8" />
+    <circle
+       cx="24"
+       cy="10"
+       r="3"
+       class="invert"
+       id="circle8" />
+    <g
+       s:x="-1"
+       s:y="10"
+       s:pid="A"
+       id="g9" />
+    <g
+       s:x="27"
+       s:y="10"
+       s:pid="Y"
+       id="g10" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:5.33333px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     x="75.431824"
+     y="54.466339"
+     id="text37-2"><tspan
+       sodipodi:role="line"
+       id="tspan37-93"
+       x="75.431824"
+       y="54.466339"
+       style="font-size:5.33333px;fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1">not</tspan></text>
+  <g
+     s:type="or"
+     class="combinational"
+     transform="translate(173,64.615543)"
+     s:width="30"
+     s:height="25"
+     id="cell_$or$REF.v:20$3">
+    <s:alias
+       val="$or" />
+    <s:alias
+       val="$logic_or" />
+    <s:alias
+       val="$_OR_" />
+    <s:alias
+       val="$reduce_or" />
+    <s:alias
+       val="$reduce_bool" />
+    <path
+       d="M 0,0 A 30,25 0 0 1 0,25 30,25 0 0 0 30,12.5 30,25 0 0 0 0,0"
+       class="cell_$or$REF.v:20$3"
+       id="path10" />
+    <g
+       s:x="2"
+       s:y="5"
+       s:pid="A"
+       id="g11" />
+    <g
+       s:x="2"
+       s:y="20"
+       s:pid="B"
+       id="g12" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g13" />
+  </g>
+  <g
+     s:type="inputExt"
+     class="io"
+     transform="translate(12,27.897811)"
+     s:width="30"
+     s:height="20"
+     id="cell_a">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_a"
+       s:attribute="ref"
+       id="text13">a</text>
+    <s:alias
+       val="$_inputExt_" />
+    <path
+       d="M 0,0 V 20 H 15 L 30,10 15,0 Z"
+       class="cell_a"
+       id="path13" />
+    <g
+       s:x="30"
+       s:y="10"
+       s:pid="Y"
+       id="g14" />
+  </g>
+  <g
+     s:type="inputExt"
+     class="io"
+     transform="translate(12,67.029295)"
+     s:width="30"
+     s:height="20"
+     id="cell_b">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_b"
+       s:attribute="ref"
+       id="text14">b</text>
+    <s:alias
+       val="$_inputExt_" />
+    <path
+       d="M 0,0 V 20 H 15 L 30,10 15,0 Z"
+       class="cell_b"
+       id="path14" />
+    <g
+       s:x="30"
+       s:y="10"
+       s:pid="Y"
+       id="g15" />
+  </g>
+  <g
+     s:type="outputExt"
+     class="io"
+     transform="translate(223,67.115543)"
+     s:width="30"
+     s:height="20"
+     id="cell_y">
+    <text
+       x="15"
+       y="-4"
+       class="nodelabel cell_y"
+       s:attribute="ref"
+       id="text15">y</text>
+    <s:alias
+       val="$_outputExt_" />
+    <path
+       d="M 30,0 V 20 H 15 L 0,10 15,0 Z"
+       class="cell_y"
+       id="path15" />
+    <g
+       s:x="0"
+       s:y="10"
+       s:pid="A"
+       id="g16" />
+  </g>
+  <line
+     x1="42.069927"
+     x2="122.99944"
+     y1="37.897812"
+     y2="37.897812"
+     class="net_2 width_1"
+     style="stroke-width:1.06764"
+     id="line16" />
+  <line
+     x1="42"
+     x2="52"
+     y1="37.897812"
+     y2="37.897812"
+     class="net_2 width_1"
+     style="stroke-width:1"
+     id="line19" />
+  <line
+     x1="52"
+     x2="52"
+     y1="38.571144"
+     y2="92.241371"
+     class="net_2 width_1"
+     style="stroke-width:0.869436"
+     id="line20" />
+  <circle
+     cx="52"
+     cy="37.897812"
+     r="2"
+     style="fill:#000000"
+     class="net_2 width_1"
+     id="circle20" />
+  <line
+     x1="52.021408"
+     x2="72.877655"
+     y1="92.115547"
+     y2="92.115547"
+     class="net_2 width_1"
+     style="stroke-width:1.02118"
+     id="line21" />
+  <line
+     x1="42.073257"
+     x2="123.4756"
+     y1="77.029297"
+     y2="77.029297"
+     class="net_3 width_1"
+     style="stroke-width:1.07075"
+     id="line23" />
+  <line
+     x1="42"
+     x2="62"
+     y1="77.029297"
+     y2="77.029297"
+     class="net_3 width_1"
+     style="stroke-width:1"
+     id="line26" />
+  <line
+     x1="62"
+     x2="62"
+     y1="77.029297"
+     y2="53.029297"
+     class="net_3 width_1"
+     style="stroke-width:1"
+     id="line27" />
+  <circle
+     cx="62"
+     cy="77.029297"
+     r="2"
+     style="fill:#000000"
+     class="net_3 width_1"
+     id="circle27" />
+  <line
+     x1="62.031097"
+     x2="72.65303"
+     y1="53.029297"
+     y2="53.029297"
+     class="net_3 width_1"
+     style="stroke-width:1.03063"
+     id="line28" />
+  <g
+     s:type="and"
+     class="combinational"
+     transform="translate(123,72.115543)"
+     s:width="30"
+     s:height="25"
+     id="cell_$and$REF.v:19$2">
+    <s:alias
+       val="$and" />
+    <s:alias
+       val="$logic_and" />
+    <s:alias
+       val="$_AND_" />
+    <s:alias
+       val="$reduce_and" />
+    <path
+       d="M 0,0 V 25 H 15 A 15,12.5 0 0 0 15,0 Z"
+       class="cell_$and$REF.v:19$2"
+       id="path3" />
+    <g
+       s:x="0"
+       s:y="5"
+       s:pid="A"
+       id="g4" />
+    <g
+       s:x="0"
+       s:y="20"
+       s:pid="B"
+       id="g5" />
+    <g
+       s:x="30"
+       s:y="12.5"
+       s:pid="Y"
+       id="g6" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;paint-order:stroke fill markers"
+     x="108.7738"
+     y="11.330077"
+     id="text34"><tspan
+       sodipodi:role="line"
+       id="tspan34"
+       x="108.7738"
+       y="11.330077">wires</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:10px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;paint-order:stroke fill markers"
+     x="9.3410234"
+     y="8.428977"
+     id="text34-5"><tspan
+       sodipodi:role="line"
+       id="tspan34-0"
+       x="9.3410234"
+       y="8.428977">inputs</tspan></text>
+  <circle
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     id="path35"
+     cx="83.205002"
+     cy="37.931519"
+     r="3.6937499" />
+  <circle
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     id="path35-2"
+     cx="113.27202"
+     cy="53.272018"
+     r="3.6937499" />
+  <path
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     d="m 107.20017,13.463933 h 31.27382"
+     id="path36" />
+  <path
+     style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="m 107.13525,13.459423 6.08164,36.286551"
+     id="path37"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc" />
+  <text
+     xml:space="preserve"
+     style="text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     x="127.68545"
+     y="47.774254"
+     id="text37"><tspan
+       sodipodi:role="line"
+       id="tspan37"
+       x="127.68545"
+       y="47.774254"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1">and</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:10px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     x="128.338"
+     y="87.78788"
+     id="text37-8"><tspan
+       sodipodi:role="line"
+       id="tspan37-9"
+       x="128.338"
+       y="87.78788"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1">and</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:10px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     x="182.30843"
+     y="79.860794"
+     id="text37-3"><tspan
+       sodipodi:role="line"
+       id="tspan37-6"
+       x="182.30843"
+       y="79.860794"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1">or</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:10px;font-family:'Courier New', monospace;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.77953;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;paint-order:stroke fill markers"
+     x="218.77924"
+     y="8.5977898"
+     id="text34-5-6"><tspan
+       sodipodi:role="line"
+       id="tspan34-0-1"
+       x="218.77924"
+       y="8.5977898">outputs</tspan></text>
+  <path
+     style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="M 107.24341,13.337557 82.809489,34.444976"
+     id="path37-6"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc" />
+  <circle
+     style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.15654;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:18.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+     id="path35-2-6"
+     cx="162.46143"
+     cy="45.579979"
+     r="3.6937499" />
+  <path
+     style="fill:#ff7900;fill-opacity:1;fill-rule:evenodd;stroke:#ff7900;stroke-width:1.00157;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+     d="m 138.4914,13.371484 23.51779,28.582193"
+     id="path37-1"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc" />
+</svg>

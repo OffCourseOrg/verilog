@@ -18,8 +18,8 @@ module	REF (
 	`ifndef GEN_FSM
 		output [3:0] state_ref,
 	`endif
-		output reg armed,
-		output reg alarm
+		output armed,
+		output alarm
 	);
 	localparam D_2 = 4'd4,
 		D_1 = 4'd2,
@@ -47,8 +47,9 @@ module	REF (
 		_MAX_STATE = 12;
 
 
-	reg [3:0] state;
-	reg [3:0] state_next;
+	reg [3:0] state, state_next;
+	reg alarm_r, alarm_next;
+	reg armed_r, armed_next;
 	reg active_digit;
 
 	`ifndef GEN_FSM
