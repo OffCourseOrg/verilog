@@ -207,7 +207,7 @@ class SSHR(Cell):
 
 class EQ(Cell):
   type = "$eq"
-  resolve_format = "A == B"
+  resolve_format = "A = B"
   def execute(self, netlist, args={}, start_net=""):
     try:
       value = netlist.execute(self.ports["A"].netname, args, start_net) == netlist.execute(self.ports["B"].netname, args, start_net)

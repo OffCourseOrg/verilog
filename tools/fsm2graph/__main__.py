@@ -112,7 +112,10 @@ for state in fsm.states.values():
       if(DOT_remove_reset and key == fsm.reset_input):
         continue
       if(netlist != None):
-        net = key if "$" not in key else netlist.resolve(key)
+        if("$" in key):
+          net = netlist.resolve(key)
+        else:
+          net = f"{key}{" = 1'1" if value else " = 1'0"}"
       else:
         net = key
       if(net == -1):
@@ -121,7 +124,7 @@ for state in fsm.states.values():
         label += f"{DOT_edge_label_spacing}&& "
       else:
         label = DOT_edge_label_spacing
-      label += f"{'' if value else '!'}{net}\l"
+      label += f"{net}\l"
 
     if(fsm.is_mealy()):
       for output in transition.executed_outputs:
