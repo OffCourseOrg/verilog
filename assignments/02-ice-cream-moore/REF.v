@@ -174,18 +174,21 @@ module REF (
       f_isReset <= 1;
     end
 
-      // if (f_isReset) begin
-      //   assert (state_r >= 0 && state_r <= 8);
-      //
-      //   if (!reset) begin
-      //     if ($past(state_nxt) < 4 && $past(state_nxt) > 5) begin
-      //       assert (ice_cream_balls == 1);
-      //     end
-      //     if ($past(state_nxt) == C3B0 && state_nxt > 6) begin
-      //       assert (ice_cream_balls == 2);
-      //     end
-      //   end
-      // end
+      if (f_isReset) begin
+        assert (state_r >= 0 && state_r <= 8);
+
+        if (!reset) begin
+          if ($past(state_r) < 4 && $past(state_r) > 5) begin
+            assert (ice_cream_balls == 1);
+          end
+          if ($past(state_r) == C3B0 && state_r > 6) begin
+            assert (ice_cream_balls == 2);
+          end
+          if ($past(f_isReset) != 1 && $past(state_r) < 5)  begin
+            assert(ice_cream_balls == 0);
+          end
+        end
+      end
   end
 
 `endif
