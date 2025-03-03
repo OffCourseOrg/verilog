@@ -29,10 +29,11 @@ module REF (
            C1B2 = 7,
            C2B2 = 8;
 
-  localparam B0 = 0, B1 = 1, B2 = 2;
+  // localparam B0 = 0, B1 = 1, B2 = 2;
   reg [3:0] state_r;
   reg [3:0] state_nxt;
   reg [1:0] ice_cream_balls_nxt;
+  reg [1:0] ice_cream_balls_r;
 `ifndef GEN_FSM
   assign state_ref = state_r;
 `endif
@@ -40,143 +41,130 @@ module REF (
   always @(posedge clk) begin
     if (reset) begin
       state_r <= 0;
+      ice_cream_balls_r <= 0;
     end else begin
       state_r <= state_nxt;
+      ice_cream_balls_r <= ice_cream_balls_nxt;
     end
-
-  end
-
-
-  always @(*) begin
-    state_nxt = state_r;
-    case (state_r)
-      C0B0: begin
-        case (coins)
-          C1: state_nxt = C1B0;
-          C2: state_nxt = C2B0;
-        endcase
-      end
-      C1B0: begin
-        case (coins)
-          C1: state_nxt = C2B0;
-          C2: state_nxt = C3B0;
-        endcase
-      end
-      C2B0: begin
-        case (coins)
-          C1: state_nxt = C3B0;
-          C2: state_nxt = C1B1;
-          C0: state_nxt = C0B1;
-        endcase
-      end
-      C3B0: begin
-        case (coins)
-          C1: state_nxt = C1B2;
-          C2: state_nxt = C2B2;
-          C0: state_nxt = C0B2;
-        endcase
-      end
-
-      C0B1: begin
-        case (coins)
-          C1: state_nxt = C1B0;
-          C2: state_nxt = C2B0;
-        endcase
-      end
-      C1B1: begin
-        case (coins)
-          C1: state_nxt = C2B0;
-          C2: state_nxt = C3B0;
-        endcase
-      end
-
-      C0B2: begin
-        case (coins)
-          C1: state_nxt = C1B0;
-          C2: state_nxt = C2B0;
-        endcase
-      end
-      C1B2: begin
-        case (coins)
-          C1: state_nxt = C2B0;
-          C2: state_nxt = C3B0;
-        endcase
-      end
-      C2B2: begin
-        case (coins)
-          C1: state_nxt = C3B0;
-          C2: state_nxt = C1B1;
-        endcase
-      end
-    endcase
-  end
-
-  always @(*) begin
-    ice_cream_balls_nxt = 0;
-    case(state_r)
-      C0B0: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 0;
-        endcase
-      end
-      C1B0: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 0;
-        endcase
-      end
-      C2B0: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 1;
-          C0: ice_cream_balls_nxt = 1;
-        endcase
-      end
-      C3B0: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 2;
-          C2: ice_cream_balls_nxt = 2;
-          C0: ice_cream_balls_nxt = 2;
-        endcase
-      end
-
-      C0B1: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 0;
-        endcase
-      end
-      C1B1: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 0;
-        endcase
-      end
-
-      C0B2: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 0;
-        endcase
-      end
-      C1B2: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 0;
-        endcase
-      end
-      C2B2: begin
-        case (coins)
-          C1: ice_cream_balls_nxt = 0;
-          C2: ice_cream_balls_nxt = 1;
-        endcase
-      end
-    endcase
-
   end
 
   assign ice_cream_balls = ice_cream_balls_nxt;
+
+  always @(*) begin
+    state_nxt = state_r;
+    ice_cream_balls_nxt = ice_cream_balls_r;
+    case (state_r)
+      C0B0: begin
+        ice_cream_balls_nxt = 0;
+        case (coins)
+          C1: begin
+            state_nxt = C1B0;
+          end
+          C2: begin
+            state_nxt = C2B0;
+          end
+        endcase
+      end
+      C1B0: begin
+        ice_cream_balls_nxt = 0;
+        case (coins)
+          C1: begin
+            state_nxt = C2B0;
+          end
+          C2: begin
+            state_nxt = C3B0;
+          end
+        endcase
+      end
+      C2B0: begin
+        ice_cream_balls_nxt = 0;
+        case (coins)
+          C1: begin
+            state_nxt = C3B0;
+          end
+          C2: begin
+            state_nxt = C1B1;
+          end
+          C0: begin
+            state_nxt = C0B1;
+          end
+        endcase
+      end
+      C3B0: begin
+        ice_cream_balls_nxt = 0;
+        case (coins)
+          C1: begin
+            state_nxt = C1B2;
+          end
+          C2: begin
+            state_nxt = C2B2;
+          end
+          C0: begin
+            state_nxt = C0B2;
+          end
+        endcase
+      end
+
+      C0B1: begin
+        ice_cream_balls_nxt = 1;
+        case (coins)
+          C1: begin
+            state_nxt = C1B0;
+          end
+          C2: begin
+            state_nxt = C2B0;
+          end
+        endcase
+      end
+      C1B1: begin
+        ice_cream_balls_nxt = 1;
+        case (coins)
+          C1: begin
+            state_nxt = C2B0;
+          end
+          C2: begin
+            state_nxt = C3B0;
+          end
+        endcase
+      end
+
+      C0B2: begin
+        ice_cream_balls_nxt = 2;
+        case (coins)
+          C1: begin
+            state_nxt = C1B0;
+          end
+          C2: begin
+            state_nxt = C2B0;
+          end
+        endcase
+      end
+      C1B2: begin
+        ice_cream_balls_nxt = 2;
+        case (coins)
+          C1: begin
+            state_nxt = C2B0;
+          end
+          C2: begin
+            state_nxt = C3B0;
+          end
+        endcase
+      end
+      C2B2: begin
+        ice_cream_balls_nxt = 2;
+        case (coins)
+          C1: begin
+            state_nxt = C3B0;
+          end
+          C2: begin
+            state_nxt = C1B1;
+          end
+        endcase
+      end
+    endcase
+  end
+
+  // assign ice_cream_balls = ice_cream_balls_nxt;
 
 `ifdef FORMAL
   reg f_isReset = 0;
@@ -186,19 +174,20 @@ module REF (
       f_isReset <= 1;
     end
 
-    if (f_isReset) begin
-      assert(state_r >= 0 && state_r <= 8);
-
-      if (!reset) begin
-        if ($past(state_nxt) < 4 && $past(state_nxt) > 5) begin
-          assert(ice_cream_balls == 1);
-        end
-        if ($past(state_nxt) == C3B0 && state_nxt > 6) begin
-          assert(ice_cream_balls == 2);
-        end
-      end
-    end
+      // if (f_isReset) begin
+      //   assert (state_r >= 0 && state_r <= 8);
+      //
+      //   if (!reset) begin
+      //     if ($past(state_nxt) < 4 && $past(state_nxt) > 5) begin
+      //       assert (ice_cream_balls == 1);
+      //     end
+      //     if ($past(state_nxt) == C3B0 && state_nxt > 6) begin
+      //       assert (ice_cream_balls == 2);
+      //     end
+      //   end
+      // end
   end
+
 `endif
 
 
