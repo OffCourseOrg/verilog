@@ -14,7 +14,7 @@ smtbmc
 read -formal bmc.v
 read -formal DUT.v
 read -formal REF.v
-prep -top bmc
+prep -top REF
 
 [files]
 REF.v
