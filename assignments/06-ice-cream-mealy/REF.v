@@ -88,6 +88,7 @@ always @(*) begin
     CS2: begin
       case (coins)
         C0: ice_cream_balls_nxt = 1;
+        C1: ice_cream_balls_nxt = 2;
         C2: ice_cream_balls_nxt = 2;
       endcase
     end
@@ -108,7 +109,13 @@ assign ice_cream_balls = ice_cream_balls_nxt;
     if (reset) begin
       f_isReset <= 1;
     end
-    if (f_isReset) begin
+    if (f_isReset && !reset) begin
+      if (state_nxt == CS3 || (state_nxt == CS1 && coins == 2)) begin
+        assert(ice_cream_balls == 2);
+      end
+      if (state_r == CS2 && coins == 0) begin
+        assert(ice_cream_balls == 1);
+      end
 
     end
   end
