@@ -5,18 +5,18 @@ cvr
 [options]
 cvr: mode cover
 prv: mode bmc
-depth 75
+depth 60 
 
 [engines]
 smtbmc
 
 [script]
 read -formal bmc.v
-#read -formal DUT.v
+read -formal UUT.v
 read -formal REF.v
-prep -top REF
+prep -top bmc
 
 [files]
 REF.v
-#DUT.v
+UUT.v
 bmc.v
