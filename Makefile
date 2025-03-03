@@ -8,4 +8,4 @@ uninstall:
 
 reinstall: uninstall install
 
-PHONY: install
+.PHONY: install
