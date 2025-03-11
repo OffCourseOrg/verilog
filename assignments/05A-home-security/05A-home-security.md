@@ -54,7 +54,7 @@
   Good luck!
 
 
-<img src="https://raw.githubusercontent.com/OffCourseOrg/verilog/refs/heads/master/assignments/05A-home-security/fsm.svg" style="background-color:white;padding:20px;">
+<img src="fsm.svg" style="background-color:white;padding:20px;">
 
 ```
  *  This work is licensed under CC BY-SA 4.0 
