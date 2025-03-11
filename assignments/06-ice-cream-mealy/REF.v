@@ -9,79 +9,99 @@
 module REF (
   input clk,
 	input reset,
-  input insert,
-  input wire [1:0] coins,
-  output reg [1:0] ice_cream_balls,
+  input [1:0] coins,
+  output [1:0] ice_cream_balls,
 `ifndef GEN_FSM
-  output wire [2:0] state_ref,
+  output [1:0] state_ref,
 `endif
 );
 
 
-  localparam COIN0 = 2'b00,
-             COIN1 = 2'b01,
-             COIN2 = 2'b10;
-  //@STATES
-  localparam ZERO_COINS_NO_ICE_CREAM = 0,
-             ONE_COIN_NO_ICE_CREAM = 1,
-             TWO_COINS_ONE_BALL = 2;
-             
-  reg [2:0] state;
-  reg insert_prev;
-  reg [2:0] state_next;
-`ifndef GEN_FSM
-  assign state_ref = state;
-`endif
+localparam C0 = 2'b00,
+           C1 = 2'b01,
+           C2 = 2'b10;
 
-  always @(posedge clk) begin
-    if (reset) begin
-      state <= ZERO_COINS_NO_ICE_CREAM;
-    end else begin
-      state <= state_next;
+//@STATES
+localparam CS0 = 0,
+           CS1 = 1,
+           CS2 = 2,
+           CS3 = 3;
+
+reg [1:0] state_r;
+reg [1:0] state_nxt;
+reg [1:0] ice_cream_balls_r;
+reg [1:0] ice_cream_balls_nxt;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state_r <= 0;
+    ice_cream_balls_r <= 0;
+  end else begin
+    state_r <= state_nxt;
+    ice_cream_balls_r <= ice_cream_balls_nxt;
+  end
+end
+
+always @(*) begin
+  state_nxt = state_r;
+  case (state_r)
+    CS0: begin
+      case (coins)
+        C1: state_nxt = CS1;
+        C2: state_nxt = CS2;
+      endcase
     end
-  end
+    CS1: begin
+      case (coins)
+        C1: state_nxt = CS2;
+        C2: state_nxt = CS3;
+      endcase
+    end
+    CS2: begin
+      case (coins)
+        C0: state_nxt = CS0;
+        C1: state_nxt = CS3;
+        C2: state_nxt = CS1;
+      endcase
+    end
+    CS3: begin
+      case (coins)
+        C0: state_nxt = CS0;
+        C1: state_nxt = CS1;
+        C2: state_nxt = CS2;
+      endcase
+    end
+  endcase
+end
 
+always @(*) begin
+  ice_cream_balls_nxt = ice_cream_balls_r;
+  case (state_r)
+    CS0: begin
+      ice_cream_balls_nxt = 0;
+    end
+    CS1: begin
+      case(coins)
+        C2: ice_cream_balls_nxt = 2;
+      endcase
+    end
+    CS2: begin
+      case (coins)
+        C0: ice_cream_balls_nxt = 1;
+        C1: ice_cream_balls_nxt = 2;
+        C2: ice_cream_balls_nxt = 2;
+      endcase
+    end
+    CS3: begin
+      if (coins != 3)
+        ice_cream_balls_nxt = 0;
+    end
+  endcase
+end
 
-  always @(*) begin
-    state_next = 0;
-    ice_cream_balls = 0;
-    case (state)
-      ZERO_COINS_NO_ICE_CREAM: begin
-        case (coins)
-          COIN1: state_next <= ONE_COIN_NO_ICE_CREAM;
-          COIN2: begin 
-            state_next <= TWO_COINS_ONE_BALL;
-            ice_cream_balls <= 1;
-          end
-          default: state_next <= state;
-        endcase
-      end
-      ONE_COIN_NO_ICE_CREAM: begin
-        case (coins)
-          COIN1: begin
-            state_next <= TWO_COINS_ONE_BALL;
-            ice_cream_balls <= 1;
-          end
-          COIN2: begin 
-            state_next <= ZERO_COINS_NO_ICE_CREAM;
-            ice_cream_balls <= 2;
-          end
-          default: state_next <= state;
-        endcase
-      end
-      TWO_COINS_ONE_BALL: begin
-        case(coins)
-          COIN1: begin
-            ice_cream_balls <= 2;
-          end
-          default: begin
-            state_next <= ZERO_COINS_NO_ICE_CREAM;
-            ice_cream_balls <= 1;
-          end
-        endcase
-      end
-    endcase
-  end
+assign state_ref = state_r;
+assign ice_cream_balls = ice_cream_balls_nxt;
+
 `ifdef FORMAL
   reg f_isReset = 0;
   
@@ -89,18 +109,14 @@ module REF (
     if (reset) begin
       f_isReset <= 1;
     end
-    if (f_isReset) begin
-      assert(state >= ZERO_COINS_NO_ICE_CREAM);
-      assert(state_next >= ZERO_COINS_NO_ICE_CREAM);
-      assert(state <= TWO_COINS_ONE_BALL);
-      assert(state_next <= TWO_COINS_ONE_BALL);
-      
-      if((state == ONE_COIN_NO_ICE_CREAM && coins == COIN1) || (state == ZERO_COINS_NO_ICE_CREAM && coins == 2) || (state == TWO_COINS_ONE_BALL && coins != 1))
-        assert(ice_cream_balls == 1);
-      else if ((state == ONE_COIN_NO_ICE_CREAM && coins == 2) || (state == TWO_COINS_ONE_BALL && coins == 1))
+    if (f_isReset && !reset) begin
+      if (state_nxt == CS3 || (state_nxt == CS1 && coins == 2)) begin
         assert(ice_cream_balls == 2);
-      else
-        assert(ice_cream_balls == 0);
+      end
+      if (state_r == CS2 && coins == 0) begin
+        assert(ice_cream_balls == 1);
+      end
+
     end
   end
 `endif
