@@ -13,13 +13,13 @@ module	REF (
 		input trigger,
 		input [1:0] command,
 		input [3:0] digit,
-		input digit_enterd,
+		input input_digit,
 
 	`ifndef GEN_FSM
 		output [3:0] state_ref,
 	`endif
-		output armed,
-		output alarm
+		output reg armed,
+		output reg alarm
 	);
 	localparam D_2 = 4'd4,
 		D_1 = 4'd2,
@@ -33,14 +33,14 @@ module	REF (
 	localparam _MIN_STATE=0,
 		DISARMED = 0,
 		ARM0 = 1,
-		ARM1 =2,
+		ARM1 = 2,
 		ARM2 = 3,
 		ARMED = 4,
 		DISARM0 = 5,
 		DISARM1= 6,
 		DISARM2 = 7,
 		ALARM = 8,
-		ARM1B =9,
+		ARM1B = 9,
 		ARM2B = 10,
 		DISARM1B = 11,
 		DISARM2B  = 12,
@@ -48,8 +48,6 @@ module	REF (
 
 
 	reg [3:0] state, state_next;
-	reg alarm_r, alarm_next;
-	reg armed_r, armed_next;
 	reg active_digit;
 
 	`ifndef GEN_FSM
@@ -73,23 +71,23 @@ module	REF (
 		case(state)
 			//Disarm flow
 			DISARM0: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = digit == D_0 ? DISARM1 : DISARM1B;
 			end
 			DISARM1: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = digit == D_1 ? DISARM2 : DISARM2B;
 			end
 			DISARM2: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = digit == D_2 ? DISARMED : ARMED;
 			end
 			DISARM1B: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = DISARM2B;
 			end
 			DISARM2B: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = ARMED;
 			end
 			DISARMED: begin
@@ -101,23 +99,23 @@ module	REF (
 
 			//Arming flow
 			ARM0: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = digit == D_0 ? ARM1 : ARM1B;
 			end
 			ARM1: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = digit == D_1 ? ARM2 : ARM2B;
 			end
 			ARM2: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = digit == D_2 ? ARMED : DISARMED;
 			end
 			ARM1B: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = ARM2B;
 			end
 			ARM2B: begin
-				if(digit_enterd)
+				if(input_digit == 1)
 					state_next = DISARMED;
 			end
 			ARMED: begin
