@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>05A-home-security</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../github_markdown.css" />
+</head>
+<body>
+<pre><code> *  Copyright: Sybe Feitsma
+ *  This work is licensed under CC BY-SA 4.0 </code></pre>
+<h1 id="todo-yosys-bmc">TODO YOSYS BMC</h1>
+<h4 id="part-of-series">Part of Series:</h4>
+<table>
+<thead>
+<tr class="header">
+<th>05-Home</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>=&gt; <strong>05A-Home-Security</strong></td>
+</tr>
+<tr class="even">
+<td>05B-Home-Intruding-step-1</td>
+</tr>
+<tr class="odd">
+<td>05B-Home-Intruding-step-2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="assignment-05a-home-security">Assignment 05A "Home
+Security"</h2>
+<p>05A requires you to construct a simple home security system with a 3
+digit pincode. implemented as a moore FSM.</p>
+<h4 id="your-uut-will-be-checked-against-a-golden-reference">Your UUT
+will be checked against a Golden reference.</h4>
+<p>Every clockcyle:</p>
+<ul>
+<li>UUT State must match REF state</li>
+<li>UUT Outputs must match REF Outputs</li>
+<li>If your UUT and the REF diverge the simulation will halt
+immediatly</li>
+</ul>
+<p>use GTKWave (The software hiding behind the Debug/Spider button) to
+debug any issues.<br />
+<em>This task uses a golden reference. Therefore the trace in GTKwave
+will always end at the divergence/error point</em></p>
+<h1 id="task">Task</h1>
+<p>Use the provided state graph to implement the home-security Moore
+FSM. With a 1 bit: clk, reset, trigger and digit_entered inputs.<br />
+Aswell as a 3 bit wide digit and a 2 bit wide command input. The outputs
+alarm and armed are both 1 bit wide.</p>
+<p>The states are numbered as such:</p>
+<pre><code>DISARMED = 0,
+ARM0 = 1,
+ARM1 = 2,
+ARM2 = 3,
+ARMED = 4,
+DISARM0 = 5,
+DISARM1= 6,
+DISARM2 = 7,
+ALARM = 8,
+ARM1B = 9,
+ARM2B = 10,
+DISARM1B = 11,
+DISARM2B  = 12;</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Outputs keep their value unless changed by a
+state.</strong></td>
+</tr>
+<tr class="even">
+<td>The skeleton UUT (Unit Under Test) file is given <em>without</em>
+inputs or outputs.</td>
+</tr>
+</tbody>
+</table>
+<p>Good luck!</p>
+<img src="https://raw.githubusercontent.com/OffCourseOrg/verilog/refs/heads/master/assignments/05A-home-security/fsm.svg" style="background-color:white;padding:20px;">
+
+<pre><code> *  This work is licensed under CC BY-SA 4.0 </code></pre>
+</body>
+</html>
