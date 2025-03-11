@@ -12,6 +12,7 @@ SHELL:=/bin/bash
 
 SOURCE=$(wildcard *.sby)
 VERILOG_SOURCES=$(wildcard *.v)
+GITHUB_CSS=../github_markdown.css
 
 all: sby_tasks
 
@@ -56,5 +57,10 @@ env:
 clean:
 	-rm -rf tmp*
 	-rm *.svg
+
+pandoc: $(wildcard *.md)
+	-rm description.html
+	pandoc -c $(GITHUB_CSS) -f gfm+hard_line_breaks -t html -s $^ -o description.html
+	xdg-open description.html
 
 .PHONY: all env clean trace trace-cvr cvr prv prep
