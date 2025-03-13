@@ -105,9 +105,9 @@ class Bits:
      return value == 1
 
   def __str__(self):
-    if self.yosys_str != "":
+    if self.yosys_str != "" and 'x' in self.yosys_str:
        return self.yosys_str
-    return f"{self._size}'{'%0*d' % (self._size, int(bin(self._data)[2:]))}"
+    return f"{self._size}'b{'%0*d' % (self._size, int(bin(self._data)[2:]))}"
 
 
   #Verilog Selector

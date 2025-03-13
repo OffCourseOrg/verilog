@@ -165,6 +165,8 @@ class Netlist:
   def execute(self, netname, args={}, start_net=""):
     if(isinstance(netname, Bits)):
       return netname
+    if(Bits.is_yosys_bits(netname)):
+      return Bits.from_yosys_bits(netname)
     if(netname in args):
       return args[netname]
     if(start_net == netname):

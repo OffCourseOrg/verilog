@@ -115,7 +115,7 @@ for state in fsm.states.values():
         if("$" in key):
           net = netlist.resolve(key)
         else:
-          net = f"{key}{" = 1'1" if value else " = 1'0"}"
+          net = f"{key}{" = 1'b1" if value else " = 1'b0"}"
       else:
         net = key
       if(net == -1):
