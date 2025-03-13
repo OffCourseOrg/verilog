@@ -13,10 +13,10 @@
 
 ## Assignment 05A "Home Security"
 
-  05A requires you to construct a simple home security system with a 3 digit pincode. implemented as a moore FSM.
+  05A requires you to construct a simple home security system with a 3 digit pincode. Implemented as a Moore FSM.
   
 #### Your UUT will be checked against a Golden reference. 
-  Every clockcyle:
+  Every clock cycle:
 
   - UUT State must match REF state  
   - UUT Outputs must match REF Outputs
@@ -27,7 +27,7 @@
 
 # Task
   Use the provided state graph to implement the home-security Moore FSM. With a 1 bit: clk, reset, trigger and digit_entered inputs.\
-  Aswell as a 3 bit wide digit and a 2 bit wide command input. The outputs alarm and armed are both 1 bit wide.
+  As well as a 3 bit wide digit and a 2 bit wide command input. The outputs alarm and armed are both 1 bit wide.
 
 
   The states are numbered as such:
