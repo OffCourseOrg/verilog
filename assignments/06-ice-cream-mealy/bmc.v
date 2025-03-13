@@ -15,8 +15,8 @@ module	bmc(
   wire [1:0] ice_cream_balls_ref;
   wire [1:0] ice_cream_balls_uut;
     
-  wire [2:0] state_ref; 
-  wire [2:0] state_uut;
+  wire [1:0] state_ref;
+  wire [1:0] state_uut;
 
 
   REF REF (
