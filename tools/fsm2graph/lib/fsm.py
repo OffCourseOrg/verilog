@@ -209,7 +209,7 @@ class FSMInfoParser:
           if(input not in execute_args):
             execute_args[input] = Bits(0,1)
 
-        for output_net in netlist.output_netnames:
+        for name, output_net in netlist.output_netnames.items():
           NORMAL_STATE = True
           result = netlist.execute(output_net, execute_args)
           prv_result = ""
@@ -230,11 +230,11 @@ class FSMInfoParser:
                   continue
                 match = re.search("(?!\[)\d+?(?=\])", subnet)
                 if(match == None):
-                  transition.executed_outputs.append(f"{output_net}[{i}] = {subnet}")
+                  transition.executed_outputs.append(f"{name}[{i}] = {subnet}")
                 else:
                   selected = int(match.group())
                   if(selected != i):
-                    transition.executed_outputs.append(f"{output_net}[{i}] = {output_net}[{selected}]")
+                    transition.executed_outputs.append(f"{name}[{i}] = {output_net}[{selected}]")
 
           if(NORMAL_STATE):
             while(not isinstance(result, Bits) and output_net != result):
@@ -257,7 +257,7 @@ class FSMInfoParser:
               continue
             ###Binary Value formatting
               
-            transition.executed_outputs.append(f"{output_net} = {result}")
+            transition.executed_outputs.append(f"{name} = {result}")
         state.add_transition(transition)
 
   #### MOORE vs MEALY ######

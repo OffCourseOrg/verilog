@@ -55,7 +55,8 @@ env:
 
 clean:
 	-rm -rf tmp*
-	-rm *.svg
+	-rm fsm.svg
+	-rm diagram.svg
 
 pandoc: $(wildcard *.md)
 	-rm description.html

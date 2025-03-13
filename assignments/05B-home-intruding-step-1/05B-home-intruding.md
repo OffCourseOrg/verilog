@@ -4,7 +4,7 @@
 ```
 #### Part of Series:
   | 05-Home |
-  ---------------------
+  | --------------------- |
   | 05A-Home-Security |
   | => **05B-Home-Intruding-step-1** |
   | 05C-Home-Intruding-step-2 |
@@ -26,11 +26,12 @@
 
   # Task
   Create a 4 bit counter with roll-over signal. Counting from 0 to 9.
+  
   | |
-  |-|
-  | Count from 0 to 9 if enabled |
-  | signal before rolling over from 9 to 0 |
-  The skeleton UUT.v file is given with relevant input and outputs. |
+  | -- |
+  | Count from 0 to 9 if enabled | |
+  | signal before rolling over from 9 to 0 | |
+  | The skeleton UUT.v file is given with relevant input and outputs. | |
 
   Good luck!
 

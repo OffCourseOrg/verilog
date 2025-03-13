@@ -18,6 +18,7 @@
 
 # Task
   Use the provided module diagram to implement a 16bit counter. The counter runs till 16 and rolls-over to 0.
+  
   | |
   |-|
   | **0x2a** and **0x0** are hexadecimal values. Either convert them to decimal or use the hexadecimal notation in verilog.|

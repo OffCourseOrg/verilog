@@ -18,6 +18,7 @@ class Bits:
 
   def __init__(self, value: int, size: int):
     self._data = value
+    self.yosys_str = ""
     self._size = size
   
   def sub_bits(self, section_count: int, index: int):
@@ -104,6 +105,8 @@ class Bits:
      return value == 1
 
   def __str__(self):
+    if self.yosys_str != "":
+       return self.yosys_str
     return f"{self._size}'{'%0*d' % (self._size, int(bin(self._data)[2:]))}"
 
 
@@ -138,12 +141,28 @@ class Bits:
       data += chr
     return cls(int(data, 2), size)
 
+  #Make bits instance form xxx string with 'x' 
+  @classmethod
+  def from_x_str(cls, bits_str: str):
+    ##Eumerate bits_str in reverse to the first chr -> bit 0 / LSB
+    size = int(bits_str[0])
+    data = "0" * size
+    return cls(int(data, 2), size)
+
   #Make bits instance from x'xxx string
   @classmethod
   def from_yosys_bits(cls, yosys_str: str):
+    inst = None
     if(len(yosys_str) < 3 or yosys_str[1] != "'"):
       raise Bits.BitsFormatException("Malformed yosys_str not x'xxx format -> %s", yosys_str)
-    return cls.from_str(yosys_str[2::])
+      return None
+    if('x' in yosys_str):
+      logging.warning("yosys_str contains 'x' -> %s", yosys_str)
+      inst = cls.from_x_str(yosys_str)
+    else:
+       inst = cls.from_str(yosys_str[2::])
+    inst.yosys_str = yosys_str
+    return inst
   
   @staticmethod
   def is_yosys_bits(yosys_str: str):

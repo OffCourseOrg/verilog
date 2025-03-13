@@ -359,7 +359,7 @@ class PMUX(Cell):
       if(not isinstance(self.ports["B"].netname, Bits)):
         raise NotImplementedError("$pmux with non-static 'B' -> %s", self.ports["B"])
       for i, execute_net in enumerate(execute_nets):
-        if(args[execute_net] if execute_net in args else execute_net):
+        if(args[execute_net] if isinstance(execute_net, str) and execute_net in args else execute_net):
           return self.ports['B'].netname.sub_bits(len(execute_nets), i)
     return self.ports['A'].netname
 

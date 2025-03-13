@@ -5,7 +5,7 @@
 # TODO YOSYS BMC
 #### Part of Series:
   | 05-Home |
-  ---------------------
+  | --------------------- |
   | 05A-Home-Security |
   | 05B-Home-Intruding-step-1 |
   | => **05C-Home-Intruding-step-2** |
@@ -27,8 +27,9 @@
 
   ## Task
   Combine four instances of the 4-bit counter from the previous step, to bruteforce the security system pincode. three to generate the pincode and one to cycle between the digits of the pincode.
+
   | |
-  |-|
+  | -- |
   | The counter module is provided. You do not have to create it again |
   | The skeleton UUT.v file is given with relevant input and outputs. |
 

@@ -99,7 +99,7 @@ class Netlist:
     self.nets: dict[str, Net]  = {}
     self.top: Module = None
     self.external_driven_net = []
-    self.output_netnames = []
+    self.output_netnames: dict[str, str] = {}
 
     skipped_cells = []
     for line in file_input:
@@ -121,7 +121,7 @@ class Netlist:
         if(io.direction == "in"):
           self.external_driven_net.append(netname)
         else:
-          self.output_netnames.append(netname)
+          self.output_netnames[cell_name] = netname
         continue
       
       if(cell_name in skipped_cells):
