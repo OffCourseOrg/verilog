@@ -8,7 +8,7 @@
 
   
 #### Your UUT will be checked against a Golden reference. 
-  Every clockcyle:
+  Every clock cycle:
 
   - UUT State must match REF state  
   - UUT Outputs must match REF Outputs
