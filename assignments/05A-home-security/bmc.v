@@ -10,27 +10,43 @@ module	bmc(
   input wire clk,
   input wire enable,
   input wire reset,
-  input wire serial_in,
+  input wire trigger,
+  input wire [1:0] command,
+  input wire [3:0] digit,
+  input wire input_digit,
 );
 
   reg f_isReset;
   initial f_isReset <= 0;
-  wire [7:0] ref_out, uut_out;
+  wire armed_ref, armed_dut;
+  wire alarm_ref, alarm_dut;
+  wire [3:0] state_ref, state_dut;
 
   REF REF (
     .clk(clk),
-    .enable(enable),
     .reset(reset),
-    .serial_in(serial_in),
-    .serial_out(ref_out)
+    .trigger(trigger),
+    .command(command),
+    .digit(digit),
+    .input_digit(input_digit),
+
+    .armed(armed_ref),
+    .alarm(alarm_ref),
+    .state_ref(state_ref)
+
   );
 
   UUT UUT(
     .clk(clk),
-    .enable(enable),
     .reset(reset),
-    .serial_in(serial_in),
-    .serial_out(uut_out)
+    .trigger(trigger),
+    .command(command),
+    .digit(digit),
+    .input_digit(input_digit),
+
+    .armed(armed_dut),
+    .alarm(alarm_dut),
+    .state(state_dut)
   );
 
 `ifdef	FORMAL
@@ -40,8 +56,11 @@ module	bmc(
   end
 
   always @(*) begin
-    if(f_isReset)
-        assert(ref_out == uut_out);
+    if(f_isReset) begin
+        assert(armed_ref == armed_dut);
+        assert(alarm_ref == alarm_ref);
+        assert(state_ref == state_dut);
+    end
   end
 `endif
 endmodule
