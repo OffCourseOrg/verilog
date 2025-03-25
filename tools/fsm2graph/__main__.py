@@ -113,7 +113,11 @@ for state in fsm.states.values():
         continue
       if(netlist != None):
         if("$" in key):
-          net = f"{"" if value else "!("}{netlist.resolve(key)}{"" if value else ")"}"
+          net = netlist.resolve(key)
+          if(net == -1):
+            continue
+          if(not value):
+             net = f"!({net})"
         else:
           net = f"{key}{" = 1'b1" if value else " = 1'b0"}"
       else:
