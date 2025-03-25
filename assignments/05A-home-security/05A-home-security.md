@@ -26,7 +26,7 @@
   *This task uses a golden reference. Therefore the trace in GTKwave will always end at the divergence/error point*
 
 # Task
-  Use the provided state graph to implement the home-security Moore FSM. With a 1 bit: clk, reset, trigger and digit_entered inputs.\
+  Use the provided state graph to implement the home-security Moore FSM. With a 1 bit: clk, reset, trigger and input_digit inputs.\
   As well as a 3 bit wide digit and a 2 bit wide command input. The outputs alarm and armed are both 1 bit wide.
 
 
