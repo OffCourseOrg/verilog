@@ -28,7 +28,7 @@
   #### Good luck!
 
 
-<img src="diagram.svg" style="background-color:white;padding:20px;">
+<img src="diagram.svg" style="background-color:white;margin:20px;">
 
 ```
  *  This work is licensed under CC BY-SA 4.0 
