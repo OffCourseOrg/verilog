@@ -5,7 +5,7 @@
 
 ## Assignment 04 "Counter"
 
-  04 requires you to create a counter that counts from 0 to 16. Using the prodivded module diagram.
+  04 requires you to create a counter that counts from 0 to 16. Using the provided module diagram.
   
 #### Your UUT will be checked against a Golden reference. 
   Every clockcyle:
@@ -23,7 +23,7 @@
   |-|
   | **0x2a** and **0x0** are hexadecimal values. Either convert them to decimal or use the hexadecimal notation in verilog.|
   | Hex in verilog:  **width**`'h`**value** => `16'h2a`|
-  | The skeleton UUT (Unit Under Test) file is given with relevant input and outputs. |
+  | The skeleton UUT (Unit Under Test) file is given *without* relevant input and outputs. |
 
   #### Good luck!
 
