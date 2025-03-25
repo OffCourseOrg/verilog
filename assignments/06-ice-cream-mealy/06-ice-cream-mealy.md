@@ -3,7 +3,7 @@
  *  This work is licensed under CC BY-SA 4.0 
 ```
 
-## Assignment 02 "Ice cream Mealy"
+## Assignment 06 "Ice cream Mealy"
   This assignment requires you to make an ice cream Mealy machine, that accepts 1 coin or 2 coins at the time. The machine can output ice cream cone with 1 ball for 2 coins or 2 balls, for 3 coins respectively. Check the diagram carefully to see what is the logic for one and two ball cones.
 
   
