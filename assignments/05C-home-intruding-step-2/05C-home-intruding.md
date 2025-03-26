@@ -31,7 +31,7 @@
   | |
   | -- |
   | The counter module is provided. You do not have to create it again |
-  | The skeleton UUT.v file is given with relevant input and outputs. |
+  | The skeleton UUT.v file is given _without_ inputs or outputs. |
 
   #### Extra:
 

@@ -30,7 +30,7 @@
   | -- |
   | Count from 0 to 9 if enabled | |
   | signal before rolling over from 9 to 0 | |
-  | The skeleton UUT.v file is given with relevant input and outputs. | |
+  | The skeleton UUT.v file is given _without_ inputs or outputs. | |
 
   Good luck!
 
