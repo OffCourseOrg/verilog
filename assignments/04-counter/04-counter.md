@@ -5,7 +5,7 @@
 
 ## Assignment 04 "Counter"
 
-  04 requires you to create a counter that counts from 0 to 16. Using the provided module diagram.
+  04 requires you to create a counter that counts from 0 to 42. Using the provided module diagram.
   
 #### Your UUT will be checked against a Golden reference. 
   Every clockcyle:
@@ -17,7 +17,7 @@
   *This task uses a golden reference. Therefore the trace in GTKwave will always end at the divergence/error point*
 
 # Task
-  Use the provided module diagram to implement a 16bit counter. The counter runs till 16 and rolls-over to 0.
+  Use the provided module diagram to implement a 16bit counter. The counter runs till 42 and rolls-over to 0.
   
   | |
   |-|
