@@ -4,7 +4,7 @@
   width="800" height="500">
   <s:properties>
     <s:layoutEngine
-      org.eclipse.elk.layered.spacing.nodeNodeBetweenLayers="40"
+      org.eclipse.elk.layered.spacing.nodeNodeBetweenLayers="25"
       org.eclipse.elk.spacing.nodeNode= "25"
       org.eclipse.elk.layered.layering.strategy= "NETWORK_SIMPLEX"
     />

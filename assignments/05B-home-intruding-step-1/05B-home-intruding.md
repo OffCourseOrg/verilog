@@ -9,7 +9,6 @@
   | => **05B-Home-Intruding-step-1** |
   | 05C-Home-Intruding-step-2 |
 
- # TODO YOSYS BMC
 ### Assignment 05B "Home Intruding" Step 1
 
   **05C** requires you to construct a tool to crack the security system of **05A**. As you might have noticed, the home security fsm you implemented previously contains a critical security flaw. It does not raise the alarm when incorrect pincodes are repeatedly entered. Exposing the security system to a *brute-force* attack. To build the brute-force system in **05C** we first need to create a subsystem in this assignment.
