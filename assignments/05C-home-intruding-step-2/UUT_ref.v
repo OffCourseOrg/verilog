@@ -7,17 +7,17 @@
  */
 
 module	UUT (
-		input clk,
-		input enable,
-		input reset,
-		output [1:0] command,
-		output reg [3:0] digit,
-		output digit_entered
+    input clk,
+    input enable,
+    input reset,
+    output [1:0] command,
+    output reg [3:0] digit,
+    output digit_entered
 	);
 	wire en_digit_1, en_digit_2;
 	wire [3:0] digit_0, digit_1, digit_2;
 	wire [3:0] active_digit;
-    wire active_digit_overflow;
+  wire active_digit_overflow;
 
   counter counter_2(
     .clk(clk),

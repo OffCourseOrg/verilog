@@ -27,6 +27,8 @@
 
   #### Good luck!
 
+  [The solution to this assignment can be found here, if you find that you need help that is.](https://github.com/OffCourseOrg/verilog/blob/master/assignments/04-counter/UUT_ref.v)
+
 
 <img src="diagram.svg" style="background-color:white;margin:20px;max-width:100%;">
 
