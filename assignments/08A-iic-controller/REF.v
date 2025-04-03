@@ -25,7 +25,7 @@ module	REF (
 	localparam [7:0] ADDRESS = 69;
 
 	//@STATES
-	localparam _MIN_STATE = 0,
+	localparam _MIN_STATE_R= 0,
 		RESET = 0,
 		IDLE = 1,
 		START = 2,
@@ -62,11 +62,11 @@ module	REF (
 		WB1 = 28,
 		END_WRITE = 29,
 		ACK_WRITE2 = 30,
-		_MAX_STATE = 60;
+		_MAX_STATE_R= 60;
 
 
-	reg [7:0] state;
-	reg [7:0] state_next;
+	reg [7:0] state, state_nxt;
+	reg [7:0] mem_r, mem_nxt;
 
 	`ifndef GEN_FSM
 		assign state_ref = state;
@@ -75,9 +75,9 @@ module	REF (
 	//Labels FSM Logic
 	always @(posedge clk) begin
 		if(reset) begin
-			state <= RESET;
+			state_r<= RESET;
 		end else begin
-			state <= state_next;
+			state_r<= state_nxt;
 		end
 	end
 
@@ -85,202 +85,202 @@ module	REF (
 		grab_SDA = grab_SDA;
 		SDA_drive = SDA_drive;
 		mem = mem;
-		state_next = state; //default
+		state_nxt = state; //default
 		case(state)
 			RESET: begin
 				grab_SDA = 0;
 				SDA_drive = 1;
 				mem = 8'b10000001;
-				state_next = IDLE;
+				state_nxt = IDLE;
 			end
 			IDLE: begin
-				state_next = start ? AB7 : IDLE;
+				state_nxt = start ? AB7 : IDLE;
 			end
 			AB7: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[6] == SDA_recv ? AB6 : WRONG_ADDR;
+					state_nxt = ADDRESS[6] == SDA_recv ? AB6 : WRONG_ADDR;
 				end
 			end
 			AB6: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[5] == SDA_recv ? AB5 : WRONG_ADDR;
+					state_nxt = ADDRESS[5] == SDA_recv ? AB5 : WRONG_ADDR;
 				end
 			end
 			AB5: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[4] == SDA_recv ? AB4 : WRONG_ADDR;
+					state_nxt = ADDRESS[4] == SDA_recv ? AB4 : WRONG_ADDR;
 				end
 			end
 			AB4: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[3] == SDA_recv ? AB3 : WRONG_ADDR;
+					state_nxt = ADDRESS[3] == SDA_recv ? AB3 : WRONG_ADDR;
 				end
 			end
 			AB3: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[2] == SDA_recv ? AB2 : WRONG_ADDR;
+					state_nxt = ADDRESS[2] == SDA_recv ? AB2 : WRONG_ADDR;
 				end
 			end
 			AB2: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[1] == SDA_recv ? AB1 : WRONG_ADDR;
+					state_nxt = ADDRESS[1] == SDA_recv ? AB1 : WRONG_ADDR;
 				end
 			end
 			AB1: begin
 				if(edge_scl && SCL) begin
-					state_next = ADDRESS[0] == SDA_recv ? OPERATION : IDLE;
+					state_nxt = ADDRESS[0] == SDA_recv ? OPERATION : IDLE;
 				end
 			end
 			WRONG_ADDR: begin
-				state_next = IDLE;
+				state_nxt = IDLE;
 			end
 			OPERATION: begin
 				if(edge_scl && SCL) begin
-					state_next = SDA_recv ? PREAD : PWRITE;
+					state_nxt = SDA_recv ? PREAD : PWRITE;
 				end
 			end
 			//MASTER READ
 			PREAD: begin
 				if(edge_scl && !SCL) begin
-					state_next = READ;
+					state_nxt = READ;
 				end
 			end
 			READ: begin
 				grab_SDA = 1;
 				SDA_drive = 0;
 				if(edge_scl && !SCL) begin
-					state_next = RB8;
+					state_nxt = RB8;
 				end
 			end
 			RB8: begin
 				SDA_drive = mem[7];
 				if(edge_scl && !SCL) begin
-					state_next = RB7;
+					state_nxt = RB7;
 				end
 			end
 			RB7: begin
 				SDA_drive = mem[6];
 				if(edge_scl && !SCL) begin
-					state_next = RB6;
+					state_nxt = RB6;
 				end
 			end
 			RB6: begin
 				SDA_drive = mem[5];
 				if(edge_scl && !SCL) begin
-					state_next = RB5;
+					state_nxt = RB5;
 				end
 			end
 			RB5: begin
 				SDA_drive = mem[4];
 				if(edge_scl && !SCL) begin
-					state_next = RB4;
+					state_nxt = RB4;
 				end
 			end
 			RB4: begin
 				SDA_drive = mem[3];
 				if(edge_scl && !SCL) begin
-					state_next = RB3;
+					state_nxt = RB3;
 				end
 			end
 			RB3: begin
 				SDA_drive = mem[2];
 				if(edge_scl && !SCL) begin
-					state_next = RB2;
+					state_nxt = RB2;
 				end
 			end
 			RB2: begin
 				SDA_drive = mem[1];
 				if(edge_scl && !SCL) begin
-					state_next = RB1;
+					state_nxt = RB1;
 				end
 			end
 			RB1: begin
 				SDA_drive = mem[0];
 				if(edge_scl && !SCL) begin
-					state_next = RELEASE;
+					state_nxt = RELEASE;
 				end
 			end
 			RELEASE: begin
 				grab_SDA = 0;
-				state_next = IDLE;
+				state_nxt = IDLE;
 			end
 
 			//WRITE MASTER
 			PWRITE: begin
 				if(edge_scl && !SCL) begin
-					state_next = ACK_WRITE;
+					state_nxt = ACK_WRITE;
 				end
 			end
 			ACK_WRITE: begin
 				grab_SDA = 1;
 				SDA_drive = 0;
 				if(edge_scl && !SCL) begin
-					state_next = WRITE;
+					state_nxt = WRITE;
 				end
 			end
 			WRITE: begin
 				grab_SDA = 0;
 				SDA_drive = 1;
-				state_next = WB8;
+				state_nxt = WB8;
 			end
 			WB8: begin
 				mem[7] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB7;
+					state_nxt = WB7;
 				end
 			end
 			WB7: begin
 				mem[6] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB6;
+					state_nxt = WB6;
 				end
 			end
 			WB6: begin
 				mem[5] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB5;
+					state_nxt = WB5;
 				end
 			end
 			WB5: begin
 				mem[4] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB4;
+					state_nxt = WB4;
 				end
 			end
 			WB4: begin
 				mem[3] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB3;
+					state_nxt = WB3;
 				end
 			end
 			WB3: begin
 				mem[2] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB2;
+					state_nxt = WB2;
 				end
 			end
 			WB2: begin
 				mem[1] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = WB1;
+					state_nxt = WB1;
 				end
 			end
 			WB1: begin
 				mem[0] = SDA_recv;
 				if(edge_scl && SCL) begin
-					state_next = END_WRITE;
+					state_nxt = END_WRITE;
 				end
 			end
 			END_WRITE: begin
 				if(edge_scl && !SCL) begin
-					state_next = ACK_WRITE2;
+					state_nxt = ACK_WRITE2;
 				end
 			end
 			ACK_WRITE2: begin
 				grab_SDA = 1;
 				SDA_drive = 0;
 				if(edge_scl && !SCL) begin
-					state_next = RELEASE;
+					state_nxt = RELEASE;
 				end
 			end
 		endcase
@@ -300,8 +300,8 @@ module	REF (
 		end
 
 		if(f_is_reset) begin
-			assert(state <= _MAX_STATE);
-			assert(state >= _MIN_STATE);
+			assert(state_r<= _MAX_STATE);
+			assert(state_r>= _MIN_STATE);
 		end
 
 		if(!reset) begin

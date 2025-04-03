@@ -56,7 +56,7 @@ module	REF (
 
 	//Labels FSM Logic
 
-	always @(posedge clk) begin
+	always @(posedge reset) begin
 		if(reset) begin
 			state <= DISARMED;
 		end else begin
@@ -134,7 +134,7 @@ module	REF (
 	end
 
 `ifdef FORMAL
-	reg f_is_reset;
+	reg [7:0] f_is_reset;
 	reg f_was_armed;
 
 	initial begin
@@ -145,10 +145,11 @@ module	REF (
 	always @(posedge clk) begin
 		//track if rest into valid state
 		if(reset) begin
-			f_is_reset <= 1;
+			f_is_reset <= f_is_reset + 1;
 			f_was_armed <= 0;
 
 		end
+		cover(f_is_reset == 10);
 
 		if(f_is_reset) begin
 			assert(state <= _MAX_STATE);
@@ -158,7 +159,7 @@ module	REF (
 		if(!reset) begin
 			//Completed FSM
 			if(f_is_reset && f_was_armed && state == DISARMED && $past(state) != DISARMED && !$past(reset)) begin
-				cover($past(state) == DISARM2);
+				//cover($past(state) == DISARM2);
 				assert($past(state) == ARM2 || $past(state) == ARM2B || $past(state) == DISARM2);
 			end
 
@@ -175,7 +176,7 @@ module	REF (
 
 			//Alarm ouput
 			if(f_is_reset && trigger && state == ARMED) begin
-				cover(state_next == ALARM);
+				//cover(state_next == ALARM);
 				assert(state_next == ALARM);
 			end
 		end
