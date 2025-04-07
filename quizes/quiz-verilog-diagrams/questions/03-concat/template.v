@@ -44,8 +44,9 @@ module bench();
     #0.5 clk = ~clk;
   end
   
-  reg a, b;
-  wire [1:0] y;
+  reg [1:0] a;
+  reg b;
+  wire [2:0] y;
   
   UUT UUT (
     .a(a),
@@ -54,18 +55,21 @@ module bench();
   );
   
   initial begin
-    a = 0;
+    a = 2'b00;
     b = 0;
-    #1 check(y == 2'b00, 1);
-    a = 1;
+    #1 check(y == 3'b000, 1);
+    a = 2'b10;
+    b = 1;
+    #1 check(y == 3'b101, 2);
+    a = 2'b00;
+    b = 1;
+    #1 check(y == 3'b001, 3);
+    a = 2'b11;
+    b = 1;
+    #1 check(y == 3'b111, 4);
+    a = 2'b11;
     b = 0;
-    #1 check(y == 2'b10, 2);
-    a = 0;
-    b = 1;
-    #1 check(y == 2'b01, 3);
-    a = 1;
-    b = 1;
-    #1 check(y == 2'b11, 4);
+    #1 check(y == 3'b110, 5);
     pass(1);
   end
   
