@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>T-01-aegier-brewery</title>
+  <title>T-01B-aegier-brewery</title>
   <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -257,13 +257,11 @@ max-width: 100%; color:black;}*:not('#mkdbuttons'){margin:0;padding:0}body{font:
 <h2 id="assignment-thor-01-aegirs-brewery">Assignment THOR 01 &quot;Aegir&#39;s
 Brewery&quot;</h2>
 <p>Het Walhalla needs more beer and they have decided to start brewing
-it themselves. In 01 you will write a FSM to perfectly create the wort
-needed for the new THOR beer. If you fail, there will be no more
-beer!<br />
-(A FSM that covered the full brewing process would be actual
-torture...)</p>
-<p>After writing FSM you will then have to implement a diagram to finish
-out the whole assignment.</p>
+it themselves. The FSM you have created needs to be connected to the
+brewery&#39;s systems. A diagram of the connections and glue-logic has been
+provided.<br />
+(brew_fsm.v is provided, you can do this assignment without having done
+the FSM).</p>
 <h4 id="your-uut-will-be-checked-against-a-golden-reference">Your UUT
 will be checked against a Golden reference.</h4>
 <p>Every clock cycle:</p>
@@ -276,296 +274,7 @@ immediately</li>
 debug any issues.<br />
 <em>This task uses a golden reference. Therefore the trace in GTKwave
 will always end at the divergence/error point</em></p>
-<h1 id="task-1-brew_fsmv">Task 1 &quot;brew_fsm.v&quot;</h1>
-<p>Use the provided state graph to implement the brew_fsm. With one bit
-clk and reset inputs.<br />
-As well as eight bit wide temp and level inputs. The outputs heat,
-agitate and chute are all one bit wide. The pump output is three bits
-wide and finally you should output the state of your fsm as an eight bit
-wide output <em>state</em>.</p>
-<p>The reset is active high.</p>
-<p>The states are numbered as such:</p>
-<pre><code>  IDLE = 0,
-  DISPOSAL = 1,
-  STERILISE = 2,
-  COOL = 3,
-  PROCESS = 4,
-  FULL = 5,
-  HOT = 6,
-  MASH = 7,
-  SPARGE = 8,
-  SPARGE_B = 9,
-  DONE = 10;</code></pre>
-<table>
-<tbody>
-<tr class="odd">
-<td><strong>Outputs keep their value unless changed by a
-state.</strong></td>
-</tr>
-<tr class="even">
-<td>The skeleton brew_fsm.v file is given <em>without</em> inputs or
-outputs.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="the-solution-to-this-assignment-will-be-posted-after-the-conclusion-of-the-thor-training-session">The
-solution to this assignment will be posted AFTER the conclusion of the
-THOR training session.</h3>
-<svg id="svg_e005242eccc44058b32a" style="background-color:white;margin:20px;max-width:100%;" width="584pt" height="1014pt" viewBox="0.00 0.00 583.71 1013.56">
-<g id="svg_e005242eccc44058b32a_graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1009.56)">
-<polygon fill="white" stroke="none" points="-4,4 -4,-1009.56 579.71,-1009.56 579.71,4 -4,4"></polygon>
-<!-- _reset -->
-<!-- 0 -->
-<g id="svg_e005242eccc44058b32a_node2" class="node">
-<title>0</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="379.96" cy="-877.06" rx="36" ry="36"></ellipse>
-<ellipse fill="none" stroke="black" cx="379.96" cy="-877.06" rx="40" ry="40"></ellipse>
-<text text-anchor="middle" x="379.96" y="-872.01" font-family="Times,serif" font-size="14.00">IDLE</text>
-</g>
-<!-- _reset&#45;&gt;0 -->
-<g id="svg_e005242eccc44058b32a_edge1" class="edge">
-<title>_reset-&gt;0</title>
-<path fill="none" stroke="black" d="M379.96,-969.13C379.96,-958.49 379.96,-944.27 379.96,-930.24" />
-<polygon fill="black" stroke="black" points="379.96,-930.41 375.96,-924.41 379.96,-918.41 383.96,-924.41 379.96,-930.41"></polygon>
-<text text-anchor="middle" x="396.46" y="-938.26" font-family="Times,serif" font-size="14.00">  reset</text>
-</g>
-<!-- 2 -->
-<g id="svg_e005242eccc44058b32a_node4" class="node">
-<title>2</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="245.96" cy="-713.59" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="245.96" y="-708.54" font-family="Times,serif" font-size="14.00">PROCESS</text>
-</g>
-<!-- 0&#45;&gt;2 -->
-<g id="svg_e005242eccc44058b32a_edge2" class="edge">
-<title>0-&gt;2</title>
-<path fill="none" stroke="black" d="M340.02,-870.67C308.97,-864.16 267.82,-849.93 247.21,-819.06 235.85,-802.04 234.26,-779.72 236.04,-760.09" />
-<polygon fill="black" stroke="black" points="239.48,-760.75 237.24,-750.4 232.53,-759.89 239.48,-760.75"></polygon>
-<text text-anchor="start" x="247.21" y="-805.76" font-family="Times,serif" font-size="14.00">  !level</text>
-<text text-anchor="start" x="247.21" y="-789.26" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b1]</text>
-<text text-anchor="start" x="247.21" y="-772.76" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b100]</text>
-</g>
-<!-- 6 -->
-<g id="svg_e005242eccc44058b32a_node8" class="node">
-<title>6</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="475.96" cy="-713.59" rx="37.97" ry="37.97"></ellipse>
-<text text-anchor="middle" x="475.96" y="-708.54" font-family="Times,serif" font-size="14.00">DISPOSAL</text>
-</g>
-<!-- 0&#45;&gt;6 -->
-<g id="svg_e005242eccc44058b32a_edge3" class="edge">
-<title>0-&gt;6</title>
-<path fill="none" stroke="black" d="M400.09,-842.21C414.91,-817.28 435.15,-783.23 451,-756.57" />
-<polygon fill="black" stroke="black" points="453.97,-758.43 456.07,-748.05 447.95,-754.86 453.97,-758.43"></polygon>
-<text text-anchor="start" x="442.17" y="-797.51" font-family="Times,serif" font-size="14.00">  !(!level)</text>
-<text text-anchor="start" x="442.17" y="-781.01" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b010]</text>
-</g>
-<!-- 1 -->
-<g id="svg_e005242eccc44058b32a_node3" class="node">
-<title>1</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="129.96" cy="-200.61" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="129.96" y="-195.56" font-family="Times,serif" font-size="14.00">SPARGE</text>
-</g>
-<!-- 1&#45;&gt;1 -->
-<g id="svg_e005242eccc44058b32a_edge4" class="edge">
-<title>1-&gt;1</title>
-<path fill="none" stroke="black" d="M163.18,-215.37C174.68,-215.53 183.96,-210.61 183.96,-200.61 183.96,-194.2 180.15,-189.88 174.39,-187.65" />
-<polygon fill="black" stroke="black" points="175.11,-184.22 164.68,-186.09 174,-191.13 175.11,-184.22"></polygon>
-</g>
-<!-- 4 -->
-<g id="svg_e005242eccc44058b32a_node6" class="node">
-<title>4</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="304.96" cy="-39.55" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="304.96" y="-34.5" font-family="Times,serif" font-size="14.00">DONE</text>
-</g>
-<!-- 1&#45;&gt;4 -->
-<g id="svg_e005242eccc44058b32a_edge5" class="edge">
-<title>1-&gt;4</title>
-<path fill="none" stroke="black" d="M163.15,-186.42C182.82,-177.39 207.28,-163.92 224.96,-146.61 243.18,-128.77 238.9,-117.68 253.96,-97.11 259.57,-89.44 266.06,-81.62 272.48,-74.34" />
-<polygon fill="black" stroke="black" points="274.81,-76.97 278.91,-67.2 269.62,-72.28 274.81,-76.97"></polygon>
-<text text-anchor="start" x="253.96" y="-125.06" font-family="Times,serif" font-size="14.00">  pump = 3&#39;b011</text>
-<text text-anchor="start" x="253.96" y="-108.56" font-family="Times,serif" font-size="14.00">  &amp;&amp;  level &lt; 20</text>
-</g>
-<!-- 7 -->
-<g id="svg_e005242eccc44058b32a_node9" class="node">
-<title>7</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="76.96" cy="-39.55" rx="39.55" ry="39.55"></ellipse>
-<text text-anchor="middle" x="76.96" y="-34.5" font-family="Times,serif" font-size="14.00">SPARGE_B</text>
-</g>
-<!-- 1&#45;&gt;7 -->
-<g id="svg_e005242eccc44058b32a_edge6" class="edge">
-<title>1-&gt;7</title>
-<path fill="none" stroke="black" d="M94.09,-194.69C65.45,-188.67 27.1,-175.43 8.21,-146.61 -3.85,-128.21 -1.18,-117 8.21,-97.11 13.83,-85.22 23.3,-74.99 33.45,-66.62" />
-<polygon fill="black" stroke="black" points="35.43,-69.52 41.26,-60.67 31.19,-63.95 35.43,-69.52"></polygon>
-<text text-anchor="start" x="8.21" y="-133.31" font-family="Times,serif" font-size="14.00">  !(pump = 3&#39;b011</text>
-<text text-anchor="start" x="8.21" y="-116.81" font-family="Times,serif" font-size="14.00">  &amp;&amp;  level &lt; 20)</text>
-<text text-anchor="start" x="8.21" y="-100.31" font-family="Times,serif" font-size="14.00">  &amp;&amp; level &lt; 70</text>
-</g>
-<!-- 2&#45;&gt;2 -->
-<g id="svg_e005242eccc44058b32a_edge7" class="edge">
-<title>2-&gt;2</title>
-<path fill="none" stroke="black" d="M278.92,-728.72C290.53,-728.96 299.96,-723.92 299.96,-713.59 299.96,-706.98 296.09,-702.53 290.26,-700.25" />
-<polygon fill="black" stroke="black" points="290.83,-696.8 280.41,-698.7 289.75,-703.72 290.83,-696.8"></polygon>
-</g>
-<!-- 5 -->
-<g id="svg_e005242eccc44058b32a_node7" class="node">
-<title>5</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="108.96" cy="-551.37" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="108.96" y="-546.32" font-family="Times,serif" font-size="14.00">HOT</text>
-</g>
-<!-- 2&#45;&gt;5 -->
-<g id="svg_e005242eccc44058b32a_edge8" class="edge">
-<title>2-&gt;5</title>
-<path fill="none" stroke="black" d="M210.19,-707.41C180.45,-701.08 139.65,-687.27 118.21,-657.63 106.08,-640.85 102.85,-618.41 103.02,-598.56" />
-<polygon fill="black" stroke="black" points="106.51,-598.88 103.42,-588.75 99.52,-598.6 106.51,-598.88"></polygon>
-<text text-anchor="start" x="118.21" y="-636.08" font-family="Times,serif" font-size="14.00">  temp &gt;= 60</text>
-<text text-anchor="start" x="118.21" y="-619.58" font-family="Times,serif" font-size="14.00">  &amp;&amp; !(level &gt;= 125)</text>
-</g>
-<!-- 8 -->
-<g id="svg_e005242eccc44058b32a_node10" class="node">
-<title>8</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="236.96" cy="-551.37" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="236.96" y="-546.32" font-family="Times,serif" font-size="14.00">FULL</text>
-</g>
-<!-- 2&#45;&gt;8 -->
-<g id="svg_e005242eccc44058b32a_edge9" class="edge">
-<title>2-&gt;8</title>
-<path fill="none" stroke="black" d="M243.99,-677.43C242.7,-654.45 240.99,-624.17 239.59,-599.16" />
-<polygon fill="black" stroke="black" points="243.09,-599.02 239.03,-589.24 236.1,-599.42 243.09,-599.02"></polygon>
-<text text-anchor="start" x="242.79" y="-636.08" font-family="Times,serif" font-size="14.00">  level &gt;= 125</text>
-<text text-anchor="start" x="242.79" y="-619.58" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b000]</text>
-</g>
-<!-- 3 -->
-<g id="svg_e005242eccc44058b32a_node5" class="node">
-<title>3</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="475.96" cy="-551.37" rx="38.76" ry="38.76"></ellipse>
-<text text-anchor="middle" x="475.96" y="-546.32" font-family="Times,serif" font-size="14.00">STERILISE</text>
-</g>
-<!-- 3&#45;&gt;3 -->
-<g id="svg_e005242eccc44058b32a_edge10" class="edge">
-<title>3-&gt;3</title>
-<path fill="none" stroke="black" d="M511.99,-566.65C523.55,-566.49 532.72,-561.4 532.72,-551.37 532.72,-544.94 528.96,-540.54 523.21,-538.17" />
-<polygon fill="black" stroke="black" points="523.95,-534.75 513.48,-536.37 522.67,-541.63 523.95,-534.75"></polygon>
-</g>
-<!-- 9 -->
-<g id="svg_e005242eccc44058b32a_node11" class="node">
-<title>9</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="438.96" cy="-374.61" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="438.96" y="-369.56" font-family="Times,serif" font-size="14.00">COOL</text>
-</g>
-<!-- 3&#45;&gt;9 -->
-<g id="svg_e005242eccc44058b32a_edge11" class="edge">
-<title>3-&gt;9</title>
-<path fill="none" stroke="black" d="M468.11,-513.31C462.42,-486.42 454.69,-449.88 448.62,-421.2" />
-<polygon fill="black" stroke="black" points="452.1,-420.78 446.61,-411.72 445.25,-422.23 452.1,-420.78"></polygon>
-<text text-anchor="start" x="463.99" y="-464.81" font-family="Times,serif" font-size="14.00">  temp = 80</text>
-<text text-anchor="start" x="463.99" y="-448.31" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b0]</text>
-</g>
-<!-- 4&#45;&gt;0 -->
-<g id="svg_e005242eccc44058b32a_edge12" class="edge">
-<title>4-&gt;0</title>
-<path fill="none" stroke="black" d="M328.92,-67.04C335.8,-76.01 342.62,-86.46 346.96,-97.11 364.33,-139.68 360.96,-153.63 360.96,-199.61 360.96,-714.59 360.96,-714.59 360.96,-714.59 360.96,-752.18 366.1,-794.34 371.03,-826.16" />
-<polygon fill="black" stroke="black" points="367.56,-826.57 372.59,-835.89 374.47,-825.46 367.56,-826.57"></polygon>
-</g>
-<!-- 5&#45;&gt;5 -->
-<g id="svg_e005242eccc44058b32a_edge13" class="edge">
-<title>5-&gt;5</title>
-<path fill="none" stroke="black" d="M141.92,-566.64C153.53,-566.89 162.96,-561.8 162.96,-551.37 162.96,-544.69 159.09,-540.2 153.26,-537.9" />
-<polygon fill="black" stroke="black" points="153.84,-534.45 143.41,-536.33 152.74,-541.36 153.84,-534.45"></polygon>
-</g>
-<!-- 10 -->
-<g id="svg_e005242eccc44058b32a_node12" class="node">
-<title>10</title>
-<ellipse fill="#a2cd5a" stroke="black" cx="129.96" cy="-374.61" rx="36" ry="36"></ellipse>
-<text text-anchor="middle" x="129.96" y="-369.56" font-family="Times,serif" font-size="14.00">MASH</text>
-</g>
-<!-- 5&#45;&gt;10 -->
-<g id="svg_e005242eccc44058b32a_edge14" class="edge">
-<title>5-&gt;10</title>
-<path fill="none" stroke="black" d="M108.2,-514.96C108.24,-490.54 109.39,-457.41 114.21,-428.61 114.68,-425.83 115.24,-423 115.88,-420.16" />
-<polygon fill="black" stroke="black" points="119.21,-421.27 118.25,-410.71 112.42,-419.56 119.21,-421.27"></polygon>
-<text text-anchor="start" x="114.21" y="-481.31" font-family="Times,serif" font-size="14.00">  level &gt;= 125</text>
-<text text-anchor="start" x="114.21" y="-464.81" font-family="Times,serif" font-size="14.00">  [agitate = 1&#39;b1]</text>
-<text text-anchor="start" x="114.21" y="-448.31" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b1]</text>
-<text text-anchor="start" x="114.21" y="-431.81" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b000]</text>
-</g>
-<!-- 6&#45;&gt;3 -->
-<g id="svg_e005242eccc44058b32a_edge15" class="edge">
-<title>6-&gt;3</title>
-<path fill="none" stroke="black" d="M475.96,-675.43C475.96,-653.51 475.96,-625.48 475.96,-601.72" />
-<polygon fill="black" stroke="black" points="479.46,-601.95 475.96,-591.95 472.46,-601.96 479.46,-601.95"></polygon>
-<text text-anchor="start" x="475.96" y="-644.33" font-family="Times,serif" font-size="14.00">  !level</text>
-<text text-anchor="start" x="475.96" y="-627.83" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b1]</text>
-<text text-anchor="start" x="475.96" y="-611.33" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b000]</text>
-</g>
-<!-- 6&#45;&gt;6 -->
-<g id="svg_e005242eccc44058b32a_edge16" class="edge">
-<title>6-&gt;6</title>
-<path fill="none" stroke="black" d="M511.21,-728.73C522.74,-728.65 531.93,-723.61 531.93,-713.59 531.93,-707.18 528.16,-702.81 522.42,-700.47" />
-<polygon fill="black" stroke="black" points="523.16,-697.05 512.7,-698.73 521.93,-703.94 523.16,-697.05"></polygon>
-</g>
-<!-- 7&#45;&gt;1 -->
-<g id="svg_e005242eccc44058b32a_edge17" class="edge">
-<title>7-&gt;1</title>
-<path fill="none" stroke="black" d="M97.3,-73.89C101.26,-81.34 105.07,-89.34 107.96,-97.11 114.66,-115.1 119.58,-135.67 123.04,-153.64" />
-<polygon fill="black" stroke="black" points="119.55,-154.03 124.79,-163.24 126.44,-152.78 119.55,-154.03"></polygon>
-<text text-anchor="start" x="121.09" y="-125.06" font-family="Times,serif" font-size="14.00">  level &lt; 40</text>
-<text text-anchor="start" x="121.09" y="-108.56" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b011]</text>
-</g>
-<!-- 7&#45;&gt;7 -->
-<g id="svg_e005242eccc44058b32a_edge18" class="edge">
-<title>7-&gt;7</title>
-<path fill="none" stroke="black" d="M113.77,-54.98C125.37,-54.74 134.52,-49.6 134.52,-39.55 134.52,-33.12 130.76,-28.69 125.01,-26.29" />
-<polygon fill="black" stroke="black" points="125.74,-22.86 115.26,-24.42 124.42,-29.74 125.74,-22.86"></polygon>
-<text text-anchor="start" x="134.52" y="-34.5" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b111]</text>
-</g>
-<!-- 8&#45;&gt;8 -->
-<g id="svg_e005242eccc44058b32a_edge19" class="edge">
-<title>8-&gt;8</title>
-<path fill="none" stroke="black" d="M269.92,-566.64C281.53,-566.89 290.96,-561.8 290.96,-551.37 290.96,-544.69 287.09,-540.2 281.26,-537.9" />
-<polygon fill="black" stroke="black" points="281.84,-534.45 271.41,-536.33 280.74,-541.36 281.84,-534.45"></polygon>
-</g>
-<!-- 8&#45;&gt;10 -->
-<g id="svg_e005242eccc44058b32a_edge20" class="edge">
-<title>8-&gt;10</title>
-<path fill="none" stroke="black" d="M237.59,-515.01C236.41,-489.06 231.26,-454.05 213.96,-428.61 204.03,-414.01 188.61,-402.61 173.68,-394.19" />
-<polygon fill="black" stroke="black" points="175.31,-391.09 164.83,-389.54 172.05,-397.29 175.31,-391.09"></polygon>
-<text text-anchor="start" x="235.85" y="-473.06" font-family="Times,serif" font-size="14.00">  temp &gt;= 60</text>
-<text text-anchor="start" x="235.85" y="-456.56" font-family="Times,serif" font-size="14.00">  [agitate = 1&#39;b1]</text>
-<text text-anchor="start" x="235.85" y="-440.06" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b1]</text>
-</g>
-<!-- 9&#45;&gt;0 -->
-<g id="svg_e005242eccc44058b32a_edge21" class="edge">
-<title>9-&gt;0</title>
-<path fill="none" stroke="black" d="M433.86,-410.62C427.31,-456.09 415.81,-537.95 407.46,-608.13 398.45,-683.83 389.76,-771.78 384.64,-825.67" />
-<polygon fill="black" stroke="black" points="381.17,-825.18 383.72,-835.46 388.14,-825.84 381.17,-825.18"></polygon>
-<text text-anchor="start" x="407.46" y="-627.83" font-family="Times,serif" font-size="14.00">  temp = 30</text>
-</g>
-<!-- 9&#45;&gt;9 -->
-<g id="svg_e005242eccc44058b32a_edge22" class="edge">
-<title>9-&gt;9</title>
-<path fill="none" stroke="black" d="M471.38,-390.9C483.24,-391.34 492.96,-385.91 492.96,-374.61 492.96,-367.19 488.78,-362.31 482.55,-359.95" />
-<polygon fill="black" stroke="black" points="483.28,-356.52 472.88,-358.54 482.27,-363.44 483.28,-356.52"></polygon>
-</g>
-<!-- 10&#45;&gt;1 -->
-<g id="svg_e005242eccc44058b32a_edge23" class="edge">
-<title>10-&gt;1</title>
-<path fill="none" stroke="black" d="M129.96,-338.39C129.96,-312.39 129.96,-276.74 129.96,-248.35" />
-<polygon fill="black" stroke="black" points="133.46,-248.59 129.96,-238.59 126.46,-248.59 133.46,-248.59"></polygon>
-<text text-anchor="start" x="129.96" y="-307.31" font-family="Times,serif" font-size="14.00">  temp &gt;= 65</text>
-<text text-anchor="start" x="129.96" y="-290.81" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b0]</text>
-<text text-anchor="start" x="129.96" y="-274.31" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b0]</text>
-<text text-anchor="start" x="129.96" y="-257.81" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b011]</text>
-</g>
-<!-- 10&#45;&gt;10 -->
-<g id="svg_e005242eccc44058b32a_edge24" class="edge">
-<title>10-&gt;10</title>
-<path fill="none" stroke="black" d="M162.38,-390.9C174.24,-391.34 183.96,-385.91 183.96,-374.61 183.96,-367.19 179.78,-362.31 173.55,-359.95" />
-<polygon fill="black" stroke="black" points="174.28,-356.52 163.88,-358.54 173.27,-363.44 174.28,-356.52"></polygon>
-<text text-anchor="start" x="183.96" y="-369.56" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b0]</text>
-</g>
-</g>
-</svg>
-
-<h1 id="task-2-brew_systemv">Task 2 &quot;brew_system.v&quot;</h1>
+<h1 id="task-brew_systemv">Task &quot;brew_system.v&quot;</h1>
 <p>Integrate the brew_fsm you have created into the rest of the brewery
 systems.</p>
 <table>
@@ -580,10 +289,10 @@ outputs.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="the-solution-to-this-assignment-will-be-posted-after-the-conclusion-of-the-thor-training-session-1">The
+<h3 id="the-solution-to-this-assignment-will-be-posted-after-the-conclusion-of-the-thor-training-session">The
 solution to this assignment will be posted AFTER the conclusion of the
 THOR training session.</h3>
-<p><svg id="svg_70e441379011fc0dbda7" style="background-color:white;margin:20px;max-width:100%;" xmlns:s="https://github.com/nturley/netlistsvg" width="1021.5" height="514"><style>  svg {
+<p><svg id="svg_e819314e5de51f7fc1ff" style="background-color:white;margin:20px;max-width:100%;" xmlns:s="https://github.com/nturley/netlistsvg" viewBox="0 0 1100 550" preserveAspectRatio="xMinYMin meet" width="1100" height="550"><style>  svg {
     stroke:#000;
     fill:none;
   }
@@ -626,7 +335,7 @@ THOR training session.</h3>
   .io {
     fill:#fcffb2;
     fill-opacity:1.0;
-  }</style><g s:type="eq" class="hierarchical" transform="translate(877.5,340)" s:width="25" s:height="25" id="svg_70e441379011fc0dbda7_cell_$eq$brew_system_ref.v:46$5"><s:alias val="$eq"></s:alias><s:alias val="$eqx"></s:alias><circle r="12.5" cx="12.5" cy="12.5" class="cell_$eq$brew_system_ref.v:46$5"></circle><line x1="7.5" x2="17.5" y1="10" y2="10" class="cell_$eq$brew_system_ref.v:46$5"></line><line x1="7.5" x2="17.5" y1="15" y2="15" class="cell_$eq$brew_system_ref.v:46$5"></line><g s:x="2" s:y="5" s:pid="A"></g><g s:x="2" s:y="20" s:pid="B"></g><g s:x="25" s:y="12.5" s:pid="Y"></g></g><g s:type="or" class="combinational" transform="translate(190,467.5)" s:width="30" s:height="25" id="svg_70e441379011fc0dbda7_cell_$logic_or$brew_system_ref.v:28$3"><s:alias val="$or"></s:alias><s:alias val="$logic_or"></s:alias><s:alias val="$_OR_"></s:alias><s:alias val="$reduce_or"></s:alias><s:alias val="$reduce_bool"></s:alias><path d="M0,0 A30 25 0 0 1 0,25 A30 25 0 0 0 30,12.5 A30 25 0 0 0 0,0" class="cell_$logic_or$brew_system_ref.v:28$3" /><g s:x="2" s:y="5" s:pid="A"></g><g s:x="2" s:y="20" s:pid="B"></g><g s:x="30" s:y="12.5" s:pid="Y"></g></g><g s:type="not" class="combinational" transform="translate(104,412.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_$not$brew_system_ref.v:28$2"><s:alias val="$_NOT_"></s:alias><s:alias val="$not"></s:alias><s:alias val="$logic_not"></s:alias><path d="M0,0 L0,20 L20,10 Z" class="cell_$not$brew_system_ref.v:28$2" /><circle cx="24" cy="10" r="3" class="invert"></circle><g s:x="-1" s:y="10" s:pid="A"></g><g s:x="27" s:y="10" s:pid="Y"></g></g><g s:type="or" class="combinational" transform="translate(763.8333333333334,452.5)" s:width="30" s:height="25" id="svg_70e441379011fc0dbda7_cell_$or$brew_system_ref.v:47$6"><s:alias val="$or"></s:alias><s:alias val="$logic_or"></s:alias><s:alias val="$_OR_"></s:alias><s:alias val="$reduce_or"></s:alias><s:alias val="$reduce_bool"></s:alias><path d="M0,0 A30 25 0 0 1 0,25 A30 25 0 0 0 30,12.5 A30 25 0 0 0 0,0" class="cell_$or$brew_system_ref.v:47$6" /><g s:x="2" s:y="5" s:pid="A"></g><g s:x="2" s:y="20" s:pid="B"></g><g s:x="30" s:y="12.5" s:pid="Y"></g></g><g s:type="dff-bus" class="state" transform="translate(389,347.5)" s:width="34" s:height="44" id="svg_70e441379011fc0dbda7_cell_$procdff$395"><s:alias val="$dff-bus"></s:alias><s:alias val="$_DFF_-bus"></s:alias><s:alias val="$_DFF_P_-bus"></s:alias><s:alias val="adff-bus"></s:alias><s:alias val="$adff-bus"></s:alias><s:alias val="$_DFF_-bus"></s:alias><s:alias val="$_DFF_P_-bus"></s:alias><s:alias val="sdff-bus"></s:alias><s:alias val="$sdff-bus"></s:alias><s:alias val="$_DFF_-bus"></s:alias><s:alias val="$_DFF_P_-bus"></s:alias><rect width="30" height="40" x="0" y="0" stroke="none" transform="translate(4,4)" style="filter:brightness(0.7);" class="cell_$procdff$395" /><path d="M32,4 L34,4 L34,44 L4,44 L4,42" class="cell_$procdff$395" /><rect width="30" height="40" x="0" y="0" stroke="none" transform="translate(2,2)" style="filter:brightness(0.7)" class="cell_$procdff$395" /><path d="M30,2 L32,2 L32,42 L2,42 L2,40" class="cell_$procdff$395" style /><rect width="30" height="40" x="0" y="0" class="cell_$procdff$395" /><path d="M0,35 L5,30 L0,25 Z" class="cell_$procdff$395" style="fill:#ffffff;" /><g s:x="35" s:y="10" s:pid="Q"></g><g s:x="-1" s:y="30" s:pid="CLK"></g><g s:x="-1" s:y="30" s:pid="C"></g><g s:x="-1" s:y="10" s:pid="D"></g><g s:x="17" s:y="44" s:pid="ARST"></g><g s:x="17" s:y="44" s:pid="SRST"></g></g><g s:type="mux-bus" class="combinational" transform="translate(256,337.5)" s:width="24" s:height="40" id="svg_70e441379011fc0dbda7_cell_$procmux$388"><s:alias val="$pmux-bus"></s:alias><s:alias val="$mux-bus"></s:alias><s:alias val="$_MUX_-bus"></s:alias><path d="M8,2 L8,0 L24,8 L24,32 L8,40 L8,38" style="filter:brightness(0.7)" class="cell_$procmux$388" /><path d="M4,2 L4,0 L22,9 L22,31 L4,40 L4,38" style="filter:brightness(0.7)" class="cell_$procmux$388" /><path d="M0,0 L20,10 L20,30 L0,40 Z" class="cell_$procmux$388" /><text x="5" y="32" class="nodelabel cell_$procmux$178" s:attribute>1</text><text x="5" y="13" class="nodelabel cell_$procmux$178" s:attribute>0</text><g s:x="-1" s:y="10" s:pid="A"></g><g s:x="-1" s:y="30" s:pid="B"></g><g s:x="12" s:y="38" s:pid="S"></g><g s:x="24.5" s:y="20" s:pid="Y"></g></g><g s:type="generic" class="hierarchical" transform="translate(551.5,372)" s:width="30" s:height="40" id="svg_70e441379011fc0dbda7_cell_FSM"><text x="15" y="-4" class="nodelabel cell_FSM" s:attribute="ref">brew_fsm</text><rect width="30" height="80" s:generic="body" class="cell_FSM" /><g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="svg_70e441379011fc0dbda7_port_FSM~clk"><text x="-3" y="-4" class="inputPortLabel cell_FSM">clk</text></g><g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="svg_70e441379011fc0dbda7_port_FSM~level"><text x="-3" y="-4" class="inputPortLabel cell_FSM">level</text></g><g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="svg_70e441379011fc0dbda7_port_FSM~reset"><text x="-3" y="-4" class="inputPortLabel cell_FSM">reset</text></g><g transform="translate(0,70)" s:x="0" s:y="10" s:pid="in0" id="svg_70e441379011fc0dbda7_port_FSM~temp"><text x="-3" y="-4" class="inputPortLabel cell_FSM">temp</text></g><g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="svg_70e441379011fc0dbda7_port_FSM~agitate"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">agitate</text></g><g transform="translate(30,30)" s:x="30" s:y="10" s:pid="out0" id="svg_70e441379011fc0dbda7_port_FSM~chute"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">chute</text></g><g transform="translate(30,50)" s:x="30" s:y="10" s:pid="out0" id="svg_70e441379011fc0dbda7_port_FSM~heat"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">heat</text></g><g transform="translate(30,70)" s:x="30" s:y="10" s:pid="out0" id="svg_70e441379011fc0dbda7_port_FSM~pump"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">pump</text></g></g><g s:type="inputExt" class="io" transform="translate(315.5,67)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_clock"><text x="15" y="-4" class="nodelabel cell_clock" s:attribute="ref">clock</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_clock" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(12,412.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_nreset"><text x="15" y="-4" class="nodelabel cell_nreset" s:attribute="ref">nreset</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_nreset" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(83,477.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_valid"><text x="15" y="-4" class="nodelabel cell_valid" s:attribute="ref">valid</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_valid" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(83,357.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_level_sensor"><text x="15" y="-4" class="nodelabel cell_level_sensor" s:attribute="ref">level_sensor</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_level_sensor" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(380.5,443.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_temperature"><text x="15" y="-4" class="nodelabel cell_temperature" s:attribute="ref">temperature</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_temperature" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,274)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_heater"><text x="15" y="-4" class="nodelabel cell_heater" s:attribute="ref">heater</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_heater" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,144)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_motor"><text x="15" y="-4" class="nodelabel cell_motor" s:attribute="ref">motor</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_motor" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,472.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_pump"><text x="15" y="-4" class="nodelabel cell_pump" s:attribute="ref">pump</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_pump" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,342.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_sparge_valve"><text x="15" y="-4" class="nodelabel cell_sparge_valve" s:attribute="ref">sparge_valve</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_sparge_valve" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,209)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_grain_feed"><text x="15" y="-4" class="nodelabel cell_grain_feed" s:attribute="ref">grain_feed</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_grain_feed" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,407.5)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_valve"><text x="15" y="-4" class="nodelabel cell_valve" s:attribute="ref">valve</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_valve" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,79)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_level"><text x="15" y="-4" class="nodelabel cell_level" s:attribute="ref">level</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_level" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="constant" class="io" transform="translate(763.5,350)" s:width="30" s:height="20" id="svg_70e441379011fc0dbda7_cell_11"><text x="15" y="-4" class="nodelabel cell_11" s:attribute="ref">11</text><s:alias val="$_constant_"></s:alias><rect width="30" height="20" class="cell_11" /><g s:x="31" s:y="10" s:pid="Y"></g></g><g s:type="join" class transform="translate(836.5,462)" s:width="4" s:height="40" id="svg_70e441379011fc0dbda7_cell_$join$,23,24,"><rect width="5" height="40" class="splitjoinBody" s:generic="body" /><s:alias val="$_join_"></s:alias><g s:x="5" s:y="20" s:pid="out"></g><g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0"><text x="-3" y="-4" class="inputPortLabel">0</text></g><g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0"><text x="-3" y="-4" class="inputPortLabel">1</text></g></g><g s:type="split" class transform="translate(704.5,422)" s:width="5" s:height="40" id="svg_70e441379011fc0dbda7_cell_$split$,27,36,24,"><rect width="5" height="80" class="splitjoinBody" s:generic="body" /><s:alias val="$_split_"></s:alias><g s:x="0" s:y="20" s:pid="in"></g><g transform="translate(4,10)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">1:2</text></g><g transform="translate(4,30)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">0</text></g><g transform="translate(4,50)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">1</text></g><g transform="translate(4,70)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">2</text></g></g><line x1="709.5" x2="738.5" y1="432.5" y2="432.5" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="738.5" x2="738.5" y1="432.5" y2="299" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="738.5" x2="852.5" y1="299" y2="299" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="852.5" x2="852.5" y1="299" y2="345" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="852.5" x2="879.5" y1="345" y2="345" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="794.5" x2="879.5" y1="360" y2="360" class="net_47,48 width_2" style="stroke-width: 2"></line><line x1="131" x2="165" y1="422.5" y2="422.5" class="net_37 width_1" style="stroke-width: 1"></line><line x1="165" x2="165" y1="422.5" y2="472.5" class="net_37 width_1" style="stroke-width: 1"></line><circle cx="165" cy="422.5" r="2" style="fill:#000" class="net_37 width_1"></circle><line x1="165" x2="192" y1="472.5" y2="472.5" class="net_37 width_1" style="stroke-width: 1"></line><line x1="131" x2="551.5" y1="422.5" y2="422.5" class="net_37 width_1" style="stroke-width: 1"></line><line x1="113" x2="192" y1="487.5" y2="487.5" class="net_4 width_1" style="stroke-width: 1"></line><line x1="42" x2="103" y1="422.5" y2="422.5" class="net_3 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="748.5" y1="452.5" y2="452.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="748.5" x2="748.5" y1="452.5" y2="457.5" class="net_27 width_1" style="stroke-width: 1"></line><circle cx="748.5" cy="452.5" r="2" style="fill:#000" class="net_27 width_1"></circle><line x1="748.5" x2="765.8333333333334" y1="457.5" y2="457.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="748.5" y1="452.5" y2="452.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="748.5" x2="748.5" y1="452.5" y2="417.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="748.5" x2="937.5" y1="417.5" y2="417.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="765.8333333333334" y1="472.5" y2="472.5" class="net_36 width_1" style="stroke-width: 1"></line><line x1="345.5" x2="355.5" y1="77" y2="77" class="net_2 width_1" style="stroke-width: 1"></line><line x1="355.5" x2="355.5" y1="77" y2="377.5" class="net_2 width_1" style="stroke-width: 1"></line><circle cx="355.5" cy="77" r="2" style="fill:#000" class="net_2 width_1"></circle><line x1="355.5" x2="388" y1="377.5" y2="377.5" class="net_2 width_1" style="stroke-width: 1"></line><line x1="345.5" x2="505.5" y1="77" y2="77" class="net_2 width_1" style="stroke-width: 1"></line><line x1="505.5" x2="505.5" y1="77" y2="382.5" class="net_2 width_1" style="stroke-width: 1"></line><line x1="505.5" x2="551.5" y1="382.5" y2="382.5" class="net_2 width_1" style="stroke-width: 1"></line><line x1="280.5" x2="388" y1="357.5" y2="357.5" class="net_39,40,41,42,43,44,45,46 width_8" style="stroke-width: 2"></line><line x1="424" x2="456.5" y1="357.5" y2="357.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="456.5" x2="456.5" y1="357.5" y2="16" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="456.5" x2="230" y1="16" y2="16" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="230" x2="230" y1="16" y2="347.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><circle cx="456.5" cy="357.5" r="3" style="fill:#000" class="net_28,29,30,31,32,33,34,35 width_8"></circle><line x1="230" x2="255" y1="347.5" y2="347.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="424" x2="495.5" y1="357.5" y2="357.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="495.5" y1="357.5" y2="402.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="551.5" y1="402.5" y2="402.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="424" x2="456.5" y1="357.5" y2="357.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="456.5" x2="456.5" y1="357.5" y2="89" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><circle cx="456.5" cy="89" r="3" style="fill:#000" class="net_28,29,30,31,32,33,34,35 width_8"></circle><line x1="456.5" x2="937.5" y1="89" y2="89" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="113" x2="255" y1="367.5" y2="367.5" class="net_5,6,7,8,9,10,11,12 width_8" style="stroke-width: 2"></line><line x1="220" x2="268" y1="480" y2="480" class="net_38 width_1" style="stroke-width: 1"></line><line x1="268" x2="268" y1="480" y2="375.5" class="net_38 width_1" style="stroke-width: 1"></line><line x1="410.5" x2="495.5" y1="453.5" y2="453.5" class="net_13,14,15,16,17,18,19,20 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="495.5" y1="453.5" y2="442.5" class="net_13,14,15,16,17,18,19,20 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="551.5" y1="442.5" y2="442.5" class="net_13,14,15,16,17,18,19,20 width_8" style="stroke-width: 2"></line><line x1="582.5" x2="655.5" y1="422.5" y2="422.5" class="net_21 width_1" style="stroke-width: 1"></line><line x1="655.5" x2="655.5" y1="422.5" y2="284" class="net_21 width_1" style="stroke-width: 1"></line><line x1="655.5" x2="937.5" y1="284" y2="284" class="net_21 width_1" style="stroke-width: 1"></line><line x1="582.5" x2="635.5" y1="382.5" y2="382.5" class="net_22 width_1" style="stroke-width: 1"></line><line x1="635.5" x2="635.5" y1="382.5" y2="154" class="net_22 width_1" style="stroke-width: 1"></line><line x1="635.5" x2="937.5" y1="154" y2="154" class="net_22 width_1" style="stroke-width: 1"></line><line x1="842.5" x2="937.5" y1="482.5" y2="482.5" class="net_23,24 width_2" style="stroke-width: 2"></line><line x1="902.5" x2="937.5" y1="352.5" y2="352.5" class="net_25 width_1" style="stroke-width: 1"></line><line x1="582.5" x2="645.5" y1="402.5" y2="402.5" class="net_26 width_1" style="stroke-width: 1"></line><line x1="645.5" x2="645.5" y1="402.5" y2="219" class="net_26 width_1" style="stroke-width: 1"></line><line x1="645.5" x2="937.5" y1="219" y2="219" class="net_26 width_1" style="stroke-width: 1"></line><line x1="793.8333333333334" x2="804.5" y1="465" y2="465" class="net_23 width_1" style="stroke-width: 1"></line><line x1="804.5" x2="804.5" y1="465" y2="472.5" class="net_23 width_1" style="stroke-width: 1"></line><line x1="804.5" x2="836.5" y1="472.5" y2="472.5" class="net_23 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="836.5" y1="492.5" y2="492.5" class="net_24 width_1" style="stroke-width: 1"></line><line x1="582.5" x2="704.5" y1="442.5" y2="442.5" class="net_27,36,24 width_3" style="stroke-width: 2"></line><rect x="778" y="294" width="16" height="9" class="net_36,24 width_2 busLabel_2" style="fill: white; stroke: none" /><text x="777" y="302" class="net_36,24 width_2 busLabel_2">/2/</text><rect x="835" y="355" width="16" height="9" class="net_47,48 width_2 busLabel_2" style="fill: white; stroke: none" /><text x="834" y="363" class="net_47,48 width_2 busLabel_2">/2/</text><rect x="329.5" y="352.5" width="16" height="9" class="net_39,40,41,42,43,44,45,46 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="328.5" y="360.5" class="net_39,40,41,42,43,44,45,46 width_8 busLabel_8">/8/</text><rect x="715.5" y="84" width="16" height="9" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="714.5" y="92" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8">/8/</text><rect x="715.5" y="84" width="16" height="9" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="714.5" y="92" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8">/8/</text><rect x="715.5" y="84" width="16" height="9" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="714.5" y="92" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8">/8/</text><rect x="204" y="362.5" width="16" height="9" class="net_5,6,7,8,9,10,11,12 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="203" y="370.5" class="net_5,6,7,8,9,10,11,12 width_8 busLabel_8">/8/</text><rect x="482.5" y="448.5" width="16" height="9" class="net_13,14,15,16,17,18,19,20 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="481.5" y="456.5" class="net_13,14,15,16,17,18,19,20 width_8 busLabel_8">/8/</text><rect x="889" y="477.5" width="16" height="9" class="net_23,24 width_2 busLabel_2" style="fill: white; stroke: none" /><text x="888" y="485.5" class="net_23,24 width_2 busLabel_2">/2/</text><rect x="666.5" y="437.5" width="16" height="9" class="net_27,36,24 width_3 busLabel_3" style="fill: white; stroke: none" /><text x="665.5" y="445.5" class="net_27,36,24 width_3 busLabel_3">/3/</text></svg>&gt;</p>
+  }</style><g s:type="eq" class="hierarchical" transform="translate(877.5,340)" s:width="25" s:height="25" id="svg_e819314e5de51f7fc1ff_cell_$eq$brew_system_ref.v:46$5"><s:alias val="$eq"></s:alias><s:alias val="$eqx"></s:alias><circle r="12.5" cx="12.5" cy="12.5" class="cell_$eq$brew_system_ref.v:46$5"></circle><line x1="7.5" x2="17.5" y1="10" y2="10" class="cell_$eq$brew_system_ref.v:46$5"></line><line x1="7.5" x2="17.5" y1="15" y2="15" class="cell_$eq$brew_system_ref.v:46$5"></line><g s:x="2" s:y="5" s:pid="A"></g><g s:x="2" s:y="20" s:pid="B"></g><g s:x="25" s:y="12.5" s:pid="Y"></g></g><g s:type="or" class="combinational" transform="translate(190,467.5)" s:width="30" s:height="25" id="svg_e819314e5de51f7fc1ff_cell_$logic_or$brew_system_ref.v:28$3"><s:alias val="$or"></s:alias><s:alias val="$logic_or"></s:alias><s:alias val="$_OR_"></s:alias><s:alias val="$reduce_or"></s:alias><s:alias val="$reduce_bool"></s:alias><path d="M0,0 A30 25 0 0 1 0,25 A30 25 0 0 0 30,12.5 A30 25 0 0 0 0,0" class="cell_$logic_or$brew_system_ref.v:28$3" /><g s:x="2" s:y="5" s:pid="A"></g><g s:x="2" s:y="20" s:pid="B"></g><g s:x="30" s:y="12.5" s:pid="Y"></g></g><g s:type="not" class="combinational" transform="translate(104,412.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_$not$brew_system_ref.v:28$2"><s:alias val="$_NOT_"></s:alias><s:alias val="$not"></s:alias><s:alias val="$logic_not"></s:alias><path d="M0,0 L0,20 L20,10 Z" class="cell_$not$brew_system_ref.v:28$2" /><circle cx="24" cy="10" r="3" class="invert"></circle><g s:x="-1" s:y="10" s:pid="A"></g><g s:x="27" s:y="10" s:pid="Y"></g></g><g s:type="or" class="combinational" transform="translate(763.8333333333334,452.5)" s:width="30" s:height="25" id="svg_e819314e5de51f7fc1ff_cell_$or$brew_system_ref.v:47$6"><s:alias val="$or"></s:alias><s:alias val="$logic_or"></s:alias><s:alias val="$_OR_"></s:alias><s:alias val="$reduce_or"></s:alias><s:alias val="$reduce_bool"></s:alias><path d="M0,0 A30 25 0 0 1 0,25 A30 25 0 0 0 30,12.5 A30 25 0 0 0 0,0" class="cell_$or$brew_system_ref.v:47$6" /><g s:x="2" s:y="5" s:pid="A"></g><g s:x="2" s:y="20" s:pid="B"></g><g s:x="30" s:y="12.5" s:pid="Y"></g></g><g s:type="dff-bus" class="state" transform="translate(389,347.5)" s:width="34" s:height="44" id="svg_e819314e5de51f7fc1ff_cell_$procdff$395"><s:alias val="$dff-bus"></s:alias><s:alias val="$_DFF_-bus"></s:alias><s:alias val="$_DFF_P_-bus"></s:alias><s:alias val="adff-bus"></s:alias><s:alias val="$adff-bus"></s:alias><s:alias val="$_DFF_-bus"></s:alias><s:alias val="$_DFF_P_-bus"></s:alias><s:alias val="sdff-bus"></s:alias><s:alias val="$sdff-bus"></s:alias><s:alias val="$_DFF_-bus"></s:alias><s:alias val="$_DFF_P_-bus"></s:alias><rect width="30" height="40" x="0" y="0" stroke="none" transform="translate(4,4)" style="filter:brightness(0.7);" class="cell_$procdff$395" /><path d="M32,4 L34,4 L34,44 L4,44 L4,42" class="cell_$procdff$395" /><rect width="30" height="40" x="0" y="0" stroke="none" transform="translate(2,2)" style="filter:brightness(0.7)" class="cell_$procdff$395" /><path d="M30,2 L32,2 L32,42 L2,42 L2,40" class="cell_$procdff$395" style /><rect width="30" height="40" x="0" y="0" class="cell_$procdff$395" /><path d="M0,35 L5,30 L0,25 Z" class="cell_$procdff$395" style="fill:#ffffff;" /><g s:x="35" s:y="10" s:pid="Q"></g><g s:x="-1" s:y="30" s:pid="CLK"></g><g s:x="-1" s:y="30" s:pid="C"></g><g s:x="-1" s:y="10" s:pid="D"></g><g s:x="17" s:y="44" s:pid="ARST"></g><g s:x="17" s:y="44" s:pid="SRST"></g></g><g s:type="mux-bus" class="combinational" transform="translate(256,337.5)" s:width="24" s:height="40" id="svg_e819314e5de51f7fc1ff_cell_$procmux$388"><s:alias val="$pmux-bus"></s:alias><s:alias val="$mux-bus"></s:alias><s:alias val="$_MUX_-bus"></s:alias><path d="M8,2 L8,0 L24,8 L24,32 L8,40 L8,38" style="filter:brightness(0.7)" class="cell_$procmux$388" /><path d="M4,2 L4,0 L22,9 L22,31 L4,40 L4,38" style="filter:brightness(0.7)" class="cell_$procmux$388" /><path d="M0,0 L20,10 L20,30 L0,40 Z" class="cell_$procmux$388" /><text x="5" y="32" class="nodelabel cell_$procmux$178" s:attribute>1</text><text x="5" y="13" class="nodelabel cell_$procmux$178" s:attribute>0</text><g s:x="-1" s:y="10" s:pid="A"></g><g s:x="-1" s:y="30" s:pid="B"></g><g s:x="12" s:y="38" s:pid="S"></g><g s:x="24.5" s:y="20" s:pid="Y"></g></g><g s:type="generic" class="hierarchical" transform="translate(551.5,372)" s:width="30" s:height="40" id="svg_e819314e5de51f7fc1ff_cell_FSM"><text x="15" y="-4" class="nodelabel cell_FSM" s:attribute="ref">brew_fsm</text><rect width="30" height="80" s:generic="body" class="cell_FSM" /><g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0" id="svg_e819314e5de51f7fc1ff_port_FSM~clk"><text x="-3" y="-4" class="inputPortLabel cell_FSM">clk</text></g><g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0" id="svg_e819314e5de51f7fc1ff_port_FSM~level"><text x="-3" y="-4" class="inputPortLabel cell_FSM">level</text></g><g transform="translate(0,50)" s:x="0" s:y="10" s:pid="in0" id="svg_e819314e5de51f7fc1ff_port_FSM~reset"><text x="-3" y="-4" class="inputPortLabel cell_FSM">reset</text></g><g transform="translate(0,70)" s:x="0" s:y="10" s:pid="in0" id="svg_e819314e5de51f7fc1ff_port_FSM~temp"><text x="-3" y="-4" class="inputPortLabel cell_FSM">temp</text></g><g transform="translate(30,10)" s:x="30" s:y="10" s:pid="out0" id="svg_e819314e5de51f7fc1ff_port_FSM~agitate"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">agitate</text></g><g transform="translate(30,30)" s:x="30" s:y="10" s:pid="out0" id="svg_e819314e5de51f7fc1ff_port_FSM~chute"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">chute</text></g><g transform="translate(30,50)" s:x="30" s:y="10" s:pid="out0" id="svg_e819314e5de51f7fc1ff_port_FSM~heat"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">heat</text></g><g transform="translate(30,70)" s:x="30" s:y="10" s:pid="out0" id="svg_e819314e5de51f7fc1ff_port_FSM~pump"><text x="5" y="-4" style="fill:#000; stroke:none" class="cell_FSM">pump</text></g></g><g s:type="inputExt" class="io" transform="translate(315.5,67)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_clock"><text x="15" y="-4" class="nodelabel cell_clock" s:attribute="ref">clock</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_clock" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(12,412.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_nreset"><text x="15" y="-4" class="nodelabel cell_nreset" s:attribute="ref">nreset</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_nreset" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(83,477.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_valid"><text x="15" y="-4" class="nodelabel cell_valid" s:attribute="ref">valid</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_valid" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(83,357.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_level_sensor"><text x="15" y="-4" class="nodelabel cell_level_sensor" s:attribute="ref">level_sensor</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_level_sensor" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="inputExt" class="io" transform="translate(380.5,443.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_temperature"><text x="15" y="-4" class="nodelabel cell_temperature" s:attribute="ref">temperature</text><s:alias val="$_inputExt_"></s:alias><path d="M0,0 L0,20 L15,20 L30,10 L15,0 Z" class="cell_temperature" /><g s:x="30" s:y="10" s:pid="Y"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,274)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_heater"><text x="15" y="-4" class="nodelabel cell_heater" s:attribute="ref">heater</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_heater" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,144)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_motor"><text x="15" y="-4" class="nodelabel cell_motor" s:attribute="ref">motor</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_motor" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,472.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_pump"><text x="15" y="-4" class="nodelabel cell_pump" s:attribute="ref">pump</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_pump" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,342.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_sparge_valve"><text x="15" y="-4" class="nodelabel cell_sparge_valve" s:attribute="ref">sparge_valve</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_sparge_valve" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,209)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_grain_feed"><text x="15" y="-4" class="nodelabel cell_grain_feed" s:attribute="ref">grain_feed</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_grain_feed" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,407.5)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_valve"><text x="15" y="-4" class="nodelabel cell_valve" s:attribute="ref">valve</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_valve" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="outputExt" class="io" transform="translate(937.5,79)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_level"><text x="15" y="-4" class="nodelabel cell_level" s:attribute="ref">level</text><s:alias val="$_outputExt_"></s:alias><path d="M30,0 L30,20 L15,20 L0,10 L15,0 Z" class="cell_level" /><g s:x="0" s:y="10" s:pid="A"></g></g><g s:type="constant" class="io" transform="translate(763.5,350)" s:width="30" s:height="20" id="svg_e819314e5de51f7fc1ff_cell_11"><text x="15" y="-4" class="nodelabel cell_11" s:attribute="ref">11</text><s:alias val="$_constant_"></s:alias><rect width="30" height="20" class="cell_11" /><g s:x="31" s:y="10" s:pid="Y"></g></g><g s:type="join" class transform="translate(836.5,462)" s:width="4" s:height="40" id="svg_e819314e5de51f7fc1ff_cell_$join$,23,24,"><rect width="5" height="40" class="splitjoinBody" s:generic="body" /><s:alias val="$_join_"></s:alias><g s:x="5" s:y="20" s:pid="out"></g><g transform="translate(0,10)" s:x="0" s:y="10" s:pid="in0"><text x="-3" y="-4" class="inputPortLabel">0</text></g><g transform="translate(0,30)" s:x="0" s:y="10" s:pid="in0"><text x="-3" y="-4" class="inputPortLabel">1</text></g></g><g s:type="split" class transform="translate(704.5,422)" s:width="5" s:height="40" id="svg_e819314e5de51f7fc1ff_cell_$split$,27,36,24,"><rect width="5" height="80" class="splitjoinBody" s:generic="body" /><s:alias val="$_split_"></s:alias><g s:x="0" s:y="20" s:pid="in"></g><g transform="translate(4,10)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">1:2</text></g><g transform="translate(4,30)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">0</text></g><g transform="translate(4,50)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">1</text></g><g transform="translate(4,70)" s:x="4" s:y="10" s:pid="out0"><text x="5" y="-4">2</text></g></g><line x1="709.5" x2="738.5" y1="432.5" y2="432.5" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="738.5" x2="738.5" y1="432.5" y2="299" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="738.5" x2="852.5" y1="299" y2="299" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="852.5" x2="852.5" y1="299" y2="345" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="852.5" x2="879.5" y1="345" y2="345" class="net_36,24 width_2" style="stroke-width: 2"></line><line x1="794.5" x2="879.5" y1="360" y2="360" class="net_47,48 width_2" style="stroke-width: 2"></line><line x1="131" x2="165" y1="422.5" y2="422.5" class="net_37 width_1" style="stroke-width: 1"></line><line x1="165" x2="165" y1="422.5" y2="472.5" class="net_37 width_1" style="stroke-width: 1"></line><circle cx="165" cy="422.5" r="2" style="fill:#000" class="net_37 width_1"></circle><line x1="165" x2="192" y1="472.5" y2="472.5" class="net_37 width_1" style="stroke-width: 1"></line><line x1="131" x2="551.5" y1="422.5" y2="422.5" class="net_37 width_1" style="stroke-width: 1"></line><line x1="113" x2="192" y1="487.5" y2="487.5" class="net_4 width_1" style="stroke-width: 1"></line><line x1="42" x2="103" y1="422.5" y2="422.5" class="net_3 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="748.5" y1="452.5" y2="452.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="748.5" x2="748.5" y1="452.5" y2="457.5" class="net_27 width_1" style="stroke-width: 1"></line><circle cx="748.5" cy="452.5" r="2" style="fill:#000" class="net_27 width_1"></circle><line x1="748.5" x2="765.8333333333334" y1="457.5" y2="457.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="748.5" y1="452.5" y2="452.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="748.5" x2="748.5" y1="452.5" y2="417.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="748.5" x2="937.5" y1="417.5" y2="417.5" class="net_27 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="765.8333333333334" y1="472.5" y2="472.5" class="net_36 width_1" style="stroke-width: 1"></line><line x1="345.5" x2="355.5" y1="77" y2="77" class="net_2 width_1" style="stroke-width: 1"></line><line x1="355.5" x2="355.5" y1="77" y2="377.5" class="net_2 width_1" style="stroke-width: 1"></line><circle cx="355.5" cy="77" r="2" style="fill:#000" class="net_2 width_1"></circle><line x1="355.5" x2="388" y1="377.5" y2="377.5" class="net_2 width_1" style="stroke-width: 1"></line><line x1="345.5" x2="505.5" y1="77" y2="77" class="net_2 width_1" style="stroke-width: 1"></line><line x1="505.5" x2="505.5" y1="77" y2="382.5" class="net_2 width_1" style="stroke-width: 1"></line><line x1="505.5" x2="551.5" y1="382.5" y2="382.5" class="net_2 width_1" style="stroke-width: 1"></line><line x1="280.5" x2="388" y1="357.5" y2="357.5" class="net_39,40,41,42,43,44,45,46 width_8" style="stroke-width: 2"></line><line x1="424" x2="456.5" y1="357.5" y2="357.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="456.5" x2="456.5" y1="357.5" y2="16" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="456.5" x2="230" y1="16" y2="16" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="230" x2="230" y1="16" y2="347.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><circle cx="456.5" cy="357.5" r="3" style="fill:#000" class="net_28,29,30,31,32,33,34,35 width_8"></circle><line x1="230" x2="255" y1="347.5" y2="347.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="424" x2="495.5" y1="357.5" y2="357.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="495.5" y1="357.5" y2="402.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="551.5" y1="402.5" y2="402.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="424" x2="456.5" y1="357.5" y2="357.5" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="456.5" x2="456.5" y1="357.5" y2="89" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><circle cx="456.5" cy="89" r="3" style="fill:#000" class="net_28,29,30,31,32,33,34,35 width_8"></circle><line x1="456.5" x2="937.5" y1="89" y2="89" class="net_28,29,30,31,32,33,34,35 width_8" style="stroke-width: 2"></line><line x1="113" x2="255" y1="367.5" y2="367.5" class="net_5,6,7,8,9,10,11,12 width_8" style="stroke-width: 2"></line><line x1="220" x2="268" y1="480" y2="480" class="net_38 width_1" style="stroke-width: 1"></line><line x1="268" x2="268" y1="480" y2="375.5" class="net_38 width_1" style="stroke-width: 1"></line><line x1="410.5" x2="495.5" y1="453.5" y2="453.5" class="net_13,14,15,16,17,18,19,20 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="495.5" y1="453.5" y2="442.5" class="net_13,14,15,16,17,18,19,20 width_8" style="stroke-width: 2"></line><line x1="495.5" x2="551.5" y1="442.5" y2="442.5" class="net_13,14,15,16,17,18,19,20 width_8" style="stroke-width: 2"></line><line x1="582.5" x2="655.5" y1="422.5" y2="422.5" class="net_21 width_1" style="stroke-width: 1"></line><line x1="655.5" x2="655.5" y1="422.5" y2="284" class="net_21 width_1" style="stroke-width: 1"></line><line x1="655.5" x2="937.5" y1="284" y2="284" class="net_21 width_1" style="stroke-width: 1"></line><line x1="582.5" x2="635.5" y1="382.5" y2="382.5" class="net_22 width_1" style="stroke-width: 1"></line><line x1="635.5" x2="635.5" y1="382.5" y2="154" class="net_22 width_1" style="stroke-width: 1"></line><line x1="635.5" x2="937.5" y1="154" y2="154" class="net_22 width_1" style="stroke-width: 1"></line><line x1="842.5" x2="937.5" y1="482.5" y2="482.5" class="net_23,24 width_2" style="stroke-width: 2"></line><line x1="902.5" x2="937.5" y1="352.5" y2="352.5" class="net_25 width_1" style="stroke-width: 1"></line><line x1="582.5" x2="645.5" y1="402.5" y2="402.5" class="net_26 width_1" style="stroke-width: 1"></line><line x1="645.5" x2="645.5" y1="402.5" y2="219" class="net_26 width_1" style="stroke-width: 1"></line><line x1="645.5" x2="937.5" y1="219" y2="219" class="net_26 width_1" style="stroke-width: 1"></line><line x1="793.8333333333334" x2="804.5" y1="465" y2="465" class="net_23 width_1" style="stroke-width: 1"></line><line x1="804.5" x2="804.5" y1="465" y2="472.5" class="net_23 width_1" style="stroke-width: 1"></line><line x1="804.5" x2="836.5" y1="472.5" y2="472.5" class="net_23 width_1" style="stroke-width: 1"></line><line x1="709.5" x2="836.5" y1="492.5" y2="492.5" class="net_24 width_1" style="stroke-width: 1"></line><line x1="582.5" x2="704.5" y1="442.5" y2="442.5" class="net_27,36,24 width_3" style="stroke-width: 2"></line><rect x="778" y="294" width="16" height="9" class="net_36,24 width_2 busLabel_2" style="fill: white; stroke: none" /><text x="777" y="302" class="net_36,24 width_2 busLabel_2">/2/</text><rect x="835" y="355" width="16" height="9" class="net_47,48 width_2 busLabel_2" style="fill: white; stroke: none" /><text x="834" y="363" class="net_47,48 width_2 busLabel_2">/2/</text><rect x="329.5" y="352.5" width="16" height="9" class="net_39,40,41,42,43,44,45,46 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="328.5" y="360.5" class="net_39,40,41,42,43,44,45,46 width_8 busLabel_8">/8/</text><rect x="715.5" y="84" width="16" height="9" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="714.5" y="92" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8">/8/</text><rect x="715.5" y="84" width="16" height="9" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="714.5" y="92" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8">/8/</text><rect x="715.5" y="84" width="16" height="9" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="714.5" y="92" class="net_28,29,30,31,32,33,34,35 width_8 busLabel_8">/8/</text><rect x="204" y="362.5" width="16" height="9" class="net_5,6,7,8,9,10,11,12 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="203" y="370.5" class="net_5,6,7,8,9,10,11,12 width_8 busLabel_8">/8/</text><rect x="482.5" y="448.5" width="16" height="9" class="net_13,14,15,16,17,18,19,20 width_8 busLabel_8" style="fill: white; stroke: none" /><text x="481.5" y="456.5" class="net_13,14,15,16,17,18,19,20 width_8 busLabel_8">/8/</text><rect x="889" y="477.5" width="16" height="9" class="net_23,24 width_2 busLabel_2" style="fill: white; stroke: none" /><text x="888" y="485.5" class="net_23,24 width_2 busLabel_2">/2/</text><rect x="666.5" y="437.5" width="16" height="9" class="net_27,36,24 width_3 busLabel_3" style="fill: white; stroke: none" /><text x="665.5" y="445.5" class="net_27,36,24 width_3 busLabel_3">/3/</text></svg>&gt;</p>
 <pre><code> *  This work is licensed under CC BY-SA 4.0 </code></pre>
 </body>
 </html>
