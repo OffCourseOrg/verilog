@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>T-01A-aegier-brewery</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">
+
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+display: block;
+}
+
+audio,
+canvas,
+video {
+display: inline-block;
+}
+
+audio:not([controls]) {
+display: none;
+height: 0;
+}
+
+[hidden],
+template {
+display: none;
+}
+
+
+html {
+font-family: sans-serif; 
+-ms-text-size-adjust: 100%; 
+-webkit-text-size-adjust: 100%; 
+}
+
+body {
+margin: 0;
+}
+
+
+a {
+background: transparent;
+}
+
+a:focus {
+outline: thin dotted;
+}
+
+a:active,
+a:hover {
+outline: 0;
+}
+
+
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+
+abbr[title] {
+border-bottom: 1px dotted;
+}
+
+b,
+strong {
+font-weight: bold;
+}
+
+dfn {
+font-style: italic;
+}
+
+hr {
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+height: 0;
+}
+
+mark {
+background: #ff0;
+color: #000;
+}
+
+code,
+kbd,
+pre,
+samp {
+font-family: monospace, serif;
+font-size: 1em;
+}
+
+pre {
+white-space: pre-wrap;
+}
+
+q {
+quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+small {
+font-size: 80%;
+}
+
+sub,
+sup {
+font-size: 75%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+}
+sup {
+top: -0.5em;
+}
+sub {
+bottom: -0.25em;
+}
+
+
+img {
+border: 0;
+}
+
+svg:not(:root) {
+overflow: hidden;
+}
+
+
+figure {
+margin: 0;
+}
+
+
+fieldset {
+border: 1px solid #c0c0c0;
+margin: 0 2px;
+padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+border: 0; 
+padding: 0; 
+}
+
+button,
+input,
+select,
+textarea {
+font-family: inherit; 
+font-size: 100%; 
+margin: 0; 
+}
+
+button,
+input {
+line-height: normal;
+}
+
+button,
+select {
+text-transform: none;
+}
+
+button,
+html input[type="button"], 
+input[type="reset"],
+input[type="submit"] {
+-webkit-appearance: button; 
+cursor: pointer; 
+}
+
+button[disabled],
+html input[disabled] {
+cursor: default;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+box-sizing: border-box; 
+padding: 0; 
+}
+
+input[type="search"] {
+-webkit-appearance: textfield; 
+-moz-box-sizing: content-box;
+-webkit-box-sizing: content-box; 
+box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+-webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+border: 0;
+padding: 0;
+}
+
+textarea {
+overflow: auto; 
+vertical-align: top; 
+}
+
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+.go-top {
+position: fixed;
+bottom: 2em;
+right: 2em;
+text-decoration: none;
+background-color: #E0E0E0;
+font-size: 12px;
+padding: 1em;
+display: inline;
+}
+
+html,body{ margin: auto;
+max-width: 100%; color:black;}*:not('#mkdbuttons'){margin:0;padding:0}body{font:13.34px helvetica,arial,freesans,clean,sans-serif;-webkit-font-smoothing:subpixel-antialiased;line-height:1.4;padding:3px;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px}p{margin:1em 0}a{color:#4183c4;text-decoration:none}body{background-color:#fff;padding:30px;margin:15px;font-size:14px;line-height:1.6}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}@media screen{body{box-shadow:0 0 0 1px #cacaca,0 0 0 4px #eee}}h1,h2,h3,h4,h5,h6{margin:20px 0 10px;padding:0;font-weight:bold;-webkit-font-smoothing:subpixel-antialiased;cursor:text}h1{font-size:28px;color:#000}h2{font-size:24px;border-bottom:1px solid #ccc;color:#000}h3{font-size:18px;color:#333}h4{font-size:16px;color:#333}h5{font-size:14px;color:#333}h6{color:#777;font-size:14px}p,blockquote,table,pre{margin:15px 0}ul{padding-left:30px}ol{padding-left:30px}ol li ul:first-of-type{margin-top:0}hr{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;border:0 none;color:#ccc;height:4px;padding:0}body>h2:first-child{margin-top:0;padding-top:0}body>h1:first-child{margin-top:0;padding-top:0}body>h1:first-child+h2{margin-top:0;padding-top:0}body>h3:first-child,body>h4:first-child,body>h5:first-child,body>h6:first-child{margin-top:0;padding-top:0}a:first-child h1,a:first-child h2,a:first-child h3,a:first-child h4,a:first-child h5,a:first-child h6{margin-top:0;padding-top:0}h1+p,h2+p,h3+p,h4+p,h5+p,h6+p,ul li>:first-child,ol li>:first-child{margin-top:0}dl{padding:0}dl dt{font-size:14px;font-weight:bold;font-style:italic;padding:0;margin:15px 0 5px}dl dt:first-child{padding:0}dl dt>:first-child{margin-top:0}dl dt>:last-child{margin-bottom:0}dl dd{margin:0 0 15px;padding:0 15px}dl dd>:first-child{margin-top:0}dl dd>:last-child{margin-bottom:0}blockquote{border-left:4px solid #DDD;padding:0 15px;color:#777}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{border-collapse:collapse;border-spacing:0;font-size:100%;font:inherit}table th{font-weight:bold;border:1px solid #ccc;padding:6px 13px}table td{border:1px solid #ccc;padding:6px 13px}table tr{border-top:1px solid #ccc;background-color:#fff}table tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%}code,tt{margin:0 2px;padding:0 5px;white-space:nowrap;border:1px solid #eaeaea;background-color:#f8f8f8;border-radius:3px;font-family:Consolas,'Liberation Mono',Courier,monospace;font-size:12px;color:#333}pre>code{margin:0;padding:0;white-space:pre;border:0;background:transparent}.highlight pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}pre code,pre tt{background-color:transparent;border:0}.poetry pre{font-family:Georgia,Garamond,serif!important;font-style:italic;font-size:110%!important;line-height:1.6em;display:block;margin-left:1em}.poetry pre code{font-family:Georgia,Garamond,serif!important;word-break:break-all;word-break:break-word;-webkit-hyphens:auto;-moz-hyphens:auto;hyphens:auto;white-space:pre-wrap}sup,sub,a.footnote{font-size:1.4ex;height:0;line-height:1;vertical-align:super;position:relative}sub{vertical-align:sub;top:-1px}@media print{body{background:#fff}img,pre,blockquote,table,figure{page-break-inside:avoid}body{background:#fff;border:0}code{background-color:#fff;color:#333!important;padding:0 .2em;border:1px solid #dedede}pre{background:#fff}pre code{background-color:white!important;overflow:visible}}@media screen{body.inverted{color:#eee!important;border-color:#555;box-shadow:none}.inverted body,.inverted hr .inverted p,.inverted td,.inverted li,.inverted h1,.inverted h2,.inverted h3,.inverted h4,.inverted h5,.inverted h6,.inverted th,.inverted .math,.inverted caption,.inverted dd,.inverted dt,.inverted blockquote{color:#eee!important;border-color:#555;box-shadow:none}.inverted td,.inverted th{background:#333}.inverted h2{border-color:#555}.inverted hr{border-color:#777;border-width:1px!important}::selection{background:rgba(157,193,200,0.5)}h1::selection{background-color:rgba(45,156,208,0.3)}h2::selection{background-color:rgba(90,182,224,0.3)}h3::selection,h4::selection,h5::selection,h6::selection,li::selection,ol::selection{background-color:rgba(133,201,232,0.3)}code::selection{background-color:rgba(0,0,0,0.7);color:#eee}code span::selection{background-color:rgba(0,0,0,0.7)!important;color:#eee!important}a::selection{background-color:rgba(255,230,102,0.2)}.inverted a::selection{background-color:rgba(255,230,102,0.6)}td::selection,th::selection,caption::selection{background-color:rgba(180,237,95,0.5)}.inverted{background:#0b2531;background:#252a2a}.inverted body{background:#252a2a}.inverted a{color:#acd1d5}}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k,.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#800080;font-weight:bold}.highlight .gt{color:#a00}.highlight .kc,.highlight .kd,.highlight .kn,.highlight .kp,.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:#008080}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:#008080}.highlight .ni{color:#800080}.highlight .ne,.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:#000080}.highlight .nv{color:#008080}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf,.highlight .mh,.highlight .mi,.highlight .mo{color:#099}.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .se,.highlight .sh,.highlight .si,.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc,.highlight .vg,.highlight .vi{color:#008080}.highlight .il{color:#099}.highlight .gc{color:#999;background-color:#eaf2f5}.type-csharp .highlight .k,.type-csharp .highlight .kt{color:#00F}.type-csharp .highlight .nf{color:#000;font-weight:normal}.type-csharp .highlight .nc{color:#2b91af}.type-csharp .highlight .nn{color:#000}.type-csharp .highlight .s,.type-csharp .highlight .sc{color:#a31515}
+</style>
+</head>
+<body>
+<pre><code> *  Copyright: Sybe Feitsma &amp;&amp; e.t.s.v Thor
+ *  This work is licensed under CC BY-SA 4.0 </code></pre>
+<h2 id="assignment-thor-01-aegirs-brewery-fsm">Assignment THOR 01
+&quot;Aegir&#39;s Brewery FSM&quot;</h2>
+<p>Het Walhalla needs more beer and they have decided to start brewing
+it themselves. In 01 you will write a FSM to perfectly create the wort
+needed for the new THOR beer. If you fail, there will be no more
+beer!<br />
+(A FSM that covered the full brewing process would be actual
+torture...)</p>
+<h4 id="your-uut-will-be-checked-against-a-golden-reference">Your UUT
+will be checked against a Golden reference.</h4>
+<p>Every clock cycle:</p>
+<ul>
+<li>UUT Outputs must match REF Outputs</li>
+<li>If your UUT and the REF diverge the simulation will halt
+immediately</li>
+</ul>
+<p>use GTKWave (The software hiding behind the Debug/Spider button) to
+debug any issues.<br />
+<em>This task uses a golden reference. Therefore the trace in GTKwave
+will always end at the divergence/error point</em></p>
+<h1 id="task-brew_fsmv">Task &quot;brew_fsm.v&quot;</h1>
+<p>Use the provided state graph to implement the brew_fsm. With one bit
+clk and reset inputs.<br />
+As well as eight bit wide temp and level inputs. The outputs heat,
+agitate and chute are all one bit wide. The pump output is three bits
+wide and finally you should output the state of your fsm as an eight bit
+wide output <em>state</em>.</p>
+<p>The reset is active high.</p>
+<p>The states are numbered as such:</p>
+<pre><code>  IDLE = 0,
+  DISPOSAL = 1,
+  STERILISE = 2,
+  COOL = 3,
+  PROCESS = 4,
+  FULL = 5,
+  HOT = 6,
+  MASH = 7,
+  SPARGE = 8,
+  SPARGE_B = 9,
+  DONE = 10;</code></pre>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Outputs keep their value unless changed by a
+state.</strong></td>
+</tr>
+<tr class="even">
+<td>The skeleton brew_fsm.v file is given <em>without</em> inputs or
+outputs.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-solution-to-this-assignment-will-be-posted-after-the-conclusion-of-the-thor-training-session">The
+solution to this assignment will be posted AFTER the conclusion of the
+THOR training session.</h3>
+<svg id="svg_e005242eccc44058b32a" style="background-color:white;margin:20px;max-width:100%;" width="584pt" height="1014pt" viewBox="0.00 0.00 583.71 1013.56">
+<g id="svg_e005242eccc44058b32a_graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1009.56)">
+<polygon fill="white" stroke="none" points="-4,4 -4,-1009.56 579.71,-1009.56 579.71,4 -4,4"></polygon>
+<!-- _reset -->
+<!-- 0 -->
+<g id="svg_e005242eccc44058b32a_node2" class="node">
+<title>0</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="379.96" cy="-877.06" rx="36" ry="36"></ellipse>
+<ellipse fill="none" stroke="black" cx="379.96" cy="-877.06" rx="40" ry="40"></ellipse>
+<text text-anchor="middle" x="379.96" y="-872.01" font-family="Times,serif" font-size="14.00">IDLE</text>
+</g>
+<!-- _reset&#45;&gt;0 -->
+<g id="svg_e005242eccc44058b32a_edge1" class="edge">
+<title>_reset-&gt;0</title>
+<path fill="none" stroke="black" d="M379.96,-969.13C379.96,-958.49 379.96,-944.27 379.96,-930.24" />
+<polygon fill="black" stroke="black" points="379.96,-930.41 375.96,-924.41 379.96,-918.41 383.96,-924.41 379.96,-930.41"></polygon>
+<text text-anchor="middle" x="396.46" y="-938.26" font-family="Times,serif" font-size="14.00">  reset</text>
+</g>
+<!-- 2 -->
+<g id="svg_e005242eccc44058b32a_node4" class="node">
+<title>2</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="245.96" cy="-713.59" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="245.96" y="-708.54" font-family="Times,serif" font-size="14.00">PROCESS</text>
+</g>
+<!-- 0&#45;&gt;2 -->
+<g id="svg_e005242eccc44058b32a_edge2" class="edge">
+<title>0-&gt;2</title>
+<path fill="none" stroke="black" d="M340.02,-870.67C308.97,-864.16 267.82,-849.93 247.21,-819.06 235.85,-802.04 234.26,-779.72 236.04,-760.09" />
+<polygon fill="black" stroke="black" points="239.48,-760.75 237.24,-750.4 232.53,-759.89 239.48,-760.75"></polygon>
+<text text-anchor="start" x="247.21" y="-805.76" font-family="Times,serif" font-size="14.00">  !level</text>
+<text text-anchor="start" x="247.21" y="-789.26" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b1]</text>
+<text text-anchor="start" x="247.21" y="-772.76" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b100]</text>
+</g>
+<!-- 6 -->
+<g id="svg_e005242eccc44058b32a_node8" class="node">
+<title>6</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="475.96" cy="-713.59" rx="37.97" ry="37.97"></ellipse>
+<text text-anchor="middle" x="475.96" y="-708.54" font-family="Times,serif" font-size="14.00">DISPOSAL</text>
+</g>
+<!-- 0&#45;&gt;6 -->
+<g id="svg_e005242eccc44058b32a_edge3" class="edge">
+<title>0-&gt;6</title>
+<path fill="none" stroke="black" d="M400.09,-842.21C414.91,-817.28 435.15,-783.23 451,-756.57" />
+<polygon fill="black" stroke="black" points="453.97,-758.43 456.07,-748.05 447.95,-754.86 453.97,-758.43"></polygon>
+<text text-anchor="start" x="442.17" y="-797.51" font-family="Times,serif" font-size="14.00">  !(!level)</text>
+<text text-anchor="start" x="442.17" y="-781.01" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b010]</text>
+</g>
+<!-- 1 -->
+<g id="svg_e005242eccc44058b32a_node3" class="node">
+<title>1</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="129.96" cy="-200.61" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="129.96" y="-195.56" font-family="Times,serif" font-size="14.00">SPARGE</text>
+</g>
+<!-- 1&#45;&gt;1 -->
+<g id="svg_e005242eccc44058b32a_edge4" class="edge">
+<title>1-&gt;1</title>
+<path fill="none" stroke="black" d="M163.18,-215.37C174.68,-215.53 183.96,-210.61 183.96,-200.61 183.96,-194.2 180.15,-189.88 174.39,-187.65" />
+<polygon fill="black" stroke="black" points="175.11,-184.22 164.68,-186.09 174,-191.13 175.11,-184.22"></polygon>
+</g>
+<!-- 4 -->
+<g id="svg_e005242eccc44058b32a_node6" class="node">
+<title>4</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="304.96" cy="-39.55" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="304.96" y="-34.5" font-family="Times,serif" font-size="14.00">DONE</text>
+</g>
+<!-- 1&#45;&gt;4 -->
+<g id="svg_e005242eccc44058b32a_edge5" class="edge">
+<title>1-&gt;4</title>
+<path fill="none" stroke="black" d="M163.15,-186.42C182.82,-177.39 207.28,-163.92 224.96,-146.61 243.18,-128.77 238.9,-117.68 253.96,-97.11 259.57,-89.44 266.06,-81.62 272.48,-74.34" />
+<polygon fill="black" stroke="black" points="274.81,-76.97 278.91,-67.2 269.62,-72.28 274.81,-76.97"></polygon>
+<text text-anchor="start" x="253.96" y="-125.06" font-family="Times,serif" font-size="14.00">  pump = 3&#39;b011</text>
+<text text-anchor="start" x="253.96" y="-108.56" font-family="Times,serif" font-size="14.00">  &amp;&amp;  level &lt; 20</text>
+</g>
+<!-- 7 -->
+<g id="svg_e005242eccc44058b32a_node9" class="node">
+<title>7</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="76.96" cy="-39.55" rx="39.55" ry="39.55"></ellipse>
+<text text-anchor="middle" x="76.96" y="-34.5" font-family="Times,serif" font-size="14.00">SPARGE_B</text>
+</g>
+<!-- 1&#45;&gt;7 -->
+<g id="svg_e005242eccc44058b32a_edge6" class="edge">
+<title>1-&gt;7</title>
+<path fill="none" stroke="black" d="M94.09,-194.69C65.45,-188.67 27.1,-175.43 8.21,-146.61 -3.85,-128.21 -1.18,-117 8.21,-97.11 13.83,-85.22 23.3,-74.99 33.45,-66.62" />
+<polygon fill="black" stroke="black" points="35.43,-69.52 41.26,-60.67 31.19,-63.95 35.43,-69.52"></polygon>
+<text text-anchor="start" x="8.21" y="-133.31" font-family="Times,serif" font-size="14.00">  !(pump = 3&#39;b011</text>
+<text text-anchor="start" x="8.21" y="-116.81" font-family="Times,serif" font-size="14.00">  &amp;&amp;  level &lt; 20)</text>
+<text text-anchor="start" x="8.21" y="-100.31" font-family="Times,serif" font-size="14.00">  &amp;&amp; level &lt; 70</text>
+</g>
+<!-- 2&#45;&gt;2 -->
+<g id="svg_e005242eccc44058b32a_edge7" class="edge">
+<title>2-&gt;2</title>
+<path fill="none" stroke="black" d="M278.92,-728.72C290.53,-728.96 299.96,-723.92 299.96,-713.59 299.96,-706.98 296.09,-702.53 290.26,-700.25" />
+<polygon fill="black" stroke="black" points="290.83,-696.8 280.41,-698.7 289.75,-703.72 290.83,-696.8"></polygon>
+</g>
+<!-- 5 -->
+<g id="svg_e005242eccc44058b32a_node7" class="node">
+<title>5</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="108.96" cy="-551.37" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="108.96" y="-546.32" font-family="Times,serif" font-size="14.00">HOT</text>
+</g>
+<!-- 2&#45;&gt;5 -->
+<g id="svg_e005242eccc44058b32a_edge8" class="edge">
+<title>2-&gt;5</title>
+<path fill="none" stroke="black" d="M210.19,-707.41C180.45,-701.08 139.65,-687.27 118.21,-657.63 106.08,-640.85 102.85,-618.41 103.02,-598.56" />
+<polygon fill="black" stroke="black" points="106.51,-598.88 103.42,-588.75 99.52,-598.6 106.51,-598.88"></polygon>
+<text text-anchor="start" x="118.21" y="-636.08" font-family="Times,serif" font-size="14.00">  temp &gt;= 60</text>
+<text text-anchor="start" x="118.21" y="-619.58" font-family="Times,serif" font-size="14.00">  &amp;&amp; !(level &gt;= 125)</text>
+</g>
+<!-- 8 -->
+<g id="svg_e005242eccc44058b32a_node10" class="node">
+<title>8</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="236.96" cy="-551.37" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="236.96" y="-546.32" font-family="Times,serif" font-size="14.00">FULL</text>
+</g>
+<!-- 2&#45;&gt;8 -->
+<g id="svg_e005242eccc44058b32a_edge9" class="edge">
+<title>2-&gt;8</title>
+<path fill="none" stroke="black" d="M243.99,-677.43C242.7,-654.45 240.99,-624.17 239.59,-599.16" />
+<polygon fill="black" stroke="black" points="243.09,-599.02 239.03,-589.24 236.1,-599.42 243.09,-599.02"></polygon>
+<text text-anchor="start" x="242.79" y="-636.08" font-family="Times,serif" font-size="14.00">  level &gt;= 125</text>
+<text text-anchor="start" x="242.79" y="-619.58" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b000]</text>
+</g>
+<!-- 3 -->
+<g id="svg_e005242eccc44058b32a_node5" class="node">
+<title>3</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="475.96" cy="-551.37" rx="38.76" ry="38.76"></ellipse>
+<text text-anchor="middle" x="475.96" y="-546.32" font-family="Times,serif" font-size="14.00">STERILISE</text>
+</g>
+<!-- 3&#45;&gt;3 -->
+<g id="svg_e005242eccc44058b32a_edge10" class="edge">
+<title>3-&gt;3</title>
+<path fill="none" stroke="black" d="M511.99,-566.65C523.55,-566.49 532.72,-561.4 532.72,-551.37 532.72,-544.94 528.96,-540.54 523.21,-538.17" />
+<polygon fill="black" stroke="black" points="523.95,-534.75 513.48,-536.37 522.67,-541.63 523.95,-534.75"></polygon>
+</g>
+<!-- 9 -->
+<g id="svg_e005242eccc44058b32a_node11" class="node">
+<title>9</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="438.96" cy="-374.61" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="438.96" y="-369.56" font-family="Times,serif" font-size="14.00">COOL</text>
+</g>
+<!-- 3&#45;&gt;9 -->
+<g id="svg_e005242eccc44058b32a_edge11" class="edge">
+<title>3-&gt;9</title>
+<path fill="none" stroke="black" d="M468.11,-513.31C462.42,-486.42 454.69,-449.88 448.62,-421.2" />
+<polygon fill="black" stroke="black" points="452.1,-420.78 446.61,-411.72 445.25,-422.23 452.1,-420.78"></polygon>
+<text text-anchor="start" x="463.99" y="-464.81" font-family="Times,serif" font-size="14.00">  temp = 80</text>
+<text text-anchor="start" x="463.99" y="-448.31" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b0]</text>
+</g>
+<!-- 4&#45;&gt;0 -->
+<g id="svg_e005242eccc44058b32a_edge12" class="edge">
+<title>4-&gt;0</title>
+<path fill="none" stroke="black" d="M328.92,-67.04C335.8,-76.01 342.62,-86.46 346.96,-97.11 364.33,-139.68 360.96,-153.63 360.96,-199.61 360.96,-714.59 360.96,-714.59 360.96,-714.59 360.96,-752.18 366.1,-794.34 371.03,-826.16" />
+<polygon fill="black" stroke="black" points="367.56,-826.57 372.59,-835.89 374.47,-825.46 367.56,-826.57"></polygon>
+</g>
+<!-- 5&#45;&gt;5 -->
+<g id="svg_e005242eccc44058b32a_edge13" class="edge">
+<title>5-&gt;5</title>
+<path fill="none" stroke="black" d="M141.92,-566.64C153.53,-566.89 162.96,-561.8 162.96,-551.37 162.96,-544.69 159.09,-540.2 153.26,-537.9" />
+<polygon fill="black" stroke="black" points="153.84,-534.45 143.41,-536.33 152.74,-541.36 153.84,-534.45"></polygon>
+</g>
+<!-- 10 -->
+<g id="svg_e005242eccc44058b32a_node12" class="node">
+<title>10</title>
+<ellipse fill="#a2cd5a" stroke="black" cx="129.96" cy="-374.61" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="129.96" y="-369.56" font-family="Times,serif" font-size="14.00">MASH</text>
+</g>
+<!-- 5&#45;&gt;10 -->
+<g id="svg_e005242eccc44058b32a_edge14" class="edge">
+<title>5-&gt;10</title>
+<path fill="none" stroke="black" d="M108.2,-514.96C108.24,-490.54 109.39,-457.41 114.21,-428.61 114.68,-425.83 115.24,-423 115.88,-420.16" />
+<polygon fill="black" stroke="black" points="119.21,-421.27 118.25,-410.71 112.42,-419.56 119.21,-421.27"></polygon>
+<text text-anchor="start" x="114.21" y="-481.31" font-family="Times,serif" font-size="14.00">  level &gt;= 125</text>
+<text text-anchor="start" x="114.21" y="-464.81" font-family="Times,serif" font-size="14.00">  [agitate = 1&#39;b1]</text>
+<text text-anchor="start" x="114.21" y="-448.31" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b1]</text>
+<text text-anchor="start" x="114.21" y="-431.81" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b000]</text>
+</g>
+<!-- 6&#45;&gt;3 -->
+<g id="svg_e005242eccc44058b32a_edge15" class="edge">
+<title>6-&gt;3</title>
+<path fill="none" stroke="black" d="M475.96,-675.43C475.96,-653.51 475.96,-625.48 475.96,-601.72" />
+<polygon fill="black" stroke="black" points="479.46,-601.95 475.96,-591.95 472.46,-601.96 479.46,-601.95"></polygon>
+<text text-anchor="start" x="475.96" y="-644.33" font-family="Times,serif" font-size="14.00">  !level</text>
+<text text-anchor="start" x="475.96" y="-627.83" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b1]</text>
+<text text-anchor="start" x="475.96" y="-611.33" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b000]</text>
+</g>
+<!-- 6&#45;&gt;6 -->
+<g id="svg_e005242eccc44058b32a_edge16" class="edge">
+<title>6-&gt;6</title>
+<path fill="none" stroke="black" d="M511.21,-728.73C522.74,-728.65 531.93,-723.61 531.93,-713.59 531.93,-707.18 528.16,-702.81 522.42,-700.47" />
+<polygon fill="black" stroke="black" points="523.16,-697.05 512.7,-698.73 521.93,-703.94 523.16,-697.05"></polygon>
+</g>
+<!-- 7&#45;&gt;1 -->
+<g id="svg_e005242eccc44058b32a_edge17" class="edge">
+<title>7-&gt;1</title>
+<path fill="none" stroke="black" d="M97.3,-73.89C101.26,-81.34 105.07,-89.34 107.96,-97.11 114.66,-115.1 119.58,-135.67 123.04,-153.64" />
+<polygon fill="black" stroke="black" points="119.55,-154.03 124.79,-163.24 126.44,-152.78 119.55,-154.03"></polygon>
+<text text-anchor="start" x="121.09" y="-125.06" font-family="Times,serif" font-size="14.00">  level &lt; 40</text>
+<text text-anchor="start" x="121.09" y="-108.56" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b011]</text>
+</g>
+<!-- 7&#45;&gt;7 -->
+<g id="svg_e005242eccc44058b32a_edge18" class="edge">
+<title>7-&gt;7</title>
+<path fill="none" stroke="black" d="M113.77,-54.98C125.37,-54.74 134.52,-49.6 134.52,-39.55 134.52,-33.12 130.76,-28.69 125.01,-26.29" />
+<polygon fill="black" stroke="black" points="125.74,-22.86 115.26,-24.42 124.42,-29.74 125.74,-22.86"></polygon>
+<text text-anchor="start" x="134.52" y="-34.5" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b111]</text>
+</g>
+<!-- 8&#45;&gt;8 -->
+<g id="svg_e005242eccc44058b32a_edge19" class="edge">
+<title>8-&gt;8</title>
+<path fill="none" stroke="black" d="M269.92,-566.64C281.53,-566.89 290.96,-561.8 290.96,-551.37 290.96,-544.69 287.09,-540.2 281.26,-537.9" />
+<polygon fill="black" stroke="black" points="281.84,-534.45 271.41,-536.33 280.74,-541.36 281.84,-534.45"></polygon>
+</g>
+<!-- 8&#45;&gt;10 -->
+<g id="svg_e005242eccc44058b32a_edge20" class="edge">
+<title>8-&gt;10</title>
+<path fill="none" stroke="black" d="M237.59,-515.01C236.41,-489.06 231.26,-454.05 213.96,-428.61 204.03,-414.01 188.61,-402.61 173.68,-394.19" />
+<polygon fill="black" stroke="black" points="175.31,-391.09 164.83,-389.54 172.05,-397.29 175.31,-391.09"></polygon>
+<text text-anchor="start" x="235.85" y="-473.06" font-family="Times,serif" font-size="14.00">  temp &gt;= 60</text>
+<text text-anchor="start" x="235.85" y="-456.56" font-family="Times,serif" font-size="14.00">  [agitate = 1&#39;b1]</text>
+<text text-anchor="start" x="235.85" y="-440.06" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b1]</text>
+</g>
+<!-- 9&#45;&gt;0 -->
+<g id="svg_e005242eccc44058b32a_edge21" class="edge">
+<title>9-&gt;0</title>
+<path fill="none" stroke="black" d="M433.86,-410.62C427.31,-456.09 415.81,-537.95 407.46,-608.13 398.45,-683.83 389.76,-771.78 384.64,-825.67" />
+<polygon fill="black" stroke="black" points="381.17,-825.18 383.72,-835.46 388.14,-825.84 381.17,-825.18"></polygon>
+<text text-anchor="start" x="407.46" y="-627.83" font-family="Times,serif" font-size="14.00">  temp = 30</text>
+</g>
+<!-- 9&#45;&gt;9 -->
+<g id="svg_e005242eccc44058b32a_edge22" class="edge">
+<title>9-&gt;9</title>
+<path fill="none" stroke="black" d="M471.38,-390.9C483.24,-391.34 492.96,-385.91 492.96,-374.61 492.96,-367.19 488.78,-362.31 482.55,-359.95" />
+<polygon fill="black" stroke="black" points="483.28,-356.52 472.88,-358.54 482.27,-363.44 483.28,-356.52"></polygon>
+</g>
+<!-- 10&#45;&gt;1 -->
+<g id="svg_e005242eccc44058b32a_edge23" class="edge">
+<title>10-&gt;1</title>
+<path fill="none" stroke="black" d="M129.96,-338.39C129.96,-312.39 129.96,-276.74 129.96,-248.35" />
+<polygon fill="black" stroke="black" points="133.46,-248.59 129.96,-238.59 126.46,-248.59 133.46,-248.59"></polygon>
+<text text-anchor="start" x="129.96" y="-307.31" font-family="Times,serif" font-size="14.00">  temp &gt;= 65</text>
+<text text-anchor="start" x="129.96" y="-290.81" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b0]</text>
+<text text-anchor="start" x="129.96" y="-274.31" font-family="Times,serif" font-size="14.00">  [heat = 1&#39;b0]</text>
+<text text-anchor="start" x="129.96" y="-257.81" font-family="Times,serif" font-size="14.00">  [pump = 3&#39;b011]</text>
+</g>
+<!-- 10&#45;&gt;10 -->
+<g id="svg_e005242eccc44058b32a_edge24" class="edge">
+<title>10-&gt;10</title>
+<path fill="none" stroke="black" d="M162.38,-390.9C174.24,-391.34 183.96,-385.91 183.96,-374.61 183.96,-367.19 179.78,-362.31 173.55,-359.95" />
+<polygon fill="black" stroke="black" points="174.28,-356.52 163.88,-358.54 173.27,-363.44 174.28,-356.52"></polygon>
+<text text-anchor="start" x="183.96" y="-369.56" font-family="Times,serif" font-size="14.00">  [chute = 1&#39;b0]</text>
+</g>
+</g>
+</svg>
+
+<pre><code> *  This work is licensed under CC BY-SA 4.0 </code></pre>
+</body>
+</html>
