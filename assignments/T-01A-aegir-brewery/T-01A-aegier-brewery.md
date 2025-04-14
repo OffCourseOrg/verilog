@@ -43,7 +43,7 @@
   The skeleton brew_fsm.v file is given _without_ inputs or outputs.| |
 
 
-  ### The solution to this assignment will be posted AFTER the conclusion of the THOR training session.
+  [The solution to this assignment can be found here, if you find that you need help that is.](https://github.com/OffCourseOrg/verilog/blob/master/assignments/T-01A-aegir-brewery/brew_fsm_ref.v)
 
 <img src="fsm.svg" style="background-color:white;margin:20px;max-width:100%;">
 

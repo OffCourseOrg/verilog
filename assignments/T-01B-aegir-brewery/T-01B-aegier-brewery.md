@@ -25,7 +25,7 @@
   | The modules are provided. You do not have to create them in the brew_system.v file. |
   | The skeleton brew_system.v file is given _without_ inputs or outputs. |
 
-  ### The solution to this assignment will be posted AFTER the conclusion of the THOR training session.
+  [The solution to this assignment can be found here, if you find that you need help that is.](https://github.com/OffCourseOrg/verilog/blob/master/assignments/T-01B-aegir-brewery/brew_system_ref.v)
 
 <img src="diagram.svg" style="background-color:white;margin:20px;max-width:100%;">>
 
