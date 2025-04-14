@@ -1,0 +1,22 @@
+[tasks]
+prv
+
+[options]
+prv: mode bmc
+depth 10
+
+[engines]
+smtbmc
+
+[script]
+read -formal brew_system_ref.v
+read -formal brew_system.v
+read -formal system_bmc.v
+read -formal brew_fsm.v
+prep -top bmc
+
+[files]
+brew_system_ref.v
+brew_system.v
+system_bmc.v
+brew_fsm.v
