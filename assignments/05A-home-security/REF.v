@@ -149,7 +149,6 @@ module	REF (
 			f_was_armed <= 0;
 
 		end
-		cover(f_is_reset == 10);
 
 		if(f_is_reset) begin
 			assert(state <= _MAX_STATE);

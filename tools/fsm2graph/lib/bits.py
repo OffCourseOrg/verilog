@@ -107,6 +107,8 @@ class Bits:
   def __str__(self):
     if self.yosys_str != "" and 'x' in self.yosys_str:
        return self.yosys_str
+    if self._size > 6:
+       return f"{self._data}"
     return f"{self._size}'b{'%0*d' % (self._size, int(bin(self._data)[2:]))}"
 
 

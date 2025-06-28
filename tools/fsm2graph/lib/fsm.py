@@ -161,7 +161,7 @@ class FSMInfoParser:
           i_outputs = line.find("'", i_inputs)+1
           i_arrow = line.find(">")
           transition = Transition(
-            state_fsm_id=int(line[line.find(":")+1:i_inputs-2].strip()),
+            state_fsm_id=int(line[line.find(":")+1:i_inputs-2].strip().split(" ")[0]),
             next_fsm_id=int(line[i_arrow+1:i_outputs-3].strip())
           )
           for i, chr in enumerate(line[i_inputs:line.find(" ", i_inputs)][::-1]):
@@ -256,7 +256,8 @@ class FSMInfoParser:
             if(not isinstance(result, Bits) and output_net == result):
               continue
             ###Binary Value formatting
-              
+            if ('x' in f"{result}"):
+              continue
             transition.executed_outputs.append(f"{name} = {result}")
         state.add_transition(transition)
 

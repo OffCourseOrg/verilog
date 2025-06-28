@@ -21,7 +21,8 @@ logging.basicConfig(level=logging.WARN)
 
 ##Graphiz/Render arguments
 DOT_remove_reset = True
-DOT_skip_label_loops = True
+DOT_skip_label_condition = True
+DOT_skip_label_loops = False
 DOT_edge_label_spacing = "  "
 netlist: Netlist = None
 fsm: FSMInfoParser = None
@@ -80,7 +81,7 @@ fsm.get_fsm_type()
 dot = graphviz.Digraph(filename="fsm.gv",
                        directory="tmp/",
                        engine="neato",
-                       node_attr={"style": "filled", "width": "2", "margin": "0.05", "fillcolor": "darkolivegreen3"}
+                       node_attr={"style": "filled", "width": "1", "margin": "0.05", "fillcolor": "darkolivegreen3"}
                        )
 
 #add states
@@ -129,6 +130,9 @@ for state in fsm.states.values():
       else:
         label = DOT_edge_label_spacing
       label += f"{net}\l"
+
+    if(DOT_skip_label_condition and transition.state_fsm_id == transition.next_fsm_id):
+      label=""
 
     if(fsm.is_mealy()):
       for output in transition.executed_outputs:
