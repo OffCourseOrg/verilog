@@ -31,9 +31,12 @@ trace-cvr: env
 	$(OSS-CAD-BIN)/gtkwave tmp_cvr/engine_0/*.vcd
 
 fsm: env clean sby_tasks
-	$(YOSYS) -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | tee tmp/yosys.txt | $(FSM2GRAPH) --info --verilog REF.v --netlist tmp/netlist.txt
+	$(YOSYS) -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | tee tmp/yosys.txt | $(FSM2GRAPH) --info --netlist tmp/netlist.txt
 	dot -Tsvg tmp/fsm.gv -o fsm.svg
 	xdot tmp/fsm.gv
+
+fsm_json: env sby_tasks
+	$(YOSYS) -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -fullexpand -norecode -nomap; tee -o tmp/fsm_info.txt fsm_info; fsm_export -o tmp/fsm.kiss2; write_json tmp/netlist.json' 
 
 fsm_int: env clean sby_tasks
 	$(YOSYS) -p 'read_verilog -D GEN_FSM REF.v; proc; opt -nodffe -nosdff; autoname; fsm -nomap -norecode; write_table tmp/netlist.txt' | tee tmp/yosys.txt | $(FSM2GRAPH) --info --netlist tmp/netlist.txt
