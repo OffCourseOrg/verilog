@@ -56,7 +56,7 @@ module	REF (
 
 	//Labels FSM Logic
 
-	always @(posedge reset) begin
+	always @(posedge clk) begin
 		if(reset) begin
 			state <= DISARMED;
 		end else begin
